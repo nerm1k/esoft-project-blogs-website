@@ -1,0 +1,23 @@
+@mixin border-radius($value){
+    border-radius: $value;
+    -webkit-border-radius: $value;
+    -moz-border-radius: $value;
+    -ms-border-radius: $value;
+    -o-border-radius: $value;
+}
+
+@mixin transition($duration, $timing-function: ease){
+    transition: all $duration $timing-function;
+    -webkit-transition: all $duration $timing-function;
+    -moz-transition: all $duration $timing-function;
+    -o-transition: all $duration $timing-function;
+    -ms-transition: all $duration $timing-function;
+}
+
+@mixin transform($function){
+    transform: $function;
+    -webkit-transform: $function;
+    -moz-transform: $function;
+    -ms-transform: $function;
+    -o-transform: $function;
+}
