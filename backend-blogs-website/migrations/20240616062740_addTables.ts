@@ -24,8 +24,8 @@ export async function up(knex: Knex): Promise<void> {
         table.string('name', 32).unique().notNullable();
         table.text('description').notNullable();
     })
-    .createTable('posts', (table) => {
-        table.increments('post_id').primary();
+    .createTable('articles', (table) => {
+        table.increments('article_id').primary();
         table.integer('user_id').notNullable();
         table.string('title', 255).notNullable();
         table.text('content').notNullable();
@@ -38,22 +38,22 @@ export async function up(knex: Knex): Promise<void> {
         table.foreign('user_id').references('user_id').inTable('users');
         table.foreign('category_id').references('category_id').inTable('categories');
     })
-    .createTable('posts_tags', (table) => {
-        table.integer('post_id').notNullable();
+    .createTable('articles_tags', (table) => {
+        table.integer('article_id').notNullable();
         table.string('tag_name', 32).notNullable();
 
-        table.foreign('post_id').references('post_id').inTable('posts');
+        table.foreign('article_id').references('article_id').inTable('articles');
     })
     .createTable('comments', (table) => {
         table.increments('comment_id').primary();
         table.integer('user_id').notNullable();
-        table.integer('post_id').notNullable();
+        table.integer('article_id').notNullable();
         table.text('content').notNullable();
         table.integer('likes').defaultTo(0);
         table.timestamps(true, true);
 
         table.foreign('user_id').references('user_id').inTable('users');
-        table.foreign('post_id').references('post_id').inTable('posts');
+        table.foreign('article_id').references('article_id').inTable('articles');
     })
 }
 
@@ -61,8 +61,8 @@ export async function up(knex: Knex): Promise<void> {
 export async function down(knex: Knex): Promise<void> {
     await knex.schema
         .dropTableIfExists('comments')
-        .dropTableIfExists('posts_tags')
-        .dropTableIfExists('posts')
+        .dropTableIfExists('articles_tags')
+        .dropTableIfExists('articles')
         .dropTableIfExists('categories')
         .dropTableIfExists('users');
 }
