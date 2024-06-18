@@ -14,6 +14,14 @@
     -ms-transition: all $duration $timing-function;
 }
 
+@mixin transitionSingleProperty($property, $duration, $timing-function: ease){
+    transition: $property $duration $timing-function;
+    -webkit-transition: $property $duration $timing-function;
+    -moz-transition: $property $duration $timing-function;
+    -o-transition: $property $duration $timing-function;
+    -ms-transition: $property $duration $timing-function;
+}
+
 @mixin transform($function){
     transform: $function;
     -webkit-transform: $function;

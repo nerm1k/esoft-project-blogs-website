@@ -16,11 +16,17 @@
         color: $colorPlaceholder;
     }
 
-    &:focus-visible {
+    &:focus-visible, &:focus {
         outline: none;
 
         &::placeholder {
             color: transparent;
+        }
+
+        & + i {
+            @include transition(0.4s);
+            left: 6.5%;
+            color: $colorLoginMain;
         }
     }
 }
@@ -30,4 +36,5 @@ i {
     left: 8%;
     font-size: 18px;
     color: $colorInputIcon;
+    @include transition(0.4s);
 }
