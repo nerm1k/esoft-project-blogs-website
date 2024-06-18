@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
     return(
         <>
-            <Link to='/login'>
-                Войти
-            </Link>
-            <Link to='/signup'>
-                Регистрация
-            </Link>
+            <Header />
+            <main>
+                <Outlet />
+            </main>
+            <Footer />
         </>
     )
 }
