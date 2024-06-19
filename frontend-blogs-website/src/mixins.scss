@@ -6,15 +6,7 @@
     -o-border-radius: $value;
 }
 
-@mixin transition($duration, $timing-function: ease){
-    transition: all $duration $timing-function;
-    -webkit-transition: all $duration $timing-function;
-    -moz-transition: all $duration $timing-function;
-    -o-transition: all $duration $timing-function;
-    -ms-transition: all $duration $timing-function;
-}
-
-@mixin transitionSingleProperty($property, $duration, $timing-function: ease){
+@mixin transition($property, $duration, $timing-function: ease){
     transition: $property $duration $timing-function;
     -webkit-transition: $property $duration $timing-function;
     -moz-transition: $property $duration $timing-function;
