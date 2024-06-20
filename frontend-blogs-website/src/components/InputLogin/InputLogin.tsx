@@ -12,7 +12,9 @@ const InputLogin = ({type, name, id, placeholder, icon}: InputLoginProps) => {
     return(
         <>
             <input className={styles.input} type={type} name={name} id={id} placeholder={placeholder}/>
-            {icon}
+            <div className={styles['i--login']}>
+                {icon}
+            </div>
         </>
     )
 }

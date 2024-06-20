@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 
 const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
     const dropDownMenuRef = useRef<HTMLDivElement>(null);
 
@@ -28,42 +28,44 @@ const Header = () => {
 
     return(
         <header className={styles.header}>
-            <div className={styles.header__logo}>
-                <Link to='/articles'>
-                    <img src="/images/logo.png" alt="" />
-                </Link>
-            </div>
-            <nav className={styles.header__nav}>
-                {!isLoggedIn && (
-                    <ul>
-                        <li>
-                            <Link to='/login'>
-                                Войти
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to='/signup'>
-                                Регистрация
-                            </Link>
-                        </li>
-                    </ul>
-                )}
-                {isLoggedIn && (
-                    <>
+            <div className={styles.container}>
+                <div className={styles.header__logo}>
+                    <Link to='/articles'>
+                        <img src="/images/logo.png" alt="" />
+                    </Link>
+                </div>
+                <nav className={styles.header__nav}>
+                    {!isLoggedIn && (
                         <ul>
-                            <li className={styles.nav__profile} onClick={toggleDropdownMenu}>
-                              username
+                            <li>
+                                <Link to='/login'>
+                                    Войти
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/signup'>
+                                    Регистрация
+                                </Link>
                             </li>
                         </ul>
-                        {isDropDownMenuActive && (
-                            <div ref={dropDownMenuRef}>
-                                <DropDownMenu />    
-                            </div>
-                        )}
-                    </>
-                )}
+                    )}
+                    {isLoggedIn && (
+                        <>
+                            <ul>
+                                <li className={styles.nav__profile} onClick={toggleDropdownMenu}>
+                                username
+                                </li>
+                            </ul>
+                            {isDropDownMenuActive && (
+                                <div ref={dropDownMenuRef}>
+                                    <DropDownMenu />    
+                                </div>
+                            )}
+                        </>
+                    )}
 
-            </nav>
+                </nav>
+            </div>
         </header>
     )
 }

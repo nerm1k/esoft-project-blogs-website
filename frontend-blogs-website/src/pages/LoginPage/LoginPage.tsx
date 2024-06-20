@@ -9,10 +9,10 @@ const LoginPage = () => {
             <form className={styles.login}>
                 <p className={styles.login__title}>Вход</p>
                 <div className={styles.login__username}>
-                    <InputLogin type="text" name="username" id="username" placeholder='Логин' icon={<i className="fa-regular fa-user"></i>} />
+                    <InputLogin type="text" name="username" id="username" placeholder='Логин' icon={<i className="i--login fa-regular fa-user"></i>} />
                 </div>
                 <div className={styles.login__password}>
-                    <InputLogin type="password" name="password" id="password" placeholder='Пароль' icon={<i className="fa-regular fa-pen-to-square"></i>} />
+                    <InputLogin type="password" name="password" id="password" placeholder='Пароль' icon={<i className="i--login fa-regular fa-pen-to-square"></i>} />
                 </div>
                 <div className={styles.login__remember}>
                     <input type="checkbox" name="remember" id="remember" />
