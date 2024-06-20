@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './ArticlesPage.module.scss';
 import { BASE_URL } from '../../utils/consts';
+import ArticleCard from '../../components/ArticleCard/ArticleCard';
 
-interface Article {
+export interface Article {
     article_id: number,
-    username: string,
+    author: string,
     title: string,
     content: string,
     category: number,
@@ -12,6 +13,7 @@ interface Article {
     likes: number,
     image: string,
     created_at: Date,
+    updated_at: Date
 }
 
 const ArticlesPage = () => {
@@ -26,6 +28,7 @@ const ArticlesPage = () => {
             try {
                 const res = await fetch(`${BASE_URL}/articles`);
                 const data = (await res.json()) as Article[];
+                console.log(data);
                 setArticles(data);
             } catch (error: any) {
                 setError(error);
@@ -37,8 +40,6 @@ const ArticlesPage = () => {
         fetchArticles();
     }, []);
 
-    console.log(articles);
-
     if (isLoading) {
         return <div>Загрузка...</div>
     }
@@ -48,12 +49,19 @@ const ArticlesPage = () => {
     }
 
     return(
-        <>
+        <div className={styles.container}>
             {isLoading && <div>Загрузка...</div>}
             {!isLoading && (
-                <div>main article</div>
+                <>
+                    <div className={styles.container__articles}>
+                        {articles.map(article => (
+                            <ArticleCard key={article.article_id} article={article}/>
+                        ))}
+                    </div>
+                    <div className={styles.container__sidebar}>sidebar</div>
+                </>
             )}
-        </>
+        </div>
     )
 }
 

@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.container {
+    width: 1140px;
+    display: grid;
+    grid-template-columns: 2.6fr 1fr;
+    gap: 20px;
+    padding-top: 10px;
+    margin: 0 auto;
+}
