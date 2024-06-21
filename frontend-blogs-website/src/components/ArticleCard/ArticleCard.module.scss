@@ -8,6 +8,10 @@
     background-color: $colorForeBackground;
     box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
 
+    &:last-child {
+        margin-bottom: 0px;
+    }
+
     &__background {
         position: absolute;
         top: 15px;
