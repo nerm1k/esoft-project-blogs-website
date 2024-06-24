@@ -1,0 +1,16 @@
+@import '../../../variables.scss';
+@import '../../../mixins.scss';
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    & > div {
+        background-color: $colorForeBackground;
+    }
+    
+    & > div:not(.advertisement){
+        padding: 15px;
+    }
+}

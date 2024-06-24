@@ -55,6 +55,12 @@ export async function up(knex: Knex): Promise<void> {
         table.foreign('user_id').references('user_id').inTable('users');
         table.foreign('article_id').references('article_id').inTable('articles');
     })
+    .createTable('feedbacks', (table) => {
+        table.increments('feedback_id').primary();
+        table.string('sender_email', 64).notNullable();
+        table.string('topic', 64).notNullable();
+        table.text('description').notNullable();
+    })
 }
 
 
@@ -64,6 +70,7 @@ export async function down(knex: Knex): Promise<void> {
         .dropTableIfExists('articles_tags')
         .dropTableIfExists('articles')
         .dropTableIfExists('categories')
-        .dropTableIfExists('users');
+        .dropTableIfExists('users')
+        .dropTableIfExists('feedbacks');
 }
 

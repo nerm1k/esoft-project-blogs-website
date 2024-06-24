@@ -1,0 +1,30 @@
+@import '../../../variables.scss';
+@import '../../../mixins.scss';
+
+.sidebar {
+
+    &__feedback {
+        padding: 15px;
+        background-color: $colorForeBackground;
+
+        p {
+            font-size: 15px;
+            line-height: 1.3;
+        }
+
+        p:not(:last-child) {
+            margin-bottom: 14px;
+        }
+    }
+
+    &__title {
+        display: block;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color: $colorSidebarTitleFeedback;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba($colorSidebarTitleFeedback, 0.3);
+    }
+}

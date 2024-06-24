@@ -2,11 +2,11 @@ import { Knex } from "knex";
 
 export async function seed(knex: Knex): Promise<void> {
     // Deletes ALL existing entries
-    await knex("categories").del();
-    await knex("users").del();
-    await knex("articles").del();
     await knex("comments").del();
     await knex("articles_tags").del();
+    await knex("articles").del();
+    await knex("categories").del();
+    await knex("users").del();
 
     // Inserts seed entries
     await knex("categories").insert([
@@ -56,7 +56,8 @@ export async function seed(knex: Knex): Promise<void> {
             user_id: 2,
             title: 'Ученые разгадали тайну марианской впадины',
             content: 'Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст Длинный текст',
-            category_id: 3
+            category_id: 3,
+            image: './images/winter.png'
         },
         {
             article_id: 2,
@@ -70,7 +71,8 @@ export async function seed(knex: Knex): Promise<void> {
             user_id: 3,
             title: 'На Землю летит метеорит',
             content: 'Да, летит.',
-            category_id: 2
+            category_id: 2,
+            image: './images/space.jpg'
         }
     ]);
 
@@ -131,4 +133,13 @@ export async function seed(knex: Knex): Promise<void> {
             content: 'не согласен, + много воды в тексте.'
         },
     ]);
+
+    await knex('feedbacks').insert([
+        {
+            feedback_id: 1,
+            sender_email: 'roman@mail.ru',
+            topic: 'Баг',
+            description: 'нашел баги там, там и там.'
+        }
+    ])
 };
