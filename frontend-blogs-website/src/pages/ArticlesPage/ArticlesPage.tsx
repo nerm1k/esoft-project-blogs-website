@@ -10,6 +10,7 @@ export interface Article {
     content: string,
     category: number,
     views: number,
+    tags: string[],
     likes: number,
     image: string,
     created_at: Date,
@@ -22,13 +23,14 @@ const ArticlesPage = () => {
     const [error, setError] = useState();
 
     useEffect(() => {
+        window.scrollTo(0,0);
+        
         async function fetchArticles() {
             setIsLoading(true);
 
             try {
                 const res = await fetch(`${BASE_URL}/articles`);
                 const data = (await res.json()) as Article[];
-                console.log(data);
                 setArticles(data);
             } catch (error: any) {
                 setError(error);
@@ -49,7 +51,7 @@ const ArticlesPage = () => {
     }
 
     return(
-        <div className={styles.container}>
+        <>
             {isLoading && <div>Загрузка...</div>}
             {!isLoading && (
                 <>
@@ -58,10 +60,9 @@ const ArticlesPage = () => {
                             <ArticleCard key={article.article_id} article={article}/>
                         ))}
                     </div>
-                    <div className={styles.container__sidebar}>sidebar</div>
                 </>
             )}
-        </div>
+        </>
     )
 }
 

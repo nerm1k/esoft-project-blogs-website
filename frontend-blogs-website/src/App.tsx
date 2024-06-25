@@ -6,6 +6,7 @@ import ArticlesPage from "./pages/ArticlesPage/ArticlesPage";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import FeedbackPage from "./pages/FeedbackPage/FeedbackPage";
+import ArticlePage from "./pages/ArticlePage/ArticlePage";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/articles" element={<ArticlesPage />} />
+            <Route path="/articles/:articleId" element={<ArticlePage />} />
             <Route path="/feedback" element={<FeedbackPage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />

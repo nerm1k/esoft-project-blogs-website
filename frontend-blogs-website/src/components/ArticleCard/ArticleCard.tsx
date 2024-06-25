@@ -16,13 +16,14 @@ const ArticleCard = ({article}: ArticleCardProps) => {
 
     return(
         <div className={styles['article-card']}>
-            <div className={styles['article-card__background']}>
-                <img src={article.image} alt="" />
-            </div>
             {article.image && (
-                <div className={styles['article-card__head']}></div>
-            )}
-            
+                <>
+                    <div className={styles['article-card__background']}>
+                        <img src={article.image} alt="" />
+                    </div>
+                    <div className={styles['article-card__head']}></div>
+                </>
+            )} 
             <div className={styles['article-card__info']}>
                 <h3 className={styles['article-card__title']}>
                     {article.title}
@@ -33,6 +34,13 @@ const ArticleCard = ({article}: ArticleCardProps) => {
                     <span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span>
                     <span><i className="fa-regular fa-calendar-days"></i>{created_at}</span>
                 </p>
+                {article.tags.length > 1 && (
+                    <p className={styles['article-card__tags']}>
+                        {article.tags.map(tag => 
+                            <span key={tag}>{tag}</span>
+                        )}
+                    </p>
+                )}
                 <p className={styles['article-card__content']}>
                     {article.content}
                 </p>

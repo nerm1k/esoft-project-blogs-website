@@ -2,33 +2,14 @@
 @import '../../mixins.scss';
 
 .article-card {
-    position: relative;
     padding: 30px;
     margin-bottom: 15px;
     background-color: $colorForeBackground;
     box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
 
-    &:last-child {
-        margin-bottom: 0px;
-    }
-
-    &__background {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        max-width: 778px;
-        clip-path: polygon(0 0, 100% 0, 100% 80%, 0 60%);
-    }
-
-    &__head{
-        height: 200px;
-    }
-
     &__info {
         position: relative;
-        padding: 15px;
         background-color: $colorForeBackground;
-        z-index: 3;
 
         .btn {
             display: inline-block;
@@ -101,4 +82,15 @@
         margin-bottom: 16px;
         line-height: 1.5em;
     }
+
+    &__image {
+        margin-bottom: 30px;
+    }
+}
+
+.container_comments {
+    padding: 30px;
+    margin-bottom: 15px;
+    background-color: $colorForeBackground;
+    box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
 }
