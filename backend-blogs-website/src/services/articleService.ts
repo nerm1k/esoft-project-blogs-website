@@ -11,4 +11,9 @@ export default class ArticleService {
         const articles = await this.articleModel.getAllArticles();
         return articles;
     }
+
+    async getArticleByID(articleID: number) {
+        const article = await this.articleModel.getArticleByID(articleID);
+        return article;
+    }
 }

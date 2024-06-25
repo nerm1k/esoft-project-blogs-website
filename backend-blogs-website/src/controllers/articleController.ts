@@ -17,4 +17,18 @@ export default class ArticleController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error.message});
         }
     }
+
+    getArticleByID = async (req: Request, res: Response) => {
+        try {
+            const articleID = req.params.id;
+            const article = await this.articleService.getArticleByID(+articleID);
+            if (article) {
+                res.status(HttpStatusCode.OK).json(article);
+            } else {
+                res.status(HttpStatusCode.NOT_FOUND).json(`Пост с id ${articleID} не найден.`);
+            }
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
+        }
+    }
 }
