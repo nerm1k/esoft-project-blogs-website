@@ -8,7 +8,6 @@ import { formatDate } from '../../utils/functions';
 
 const ArticlePage = () => {
     const {articleId} = useParams();
-    console.log(articleId);
     const [article, setArticle] = useState<Article>();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
@@ -66,7 +65,7 @@ const ArticlePage = () => {
                             )}
                             {article.image && (
                                 <div className={styles['article-card__image']}>
-                                    <img src={`../${article.image}`} alt="" />
+                                    <img src={article.image} alt="" />
                                 </div>
                             )}
                             <p className={styles['article-card__content']}>

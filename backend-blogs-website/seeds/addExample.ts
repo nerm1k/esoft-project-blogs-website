@@ -143,6 +143,14 @@ export async function seed(knex: Knex): Promise<void> {
             content: 'Да, летит.',
             category_id: 2,
             image: './images/space.jpg'
+        },
+        {
+            article_id: 13,
+            user_id: 3,
+            title: 'На Землю летит метеорит',
+            content: 'Да, летит.',
+            category_id: 2,
+            image: './images/space.jpg'
         }
     ]);
 

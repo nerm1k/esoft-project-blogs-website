@@ -12,8 +12,12 @@ export default class ArticleController {
     getAllArticles = async (req: Request, res: Response) => {
         try {
             if (req.query.limit) {
-                const limit= req.query.limit;
+                const limit = req.query.limit;
                 const articles = await this.articleService.getTopArticles(+limit);
+                res.status(HttpStatusCode.OK).json(articles);
+            } else if (req.query.page) {
+                const page = req.query.page;
+                const articles = await this.articleService.getArticlesByPage(+page);
                 res.status(HttpStatusCode.OK).json(articles);
             } else {
                 const articles = await this.articleService.getAllArticles();

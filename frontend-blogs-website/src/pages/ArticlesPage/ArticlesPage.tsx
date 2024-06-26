@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './ArticlesPage.module.scss';
 import { BASE_URL } from '../../utils/consts';
 import ArticleCard from '../../components/ArticleCard/ArticleCard';
+import Pagination from '../../components/Pagination/Pagination';
 
 export interface Article {
     article_id: number,
@@ -14,13 +15,17 @@ export interface Article {
     likes: number,
     image: string,
     created_at: Date,
-    updated_at: Date
 }
 
 const ArticlesPage = () => {
     const [articles, setArticles] = useState<Article[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pagesAround, setPagesAround] = useState({
+        previous: false,
+        next: true
+    });
 
     useEffect(() => {
         window.scrollTo(0,0);
@@ -29,7 +34,7 @@ const ArticlesPage = () => {
             setIsLoading(true);
 
             try {
-                const res = await fetch(`${BASE_URL}/articles`);
+                const res = await fetch(`${BASE_URL}/articles?page=${currentPage}`);
                 const data = (await res.json()) as Article[];
                 setArticles(data);
             } catch (error: any) {
@@ -40,7 +45,41 @@ const ArticlesPage = () => {
         }
 
         fetchArticles();
-    }, []);
+    }, [currentPage]);
+
+    function handlePagination(type: 'next' | 'previous'): void {
+        if (type == 'next') {
+            if (currentPage + 1 < 21) {
+                setCurrentPage(prev => prev += 1);
+                setPagesAround({
+                    ...pagesAround,
+                    previous: true
+                });
+            } else {
+                setCurrentPage(20);
+                setPagesAround({
+                    ...pagesAround,
+                    next: false
+                });
+            }
+        }
+
+        if (type == 'previous') {
+            if (currentPage - 1 > 0) {
+                setCurrentPage(prev => prev -= 1);
+                setPagesAround({
+                    ...pagesAround,
+                    next: true
+                })
+            } else {
+                setCurrentPage(1);
+                setPagesAround({
+                    ...pagesAround,
+                    previous: false
+                });
+            }
+        }
+    }
 
     if (isLoading) {
         return <div>Загрузка...</div>
@@ -59,6 +98,7 @@ const ArticlesPage = () => {
                         {articles.map(article => (
                             <ArticleCard key={article.article_id} article={article}/>
                         ))}
+                        <Pagination onClick={handlePagination} pagesAround={pagesAround} page={currentPage}/>
                     </div>
                 </>
             )}

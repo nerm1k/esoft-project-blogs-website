@@ -17,6 +17,12 @@ export default class ArticleService {
         return articles;
     }
 
+    async getArticlesByPage(page: number) {
+        const offset = page * 10 - 9;
+        const articles = await this.articleModel.getArticlesByPage(offset);
+        return articles;
+    }
+
     async getArticleByID(articleID: number) {
         const article = await this.articleModel.getArticleByID(articleID);
         return article;
