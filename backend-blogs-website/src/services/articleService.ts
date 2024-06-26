@@ -12,6 +12,11 @@ export default class ArticleService {
         return articles;
     }
 
+    async getTopArticles(limit: number) {
+        const articles = await this.articleModel.getTopArticles(limit);
+        return articles;
+    }
+
     async getArticleByID(articleID: number) {
         const article = await this.articleModel.getArticleByID(articleID);
         return article;

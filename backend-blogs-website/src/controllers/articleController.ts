@@ -11,8 +11,14 @@ export default class ArticleController {
 
     getAllArticles = async (req: Request, res: Response) => {
         try {
-            const articles = await this.articleService.getAllArticles();
-            res.status(HttpStatusCode.OK).json(articles);
+            if (req.query.limit) {
+                const limit= req.query.limit;
+                const articles = await this.articleService.getTopArticles(+limit);
+                res.status(HttpStatusCode.OK).json(articles);
+            } else {
+                const articles = await this.articleService.getAllArticles();
+                res.status(HttpStatusCode.OK).json(articles);
+            }
         } catch (error: any) {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error.message});
         }
