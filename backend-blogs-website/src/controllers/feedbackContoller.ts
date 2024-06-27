@@ -11,8 +11,7 @@ export default class FeedbackController {
 
     createFeedback = async (req: Request, res: Response) => {
         try {
-            const {topic, description} = req.body;
-            const email = req.body.sender_email;
+            const {topic, description, email} = req.body;
             const feedback = await this.feedbackService.createFeedback(topic, email, description);
             res.status(HttpStatusCode.OK).json(feedback);
         } catch (error: any) {

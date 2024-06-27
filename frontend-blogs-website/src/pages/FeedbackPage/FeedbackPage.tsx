@@ -16,6 +16,7 @@ const FeedbackPage = () => {
         description: ''
     });
     const [isValid, setIsValid] = useState(true);
+    const [isSent, setIsSent] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0,0);
@@ -37,20 +38,21 @@ const FeedbackPage = () => {
         if (!isValid) {
             return;
         } else {
-            // async function sendEmail() {
-            //     const res = await fetch(`${BASE_URL}/feedbacks`, {
-            //         method: 'POST',
-            //         headers: {
-            //             'Accept': 'application/json',
-            //             'Content-Type': 'application/json'
-            //           },
-            //         body: JSON.stringify(feedbackInfo),
-            //     });
-            //     const data = await res.json();
-            //     console.log(data);
-            // }
+            async function sendEmail() {
+                const res = await fetch(`${BASE_URL}/feedbacks`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify(feedbackInfo),
+                });
+                const data = await res.json();
+                console.log(data);
+            }
     
-            // sendEmail();
+            sendEmail();
+            setIsSent(true);
             setFeedbackInfo({topic: '', email: '', description: ''});
         }
     }
@@ -59,16 +61,25 @@ const FeedbackPage = () => {
         <>
             <form className={styles.feedback} onSubmit={handleSubmit}>
                 <h3>Техническая поддержка</h3>
-                {!isValid && (
-                    <p className={styles.feedback__error}>Заполните поля корректно</p>
+                {!isSent && (
+                    <>
+                     {!isValid && (
+                        <p className={styles.feedback__error}>Заполните поля корректно</p>
+                    )}
+                    <label htmlFor="topic"><span>*</span>Укажите тему обращения:</label>
+                    <input type="text" name='topic' id='topic' className={styles.feedback__topic} onChange={handleInputs} value={feedbackInfo.topic}/>
+                    <label htmlFor="email"><span>*</span>Ваш адрес электронной почты:</label>
+                    <input type="email" name="email" id="email" className={styles.feedback__email} onChange={handleInputs} value={feedbackInfo.email}/>
+                    <label htmlFor="description"><span>*</span>Текст вашего сообщения:</label>
+                    <textarea name="description" id="description" onChange={handleInputs} value={feedbackInfo.description}></textarea>
+                    <button type='submit' className={styles.feedback__button}>Отправить</button>
+                    </>
                 )}
-                <label htmlFor="topic"><span>*</span>Укажите тему обращения:</label>
-                <input type="text" name='topic' id='topic' className={styles.feedback__topic} onChange={handleInputs} value={feedbackInfo.topic}/>
-                <label htmlFor="email"><span>*</span>Ваш адрес электронной почты:</label>
-                <input type="email" name="email" id="email" className={styles.feedback__email} onChange={handleInputs} value={feedbackInfo.email}/>
-                <label htmlFor="description"><span>*</span>Текст вашего сообщения:</label>
-                <textarea name="description" id="description" onChange={handleInputs} value={feedbackInfo.description}></textarea>
-                <button type='submit' className={styles.feedback__button}>Отправить</button>
+                {isSent && (
+                    <p className={styles.feedback__thanks}>
+                        Спасибо за обращение. С вами свяжутся в ближайшее время.
+                    </p>
+                )}
             </form>
         </>
     )
