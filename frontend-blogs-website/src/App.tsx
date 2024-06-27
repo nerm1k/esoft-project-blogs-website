@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import ArticlesPage from "./pages/ArticlesPage/ArticlesPage";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import { store } from "./store/store";
 import FeedbackPage from "./pages/FeedbackPage/FeedbackPage";
 import ArticlePage from "./pages/ArticlePage/ArticlePage";
 

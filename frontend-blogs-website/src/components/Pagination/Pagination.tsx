@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Pagination.module.scss';
 
 interface PaginationProps {
-    onClick: (type: 'next' | 'previous') => void
+    onClick: (type: 'next' | 'previous' | number) => void
     pagesAround: {
         next: boolean,
         previous: boolean
@@ -10,19 +10,63 @@ interface PaginationProps {
     page: number
 }
 
+export const maxPage = 20;
+export const minPage = 1;
+
 const Pagination = ({onClick, pagesAround, page} : PaginationProps) => {
+    const aboveMinBy2AndBelowMaxBy2 = page >= minPage + 2 && page <= maxPage - 2;
+
     return(
         <div className={styles.pagination}>
             <Link to={`/articles?page=${page - 1}`} onClick={() => onClick('previous')} className={`${styles.pagination__item} ${!pagesAround.previous && styles['pagination__item--disabled']}`}>
                 Назад
             </Link>
             <div className={`${styles.pagination__item} ${styles.pagination__list}`}>
-                <div className={`${styles.list__page} ${page == 1 && styles['list__page--active']}`}>1</div>
-                <div className={`${styles.list__page} ${page == 2 && styles['list__page--active']}`}>2</div>
-                <div className={`${styles.list__page} ${page == 3 && styles['list__page--active']}`}>3</div>
-                <div className={styles.list__page}>...</div>
-                <div className={`${styles.list__page} ${page == 19 && styles['list__page--active']}`}>19</div>
-                <div className={`${styles.list__page} ${page == 20 && styles['list__page--active']}`}>20</div>
+                <Link to={`/articles?page=${minPage}`} onClick={() => onClick(minPage)}>
+                    <div className={`${styles.list__page} ${page == minPage && styles['list__page--active']}`}>{minPage}</div>
+                </Link>
+                <Link to={`/articles?page=${minPage + 1}`} onClick={() => onClick(minPage + 1)}>
+                    <div className={`${styles.list__page} ${page == minPage + 1 && styles['list__page--active']}`}>{minPage + 1}</div>
+                </Link>
+                {aboveMinBy2AndBelowMaxBy2 && (
+                    <>
+                        {![minPage + 2, minPage + 3, minPage + 4].includes(page) && (
+                             <div className={styles.list__page}>...</div>
+                        )}
+                        {![minPage + 2, minPage + 3].includes(page) && (
+                            <Link to={`/articles?page=${page - 2}`} onClick={() => onClick(page - 2)}>
+                                <div className={`${styles.list__page}`}>{page - 2}</div>
+                            </Link>
+                        )}
+                        {page != minPage + 2 && (
+                            <Link to={`/articles?page=${page - 1}`} onClick={() => onClick(page - 1)}>
+                                <div className={`${styles.list__page}`}>{page - 1}</div>
+                            </Link>
+                        )}
+                        <Link to={`/articles?page=${page}`} onClick={() => onClick(page)}>
+                            <div className={`${styles.list__page} ${styles['list__page--active']}`}>{page}</div>
+                        </Link>
+                        {![maxPage - 2, maxPage - 1].includes(page) && (
+                            <Link to={`/articles?page=${page + 1}`} onClick={() => onClick(page + 1)}>
+                                <div className={`${styles.list__page}`}>{page + 1}</div>
+                            </Link>
+                        )}
+                        {![maxPage - 3, maxPage - 2, maxPage - 1].includes(page) && (
+                            <Link to={`/articles?page=${page + 2}`} onClick={() => onClick(page + 2)}>
+                                <div className={`${styles.list__page}`}>{page + 2}</div>
+                            </Link>
+                        )}
+                    </>
+                )}
+                {![maxPage - 4, maxPage - 3, maxPage - 2].includes(page) && (
+                    <div className={styles.list__page}>...</div>
+                )}
+                <Link to={`/articles?page=${maxPage - 1}`} onClick={() => onClick(maxPage - 1)}>
+                    <div className={`${styles.list__page} ${page == maxPage - 1 && styles['list__page--active']}`}>{maxPage - 1}</div>
+                </Link>
+                <Link to={`/articles?page=${maxPage}`} onClick={() => onClick(maxPage)}>
+                    <div className={`${styles.list__page} ${page == maxPage && styles['list__page--active']}`}>{maxPage}</div>
+                </Link>
             </div>
             <Link to={`/articles?page=${page + 1}`} onClick={() => onClick('next')} className={`${styles.pagination__item} ${!pagesAround.next && styles['pagination__item--disabled']}`}>
                 Вперед

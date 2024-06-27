@@ -2,11 +2,16 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
+import { useAppDispatch } from '../../hooks/hooks';
+import { setCurrentPage } from '../../store/currentPageSlice';
+import { setPagesAround } from '../../store/pagesAroundSlice';
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
     const dropDownMenuRef = useRef<HTMLDivElement>(null);
+
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         function handleClickOutsideDropDownMenu(event: MouseEvent) {
@@ -30,7 +35,13 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.container}>
                 <div className={styles.header__logo}>
-                    <Link to='/articles'>
+                    <Link to='/articles?page=1' onClick={() => {
+                                                            dispatch(setCurrentPage(1))
+                                                            dispatch(setPagesAround({
+                                                                previous: false,
+                                                                next: true
+                                                            }))
+                    }}>
                         <img src="/images/logo.png" alt="" />
                     </Link>
                 </div>
