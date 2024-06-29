@@ -2,7 +2,7 @@ import styles from './ButtonLogin.module.scss';
 
 interface ButtonLoginProps {
     type: 'submit' | 'reset' | 'button',
-    text: string
+    text: string,
 }
 
 const ButtonLogin = ({type, text}: ButtonLoginProps) => {

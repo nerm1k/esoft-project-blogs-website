@@ -1,23 +1,82 @@
+import { FormEvent, SyntheticEvent, useState } from 'react';
 import ButtonLogin from '../../components/ButtonLogin/ButtonLogin';
 import InputLogin from '../../components/InputLogin/InputLogin';
 import styles from './SignUpPage.module.scss';
+import { isValidSignUpForm } from '../../utils/validations';
+import { BASE_URL } from '../../utils/consts';
 
+interface SignUpForm {
+    username: string,
+    email: string,
+    password: string
+};
 
 const SignUpPage = () => {
+    const [signUpInfo, setSignUpInfo] = useState<SignUpForm>({
+        username: '',
+        email: '',
+        password: ''
+    });
+    const [isValid, setIsValid] = useState(true);
+    const [isSignedUp, setIsSignedUp] = useState(false);
+
+    function handleChange(e: SyntheticEvent): void {
+        const target = e.target as HTMLInputElement;
+        setIsValid(true);
+        setSignUpInfo({
+            ...signUpInfo,
+            [target.name]: target.value
+        })
+    }
+
+    function handleSubmit(e: FormEvent): void {
+        e.preventDefault();
+        const isValid = isValidSignUpForm(signUpInfo.username, signUpInfo.email, signUpInfo.password);
+        setIsValid(isValid);
+        console.log(isValid);
+        if (!isValid) {
+            return;
+        } else {
+            async function register() {
+                const res = await fetch(`${BASE_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify(signUpInfo),
+                });
+                const data = await res.json();
+                console.log(data);
+            }
+    
+            register();
+            setIsValid(true);
+            setIsSignedUp(true);
+            setSignUpInfo({username: '', email: '', password: ''});
+        }
+    }
+
     return(
         <div className={styles.container}>
-            <form className={styles.login}>
+            <form className={styles.login} onSubmit={handleSubmit}>
                 <p className={styles.login__title}>Регистрация</p>
-                <div className={styles.login__username}>
-                    <InputLogin type="text" name="username" id="username" placeholder='Логин' icon={<i className="i--login fa-regular fa-user"></i>} />
+                {!isValid && (
+                        <p className={styles.login__error}>Заполните поля корректно</p>
+                )}
+                {isSignedUp && (
+                        <p className={styles.login__error}>Вы успешно зарегистрировались</p>
+                )}
+                <div className={styles.login__username} data-title='Логин не меньше 6-ти символов и не больше 32-ух символов'>
+                    <InputLogin type="text" name="username" id="username" placeholder='Логин' icon={<i className="i--login fa-regular fa-user"></i>} value={signUpInfo.username} onChange={handleChange}/>
                 </div>
-                <div className={styles.login__email}>
-                    <InputLogin type="email" name="email" id="email" placeholder='Email' icon={<i className="i--login fa-regular fa-envelope"></i>} />
+                <div className={styles.login__email} data-title='Почта не меньше 6-ти символов и не больше 64-ех символов'>
+                    <InputLogin type="email" name="email" id="email" placeholder='Email' icon={<i className="i--login fa-regular fa-envelope"></i>} value={signUpInfo.email} onChange={handleChange}/>
                 </div>
-                <div className={styles.login__password}>
-                    <InputLogin type="password" name="password" id="password" placeholder='Пароль' icon={<i className="i--login fa-regular fa-pen-to-square"></i>} />
+                <div className={styles.login__password} data-title='Пароль не меньше 6-ти символов и не больше 32-ух символов'>
+                    <InputLogin type="password" name="password" id="password" placeholder='Пароль' icon={<i className="i--login fa-regular fa-pen-to-square"></i>} value={signUpInfo.password} onChange={handleChange}/>
                 </div>
-                    <ButtonLogin type="submit" text="Зарегистрироваться" />
+                    <ButtonLogin type="submit" text="Зарегистрироваться"/>
             </form>
         </div>
     )

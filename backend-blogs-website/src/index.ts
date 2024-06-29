@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import cors from 'cors';
+import "dotenv/config.js";
 import knex from "knex";
 import { routes } from "./routes/routes";
 import ArticleModel from "./models/articleModel";
@@ -8,6 +9,9 @@ import ArticleController from "./controllers/articleController";
 import FeedbackModel from "./models/feedbackModel";
 import FeedbackService from "./services/feedbackService";
 import FeedbackController from "./controllers/feedbackContoller";
+import UserModel from "./models/userModel";
+import UserService from "./services/userService";
+import UserController from "./controllers/userController";
 
 const app: Express = express();
 
@@ -19,13 +23,17 @@ const feedbackModel: FeedbackModel = new FeedbackModel();
 const feedbackService: FeedbackService = new FeedbackService(feedbackModel);
 const feedbackController: FeedbackController = new FeedbackController(feedbackService);
 
+const userModel: UserModel = new UserModel();
+const userService: UserService = new UserService(userModel);
+const userController: UserController = new UserController(userService);
+
 const corsOptions = {
   origin: "*",
 }
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(routes(articleController, feedbackController));
+app.use(routes(articleController, feedbackController, userController));
 
 
 const port = process.env.PORT || 3000;
@@ -33,40 +41,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
-
-
-  // const pool = knex({
-  //   client: 'pg',
-  //   connection: {
-  //     connectionString: 'postgresql://postgres:admin@localhost:5432/blogwebsite?application_name=app',
-  //     pool: {
-  //       min: 2,
-  //       max: 50,
-  //       idleTimeoutMillis: 10000
-  //     }
-  //   },
-  //   migrations: {
-  //     directory: './migrations',
-  //   }
-  // })
-
-// interface User {
-//   id: number,
-//   name: string
-// }
-
-// interface Category {
-//   id: number,
-//   name: string,
-//   description: string
-// }
-
-// pool
-//     .select('')
-//     .from('users')
-//      .then(users => {
-//        console.log(users);
-//      })
-//      .catch(error => {
-//        console.error(error); 
-//      });
