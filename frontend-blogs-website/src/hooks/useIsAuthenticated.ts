@@ -12,7 +12,7 @@ interface TokenPayload extends User {
 
 const useIsAuthenticated = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [user, setUser] = useState<User | null>(null);
+    const [authenticatedUser, setAuthenticatedUser] = useState<User | null>(null);
 
     useEffect(() => {
         const jwtToken = localStorage.getItem('jwt_token');
@@ -24,7 +24,7 @@ const useIsAuthenticated = () => {
 
                 if (!isJwtTokenExpired) {
                     setIsAuthenticated(true);
-                    setUser(decodedJwtToken);
+                    setAuthenticatedUser({username: decodedJwtToken.username, is_admin: decodedJwtToken.is_admin});
                 } else {
                     setIsAuthenticated(false);
                 } 
@@ -38,7 +38,7 @@ const useIsAuthenticated = () => {
 
     return {
         isAuthenticated,
-        user
+        authenticatedUser
     }
 };
 

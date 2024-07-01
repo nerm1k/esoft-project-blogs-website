@@ -8,7 +8,8 @@ import { setPagesAround } from '../../store/pagesAroundSlice';
 import useIsAuthenticated from '../../hooks/useIsAuthenticated';
 
 const Header = () => {
-    const { isAuthenticated, user } = useIsAuthenticated();
+    const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
+    console.log(authenticatedUser);
     const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
     const dropDownMenuRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +66,7 @@ const Header = () => {
                         <>
                             <ul>
                                 <li className={styles.nav__profile} onClick={toggleDropdownMenu}>
-                                    {user?.username}
+                                    {authenticatedUser?.username}
                                 </li>
                             </ul>
                             {isDropDownMenuActive && (
