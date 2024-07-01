@@ -39,6 +39,7 @@ export default class ArticleModel {
     }
 
     async getArticleByID(articleID: number) {
+        await pool('articles').where('article_id', '=', articleID).increment('views', 1);
         const article = await pool
                                 .select('articles.article_id', 'username as author', 'title', 'content', 'views', 'likes', 'image', 'name as category', pool.raw('JSON_AGG(articles_tags.tag_name) as tags'), 'articles.created_at', 'articles.updated_at')
                                 .from('articles')

@@ -12,6 +12,9 @@ import FeedbackController from "./controllers/feedbackContoller";
 import UserModel from "./models/userModel";
 import UserService from "./services/userService";
 import UserController from "./controllers/userController";
+import CommentModel from "./models/commentModel";
+import CommentService from "./services/commentService";
+import CommentController from "./controllers/commentController";
 
 const app: Express = express();
 
@@ -27,13 +30,18 @@ const userModel: UserModel = new UserModel();
 const userService: UserService = new UserService(userModel);
 const userController: UserController = new UserController(userService);
 
+const commentModel: CommentModel = new CommentModel();
+const commentService: CommentService = new CommentService(commentModel);
+const commentController: CommentController = new CommentController(commentService);
+
+
 const corsOptions = {
   origin: "*",
 }
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(routes(articleController, feedbackController, userController));
+app.use(routes(articleController, feedbackController, userController, commentController));
 
 
 const port = process.env.PORT || 3000;

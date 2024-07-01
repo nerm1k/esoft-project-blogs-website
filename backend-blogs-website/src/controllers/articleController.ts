@@ -24,7 +24,7 @@ export default class ArticleController {
                 res.status(HttpStatusCode.OK).json(articles);
             }
         } catch (error: any) {
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error.message});
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message: error});
         }
     }
 

@@ -2,7 +2,7 @@ import knex from "knex";
 
 const pool = knex(require('../../knexfile'));
 
-export interface User {
+interface User {
     user_id: number,
     username: string,
     email: string,

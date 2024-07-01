@@ -1,8 +1,8 @@
-import UserModel, { User } from "../models/userModel";
+import UserModel from "../models/userModel";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const SECRET_KEY = 'testsecretkey32testsecretkey323232'
+export const SECRET_KEY = 'testsecretkey32testsecretkey323232'
 const SESSION_DURATION = '1h'
 const SALT_ROUNDS = 10
 
@@ -36,7 +36,7 @@ export default class UserService {
             return 401;
         }
 
-        const jwtToken = jwt.sign({username: user.username, is_admin: user.is_admin}, SECRET_KEY, {expiresIn: SESSION_DURATION});
+        const jwtToken = jwt.sign({user_id: user.user_id, username: user.username, is_admin: user.is_admin}, SECRET_KEY, {expiresIn: SESSION_DURATION});
         return {user, jwtToken};
     }
 }

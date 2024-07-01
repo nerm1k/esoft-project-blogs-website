@@ -8,21 +8,21 @@ import { setCurrentPage } from '../../store/currentPageSlice';
 import { setPagesAround } from '../../store/pagesAroundSlice';
 import { useSearchParams } from 'react-router-dom';
 
-export interface Article {
+export interface ArticleCard {
     article_id: number,
     author: string,
     title: string,
     content: string,
     category: number,
     views: number,
-    tags: string[],
+    tags?: string[],
     likes: number,
-    image: string,
+    image?: string,
     created_at: Date,
 }
 
 const ArticlesPage = () => {
-    const [articles, setArticles] = useState<Article[]>([]);
+    const [articles, setArticles] = useState<ArticleCard[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
 
@@ -45,7 +45,7 @@ const ArticlesPage = () => {
 
             try {
                 const res = await fetch(`${BASE_URL}/articles?page=${currentPage}`);
-                const data = (await res.json()) as Article[];
+                const data = (await res.json()) as ArticleCard[];
                 setArticles(data);
             } catch (error: any) {
                 setError(error);
