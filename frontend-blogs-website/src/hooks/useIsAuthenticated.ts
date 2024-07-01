@@ -2,6 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 interface User {
+    user_id: number
     username: string,
     is_admin: boolean
 }
@@ -24,7 +25,7 @@ const useIsAuthenticated = () => {
 
                 if (!isJwtTokenExpired) {
                     setIsAuthenticated(true);
-                    setAuthenticatedUser({username: decodedJwtToken.username, is_admin: decodedJwtToken.is_admin});
+                    setAuthenticatedUser({user_id: decodedJwtToken.user_id, username: decodedJwtToken.username, is_admin: decodedJwtToken.is_admin});
                 } else {
                     setIsAuthenticated(false);
                 } 
