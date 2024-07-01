@@ -16,17 +16,17 @@ const Footer = () => {
                 <div className={styles.footer__item}>
                     <div className={styles['footer__img-link']}>
                         <a href="https://vk.com/nermi">
-                            <img src="./images/vk.png" alt="vk.com/nermi" />
+                            <img src="/images/vk.png" alt="vk.com/nermi" />
                         </a>
                     </div>
                     <div className={styles['footer__img-link']}>
                         <a href="https://t.me/persikkkkkkkkkkkkkkkk">
-                            <img src="./images/telegram.png" alt="t.me/persikkkkkkkkkkkkkkkk" />
+                            <img src="/images/telegram.png" alt="t.me/persikkkkkkkkkkkkkkkk" />
                         </a>
                     </div>
                     <div className={styles['footer__img-link']}>
                         <a href="https://github.com/nerm1k">
-                            <img src="./images/github.png" alt="github.com/nerm1k" />
+                            <img src="/images/github.png" alt="github.com/nerm1k" />
                         </a>
                     </div>
                 </div>
