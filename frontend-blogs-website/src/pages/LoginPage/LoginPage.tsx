@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import InputLogin from '../../components/InputLogin/InputLogin';
 import styles from './LoginPage.module.scss';
 import ButtonLogin from '../../components/ButtonLogin/ButtonLogin';
@@ -17,16 +17,18 @@ interface ResponseData {
 };
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [loginInfo, setLoginInfo] = useState<LoginForm>({
         username: '',
         password: ''
     });
     const [isValid, setIsValid] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     function handleChange(e: SyntheticEvent): void {
         const target = e.target as HTMLInputElement;
         setIsValid(true);
+        setIsError(false);
         setLoginInfo({
             ...loginInfo,
             [target.name]: target.value
@@ -37,27 +39,34 @@ const LoginPage = () => {
         e.preventDefault();
         const isValid = isValidLoginForm(loginInfo.username, loginInfo.password);
         setIsValid(isValid);
-        console.log(isValid);
         if (!isValid) {
             return;
         } else {
-            async function register() {
-                const res = await fetch(`${BASE_URL}/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                      },
-                    body: JSON.stringify(loginInfo),
-                });
-                const data = await res.json() as ResponseData;
-                localStorage.setItem('jwt_token', data.jwtToken);
+            async function login() {
+                try {
+                    const res = await fetch(`${BASE_URL}/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                          },
+                        body: JSON.stringify(loginInfo),
+                    });
+                    const data = await res.json() as ResponseData;
+                    if (!data.jwtToken) {
+                        setIsError(true);
+                    } else {
+                        localStorage.setItem('jwt_token', data.jwtToken);
+                        navigate('/articles');
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
             }
-    
-            register();
-            setIsValid(true);
-            setIsLoggedIn(true);
-            setLoginInfo({username: '', password: ''});
+            login();
+            // setIsValid(true);
+            // setIsLoggedIn(true);
+            // setLoginInfo({username: '', password: ''});
         }
     }
 
@@ -67,6 +76,9 @@ const LoginPage = () => {
                 <p className={styles.login__title}>Вход</p>
                 {!isValid && (
                         <p className={styles.login__error}>Заполните поля корректно</p>
+                )}
+                {isError && (
+                    <p className={styles.login__error}>Данные некорректны</p>
                 )}
                 <div className={styles.login__username}>
                     <InputLogin type="text" name="username" id="username" placeholder='Логин' icon={<i className="i--login fa-regular fa-user"></i>} onChange={handleChange} value={loginInfo.username}/>

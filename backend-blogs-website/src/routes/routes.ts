@@ -8,6 +8,7 @@ export const routes = (articleController: ArticleController, feedbackController:
 
     router.post('/api/v1/register', userController.registerUser);
     router.post('/api/v1/login', userController.loginUser);
+    router.get('/api/v1/logout', userController.logout);
 
     router.get('/api/v1/articles', articleController.getAllArticles);
     router.get('/api/v1/articles/:id', articleController.getArticleByID);

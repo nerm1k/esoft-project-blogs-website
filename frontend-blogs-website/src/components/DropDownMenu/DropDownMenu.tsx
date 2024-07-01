@@ -4,26 +4,26 @@ import styles from './DropDownMenu.module.scss';
 const DropDownMenu = () => {
     return(
         <div className={styles['dropdown-menu']}>
-            <div className={styles['dropdown-menu__item']}>
-                <Link to='/users/username'>
-                    Профиль
-                </Link>
-            </div>
-            <div className={styles['dropdown-menu__item']}>
-                <Link to='/users/username/articles'>
-                    Публикации
-                </Link>
-            </div>
-            <div className={styles['dropdown-menu__item']}>
-                <Link to='/settings'>
-                    Настройки
-                </Link>
-            </div>
-            <div className={styles['dropdown-menu__item']}>
-                <Link to='/logout'>
-                    Выйти
-                </Link>
-            </div>
+            <Link to='/users/username'>
+                <div className={styles['dropdown-menu__item']}>
+                        Профиль
+                </div>
+            </Link>
+            <Link to='/users/username/articles'>
+                <div className={styles['dropdown-menu__item']}>
+                        Публикации
+                </div>
+            </Link>
+            <Link to='/settings'>
+                <div className={styles['dropdown-menu__item']}>   
+                        Настройки
+                </div>
+            </Link>
+            <Link to='/logout'>
+                <div className={styles['dropdown-menu__item']}>   
+                        Выйти   
+                </div>
+            </Link>
         </div>
     )
 }

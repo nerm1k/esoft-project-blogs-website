@@ -5,9 +5,10 @@ import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import { useAppDispatch } from '../../hooks/hooks';
 import { setCurrentPage } from '../../store/currentPageSlice';
 import { setPagesAround } from '../../store/pagesAroundSlice';
+import useIsAuthenticated from '../../hooks/useIsAuthenticated';
 
 const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { isAuthenticated, user } = useIsAuthenticated();
     const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
     const dropDownMenuRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +47,7 @@ const Header = () => {
                     </Link>
                 </div>
                 <nav className={styles.header__nav}>
-                    {!isLoggedIn && (
+                    {!isAuthenticated && (
                         <ul>
                             <li>
                                 <Link to='/login'>
@@ -60,11 +61,11 @@ const Header = () => {
                             </li>
                         </ul>
                     )}
-                    {isLoggedIn && (
+                    {isAuthenticated && (
                         <>
                             <ul>
                                 <li className={styles.nav__profile} onClick={toggleDropdownMenu}>
-                                username
+                                    {user?.username}
                                 </li>
                             </ul>
                             {isDropDownMenuActive && (

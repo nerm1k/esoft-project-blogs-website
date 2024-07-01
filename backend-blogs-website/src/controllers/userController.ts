@@ -41,4 +41,8 @@ export default class UserController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
         }
     }
+
+    logout = async (req: Request, res: Response) => {
+        res.json({ message: 'Logged out' });
+    }
 }

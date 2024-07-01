@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import FeedbackPage from "./pages/FeedbackPage/FeedbackPage";
 import ArticlePage from "./pages/ArticlePage/ArticlePage";
+import Logout from "./components/Logout/Logout";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </Provider>
     </>
