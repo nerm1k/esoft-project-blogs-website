@@ -4,6 +4,7 @@ import InputLogin from '../../components/InputLogin/InputLogin';
 import styles from './SignUpPage.module.scss';
 import { isValidSignUpForm } from '../../utils/validations';
 import { BASE_URL } from '../../utils/consts';
+import { useNavigate } from 'react-router-dom';
 
 interface SignUpForm {
     username: string,
@@ -12,13 +13,13 @@ interface SignUpForm {
 };
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
     const [signUpInfo, setSignUpInfo] = useState<SignUpForm>({
         username: '',
         email: '',
         password: ''
     });
     const [isValid, setIsValid] = useState(true);
-    const [isSignedUp, setIsSignedUp] = useState(false);
 
     function handleChange(e: SyntheticEvent): void {
         const target = e.target as HTMLInputElement;
@@ -46,13 +47,13 @@ const SignUpPage = () => {
                       },
                     body: JSON.stringify(signUpInfo),
                 });
-                const data = await res.json();
-                console.log(data);
+                if (res.status === 201) {
+                    navigate('/login');
+                }
             }
     
             register();
             setIsValid(true);
-            setIsSignedUp(true);
             setSignUpInfo({username: '', email: '', password: ''});
         }
     }
@@ -63,9 +64,6 @@ const SignUpPage = () => {
                 <p className={styles.login__title}>Регистрация</p>
                 {!isValid && (
                         <p className={styles.login__error}>Заполните поля корректно</p>
-                )}
-                {isSignedUp && (
-                        <p className={styles.login__error}>Вы успешно зарегистрировались</p>
                 )}
                 <div className={styles.login__username} data-title='Логин не меньше 6-ти символов и не больше 32-ух символов'>
                     <InputLogin type="text" name="username" id="username" placeholder='Логин' icon={<i className="i--login fa-regular fa-user"></i>} value={signUpInfo.username} onChange={handleChange}/>

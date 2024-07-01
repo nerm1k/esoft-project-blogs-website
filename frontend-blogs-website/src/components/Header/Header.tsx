@@ -9,7 +9,6 @@ import useIsAuthenticated from '../../hooks/useIsAuthenticated';
 
 const Header = () => {
     const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
-    console.log(authenticatedUser);
     const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
     const dropDownMenuRef = useRef<HTMLDivElement>(null);
 

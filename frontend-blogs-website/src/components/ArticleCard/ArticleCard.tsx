@@ -1,10 +1,20 @@
 import { Link } from 'react-router-dom';
-import { Article } from '../../pages/ArticlesPage/ArticlesPage';
 import { formatDate } from '../../utils/functions';
 import styles from './ArticleCard.module.scss';
 
 interface ArticleCardProps {
-    article: Article;
+    article : {
+        article_id: number,
+        author: string,
+        title: string,
+        content: string,
+        category: number,
+        views: number,
+        tags?: string[],
+        likes: number,
+        image?: string,
+        created_at: Date,
+    }
 }
 
 const ArticleCard = ({article}: ArticleCardProps) => {
@@ -30,11 +40,12 @@ const ArticleCard = ({article}: ArticleCardProps) => {
                 </h3>
                 <p className={styles['article-card__additional-info']}>
                     <span><i className="fa-solid fa-user"></i>{article.author}</span>
+                    <span><i className="fa-solid fa-layer-group"></i>{article.category}</span>
                     <span><i className="fa-solid fa-eye"></i>{article.views}</span>
                     <span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span>
                     <span><i className="fa-regular fa-calendar-days"></i>{created_at}</span>
                 </p>
-                {article.tags.length > 1 && (
+                {(article.tags && article.tags.length > 1) && (
                     <p className={styles['article-card__tags']}>
                         {article.tags.map(tag => 
                             <span key={tag}>{tag}</span>
