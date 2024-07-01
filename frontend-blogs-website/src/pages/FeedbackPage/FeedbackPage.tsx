@@ -2,6 +2,8 @@ import { FormEvent, SyntheticEvent, useEffect, useState } from 'react';
 import styles from './FeedbackPage.module.scss';
 import { isValidFeedbackForm } from '../../utils/validations';
 import { BASE_URL } from '../../utils/consts';
+import ButtonSubmit from '../../components/ButtonSubmit/ButtonSubmit';
+import Textarea from '../../components/Textarea/Textarea';
 
 interface FeedbackInfo {
     topic: string,
@@ -71,8 +73,8 @@ const FeedbackPage = () => {
                     <label htmlFor="email"><span>*</span>Ваш адрес электронной почты:</label>
                     <input type="email" name="email" id="email" className={styles.feedback__email} onChange={handleInputs} value={feedbackInfo.email}/>
                     <label htmlFor="description"><span>*</span>Текст вашего сообщения:</label>
-                    <textarea name="description" id="description" onChange={handleInputs} value={feedbackInfo.description}></textarea>
-                    <button type='submit' className={styles.feedback__button}>Отправить</button>
+                    <Textarea name='description' id='description' onChange={handleInputs} value={feedbackInfo.description}/>
+                    <ButtonSubmit>Отправить</ButtonSubmit>
                     </>
                 )}
                 {isSent && (

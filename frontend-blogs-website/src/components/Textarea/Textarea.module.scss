@@ -1,0 +1,19 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.textarea {
+    min-height: 70px;
+    margin-bottom: 16px;
+    padding: 12px 12px;
+    font-family: $fontFamilyMain;
+    font-size: 16px;
+    resize: none;
+    border: 1px solid $colorBorderFeedback;
+    @include border-radius(3px);
+    @include transition(border, 0.2s);
+    outline: none;
+
+    &:focus, &:focus-visible {
+        border: 1px solid $colorBorderFeedbackFocus;
+    }
+}

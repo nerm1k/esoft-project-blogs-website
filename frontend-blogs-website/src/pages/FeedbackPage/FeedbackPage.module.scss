@@ -60,18 +60,4 @@
         font-family: $fontFamilyMain;
         resize: none;
     }
-
-    &__button {
-        width: 100px;
-        height: 36px;
-        font-family: $fontFamilyMain;
-        color: $white;
-        background-color: $colorButtonFeedback;
-        border: none;
-        @include border-radius(3px);
-
-        &:hover {
-            background-color: $colorButtonFeedbackHover;
-        }
-    }
 }
