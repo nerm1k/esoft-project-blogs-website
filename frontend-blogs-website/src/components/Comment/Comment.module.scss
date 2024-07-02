@@ -24,9 +24,15 @@
         margin-left: 16px;
 
         button {
+            padding: 5px;
             font-family: $fontFamilyMain;
             background-color: transparent;
             border: none;
+            @include border-radius(3px);
+
+            &:hover {
+                background-color: $colorCommentLikeHover;
+            }
         }
     }
 }

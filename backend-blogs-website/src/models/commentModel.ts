@@ -28,11 +28,35 @@ export default class CommentModel {
         return comment;
     }
 
-    async insertLikesByCommentID(commentID: number) {
-        const comment: Comment = await pool('comments')
-                                        .where('comment_id', '=', commentID)
-                                        .increment('likes', 1)
-                                        .returning(['comment_id', 'user_id as author', 'content', 'likes', 'updated_at']);
-        return comment;
+    async insertLikesByCommentID(commentID: number, userID: number) {
+        const isLikeExists = await pool('comments_likes')
+                                    .where('comment_id', '=', commentID)
+                                    .where('user_id', '=', userID)
+                                    .first();
+
+        if (isLikeExists) {
+            await pool('comments_likes')
+                    .where('comment_id', '=', commentID)
+                    .where('user_id', '=', userID)
+                    .delete();
+
+            const comment: Comment = await pool('comments')
+                                            .where('comment_id', '=', commentID)
+                                            .decrement('likes', 1)
+                                            .returning(['comment_id', 'user_id as author', 'content', 'likes', 'updated_at']);
+
+            return comment;
+            
+        } else {
+            await pool('comments_likes')
+                    .insert({comment_id: commentID, user_id: userID});
+
+            const comment: Comment = await pool('comments')
+                                            .where('comment_id', '=', commentID)
+                                            .increment('likes', 1)
+                                            .returning(['comment_id', 'user_id as author', 'content', 'likes', 'updated_at']);
+            
+            return comment;
+        }
     }
 }

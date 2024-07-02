@@ -60,12 +60,22 @@ export async function up(knex: Knex): Promise<void> {
         table.string('sender_email', 64).notNullable();
         table.string('topic', 64).notNullable();
         table.text('description').notNullable();
+        table.timestamps(true, true);
+    })
+    .createTable('comments_likes', (table) => {
+        table.integer('comment_id').notNullable();
+        table.integer('user_id').notNullable();
+        table.timestamps(true, true);
+
+        table.foreign('comment_id').references('comment_id').inTable('comments');
+        table.foreign('user_id').references('user_id').inTable('users');
     })
 }
 
 
 export async function down(knex: Knex): Promise<void> {
     await knex.schema
+        .dropTableIfExists('comments_likes')
         .dropTableIfExists('comments')
         .dropTableIfExists('articles_tags')
         .dropTableIfExists('articles')

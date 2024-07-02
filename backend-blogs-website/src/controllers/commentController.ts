@@ -33,7 +33,8 @@ export default class CommentController {
     likeComment = async (req: Request, res: Response) => {
         try {
             const commentID = req.params.commentID;
-            const comment = await this.commentService.likeComment(+commentID);
+            const user = req.body.user;
+            const comment = await this.commentService.likeComment(+commentID, user.user_id);
             res.status(HttpStatusCode.CREATED).json({ message: 'Comment has been liked', comment: comment });
         } catch (error: any) {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
