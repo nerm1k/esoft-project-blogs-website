@@ -21,14 +21,14 @@ export default class CommentModel {
         return comments;
     }
 
-    async insertComment(articleID: number, userID: number, content: string) {
+    async createComment(articleID: number, userID: number, content: string) {
         const comment: Comment = await pool('comments')
                                         .insert({article_id: articleID, user_id: userID, content: content})
                                         .returning(['comment_id', 'user_id as author', 'content', 'likes', 'updated_at']);
         return comment;
     }
 
-    async insertLikesByCommentID(commentID: number, userID: number) {
+    async updateLikesByCommentID(commentID: number, userID: number) {
         const isLikeExists = await pool('comments_likes')
                                     .where('comment_id', '=', commentID)
                                     .where('user_id', '=', userID)

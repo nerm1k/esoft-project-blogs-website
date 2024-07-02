@@ -39,7 +39,9 @@ const ArticleCard = ({article}: ArticleCardProps) => {
                     {article.title}
                 </h3>
                 <p className={styles['article-card__additional-info']}>
-                    <span><i className="fa-solid fa-user"></i>{article.author}</span>
+                    <Link to={`/users/${article.author}`}>
+                        <span><i className="fa-solid fa-user"></i>{article.author}</span>
+                    </Link>
                     <span><i className="fa-solid fa-layer-group"></i>{article.category}</span>
                     <span><i className="fa-solid fa-eye"></i>{article.views}</span>
                     <span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span>
@@ -55,7 +57,7 @@ const ArticleCard = ({article}: ArticleCardProps) => {
                 <p className={styles['article-card__content']}>
                     {article.content}
                 </p>
-                <Link to={`./${article.article_id}`}>
+                <Link to={`/articles/${article.article_id}`}>
                     <div className={styles.btn}>
                         <i className="fa-solid fa-arrow-right-long"></i>
                         Читать далее

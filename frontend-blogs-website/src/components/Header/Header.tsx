@@ -65,12 +65,12 @@ const Header = () => {
                         <>
                             <ul>
                                 <li className={styles.nav__profile} onClick={toggleDropdownMenu}>
-                                    {authenticatedUser?.username}
+                                    {authenticatedUser.username}
                                 </li>
                             </ul>
                             {isDropDownMenuActive && (
                                 <div ref={dropDownMenuRef}>
-                                    <DropDownMenu />    
+                                    <DropDownMenu username={authenticatedUser.username} setIsDropDownMenuActive={setIsDropDownMenuActive}/>    
                                 </div>
                             )}
                         </>

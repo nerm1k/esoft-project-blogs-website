@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/functions';
 import styles from './Article.module.scss';
 
@@ -26,7 +27,9 @@ const Article = ({article} : ArticleProps) => {
                         {article.title}
                     </h3>
                     <p className={styles['article-card__additional-info']}>
-                        <span><i className="fa-solid fa-user"></i>{article.author}</span>
+                        <Link to={`/users/${article.author}`}>
+                            <span><i className="fa-solid fa-user"></i>{article.author}</span>
+                        </Link>
                         <span><i className="fa-solid fa-eye"></i>{article.views}</span>
                         <span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span>
                         <span><i className="fa-regular fa-calendar-days"></i>{formatDate(article.created_at)}</span>

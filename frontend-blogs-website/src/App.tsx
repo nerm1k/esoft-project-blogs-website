@@ -8,6 +8,7 @@ import { store } from "./store/store";
 import FeedbackPage from "./pages/FeedbackPage/FeedbackPage";
 import ArticlePage from "./pages/ArticlePage/ArticlePage";
 import Logout from "./components/Logout/Logout";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
             <Route path="/articles" element={<ArticlesPage />} />
             <Route path="/articles/:articleId" element={<ArticlePage />} />
             <Route path="/feedback" element={<FeedbackPage />} />
+            <Route path="/users/:username" element={<ProfilePage />} />
+            <Route path="/users/:username/articles" element={<ProfilePage />} />
+            <Route path="/users/:username/comments" element={<ProfilePage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />

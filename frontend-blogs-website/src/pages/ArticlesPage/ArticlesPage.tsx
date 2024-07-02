@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { setCurrentPage } from '../../store/currentPageSlice';
 import { setPagesAround } from '../../store/pagesAroundSlice';
 import { useSearchParams } from 'react-router-dom';
+import SidebarArticlesPage from '../../components/Sidebars/SidebarArticlesPage/SidebarArticlesPage';
 
 export interface ArticleCard {
     article_id: number,
@@ -135,6 +136,7 @@ const ArticlesPage = () => {
                         ))}
                         <Pagination onClick={handlePagination} pagesAround={pagesAround} page={currentPage}/>
                     </div>
+                    <SidebarArticlesPage />
                 </>
             )}
         </>

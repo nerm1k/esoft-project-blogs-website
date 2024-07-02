@@ -4,6 +4,7 @@ import { isValidFeedbackForm } from '../../utils/validations';
 import { BASE_URL } from '../../utils/consts';
 import ButtonSubmit from '../../components/ButtonSubmit/ButtonSubmit';
 import Textarea from '../../components/Textarea/Textarea';
+import SidebarFeedbackPage from '../../components/Sidebars/SidebarFeedbackPage/SidebarFeedbackPage';
 
 interface FeedbackInfo {
     topic: string,
@@ -83,6 +84,7 @@ const FeedbackPage = () => {
                     </p>
                 )}
             </form>
+            <SidebarFeedbackPage />
         </>
     )
 }

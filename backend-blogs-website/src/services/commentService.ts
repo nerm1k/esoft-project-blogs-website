@@ -13,12 +13,12 @@ export default class CommentService {
     }
 
     async addComment(articleID: number, userID: number, content: string) {
-        const comment = await this.commentModel.insertComment(articleID, userID, content);
+        const comment = await this.commentModel.createComment(articleID, userID, content);
         return comment;
     }
 
     async likeComment(commentID: number, userID: number) {
-        const comment = await this.commentModel.insertLikesByCommentID(commentID, userID);
+        const comment = await this.commentModel.updateLikesByCommentID(commentID, userID);
         return comment;
     }
 }
