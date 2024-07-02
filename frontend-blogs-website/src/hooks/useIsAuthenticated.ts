@@ -13,9 +13,14 @@ interface TokenPayload extends User {
 
 const useIsAuthenticated = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [authenticatedUser, setAuthenticatedUser] = useState<User | null>(null);
+    const [authenticatedUser, setAuthenticatedUser] = useState<User>({
+        user_id: 0,
+        username: '',
+        is_admin: false
+    });
 
     useEffect(() => {
+        // const decodedJwtToken: TokenPayload = JSON.parse(localStorage.getItem('decoded_jwt_token') || '{}');
         const jwtToken = localStorage.getItem('jwt_token');
 
         if (jwtToken) {

@@ -41,4 +41,14 @@ export default class ArticleController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
         }
     }
+
+    getArticlesByUsername = async (req: Request, res: Response) => {
+        try {
+            const username = req.params.username;
+            const articles = await this.articleService.getArticlesByUsername(username);
+            res.status(HttpStatusCode.OK).json(articles);
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
+        }
+    }
 }

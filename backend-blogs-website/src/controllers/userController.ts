@@ -45,4 +45,18 @@ export default class UserController {
     logout = async (req: Request, res: Response) => {
         res.json({ message: 'Logged out' });
     }
+
+    getUserByUsername = async (req: Request, res: Response) => {
+        try { 
+            const username  = req.params.username;
+            const user = await this.userService.getUserByUsername(username);
+            if (user) {
+                res.status(HttpStatusCode.OK).json(user);
+            } else {
+                res.status(HttpStatusCode.NOT_FOUND).json({ message: 'Not Found'});
+            }
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
+        }
+    }
 }

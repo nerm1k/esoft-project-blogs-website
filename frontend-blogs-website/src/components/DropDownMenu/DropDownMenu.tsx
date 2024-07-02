@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 import styles from './DropDownMenu.module.scss';
 
-const DropDownMenu = () => {
+interface DropDownMenuProps {
+    username: string,
+    setIsDropDownMenuActive: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const DropDownMenu = ({username, setIsDropDownMenuActive}: DropDownMenuProps) => {
     return(
-        <div className={styles['dropdown-menu']}>
-            <Link to='/users/username'>
+        <div className={styles['dropdown-menu']} onClick={() => setIsDropDownMenuActive(false)}>
+            <Link to={`/users/${username}`}>
                 <div className={styles['dropdown-menu__item']}>
                         Профиль
                 </div>

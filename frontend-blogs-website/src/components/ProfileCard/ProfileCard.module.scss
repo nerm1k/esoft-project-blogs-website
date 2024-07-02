@@ -1,0 +1,103 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.profile-card {
+    position: relative;
+    padding: 30px 30px 0 30px;
+    margin-bottom: 15px;
+    background-color: $colorForeBackground;
+    box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+
+    &__main {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 20px;
+    margin-bottom: 12px;
+
+        .profile-card {
+
+            &__img {
+                
+            }
+
+            &__info {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                .profile-card {
+                    &__username {
+                        font-size: 30px;
+                        font-weight: 700;
+                    }
+
+                    &__id {
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: $colorProfileID;
+                    }
+
+                    &__rating {
+                        @extend .profile-card__id;
+                    }
+                }
+            }
+        }
+    }
+
+    &__show-more {
+        display: inline-block;
+        color: $colorProfileMore;
+        font-weight: 500;
+        user-select: none;
+        @include transition(all, 0.2s);
+
+        i {
+            margin-right: 6px;
+            @include transition(all, 0.2s);
+        }
+
+        &:hover {
+            color: $colorProfileMoreHover;
+        }
+    }
+
+    &__additional {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 12px;
+    }
+
+    &__dropdown {
+        display: flex;
+        gap: 20px;
+        position: relative;
+        padding-top: 10px;
+        margin-top: 20px;
+        background-color: $colorForeBackground;
+        box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+        border-top: 1px solid rgba($colorSidebarTitleFeedback, 0.3);
+    
+        .dropdown__item {
+            height: 40px;
+            padding: 5px 10px 10px 10px;
+            font-weight: 500;
+            color: $colorProfileDropdown;
+            @include transition(color, 0.2s);
+    
+            &:hover {
+                color: $colorProfileMoreHover;
+            }
+        }
+
+        .active-link {
+            color: $colorProfileDropdownActive;
+            border-bottom: 2px solid $colorProfileDropdownActive;
+        }
+    }
+}
+
+.active {
+    @include transform(rotate(180deg));
+}

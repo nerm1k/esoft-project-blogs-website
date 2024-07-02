@@ -39,4 +39,9 @@ export default class UserService {
         const jwtToken = jwt.sign({user_id: user.user_id, username: user.username, is_admin: user.is_admin}, SECRET_KEY, {expiresIn: SESSION_DURATION});
         return {user, jwtToken};
     }
+
+    async getUserByUsername(username: string) {
+        const user = await this.userModel.getUserByUsername(username);
+        return user;
+    }
 }

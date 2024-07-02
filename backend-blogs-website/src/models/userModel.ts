@@ -20,6 +20,8 @@ interface User {
     updated_at: Date
 }
 
+type UserWithoutPasswordAndUpdatedAt = Omit<User, 'password' | 'updated_at'>;
+
 export default class UserModel {
     async createUser(username: string, email: string, password: string) {
         const user: User[] = await pool('users')
@@ -33,5 +35,13 @@ export default class UserModel {
                             .select()
                             .where(attr, '=', value);
         return user[0];
+    }
+
+    async getUserByUsername(username: string) {
+        const user: UserWithoutPasswordAndUpdatedAt = await pool('users')
+                                                                .select('user_id as userID', 'username', 'email', 'first_name as firstName', 'last_name as lastName', 'surname', 'description', 'date_of_birth as dateOfBirth', 'status', 'rating', 'avatar', 'created_at as createdAt')
+                                                                .where(pool.raw('lower(username)'), '=', username)
+                                                                .first();
+        return user;
     }
 }

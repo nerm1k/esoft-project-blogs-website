@@ -27,4 +27,9 @@ export default class ArticleService {
         const article = await this.articleModel.getArticleByID(articleID);
         return article;
     }
+
+    async getArticlesByUsername(username: string) {
+        const articles = await this.articleModel.getArticlesByUsername(username);
+        return articles;
+    }
 }
