@@ -20,6 +20,7 @@ export const routes = (articleController: ArticleController, feedbackController:
     router.get('/api/v1/articles/:id/comments', commentController.getCommentsByArticleID);
     router.post('/api/v1/articles/:id/comments', authenticateJWT, commentController.addComment);
     router.post('/api/v1/articles/:articleID/comments/:commentID/likes', authenticateJWT, commentController.likeComment);
+    router.get('/api/v1/users/:username/comments', commentController.getCommentsByUsername);
 
     router.post('/api/v1/feedbacks', feedbackController.createFeedback);
 

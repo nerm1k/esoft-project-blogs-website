@@ -21,4 +21,9 @@ export default class CommentService {
         const comment = await this.commentModel.updateLikesByCommentID(commentID, userID);
         return comment;
     }
+
+    async getCommentsByUsername(username: string) {
+        const comments = await this.commentModel.getCommentsByUsername(username);
+        return comments;
+    }
 }

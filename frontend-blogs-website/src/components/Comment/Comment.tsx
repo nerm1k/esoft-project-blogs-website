@@ -12,11 +12,12 @@ interface CommentProps {
         likes: number,
         updated_at: Date
     }
-    articleID: number,
-    updater: React.Dispatch<React.SetStateAction<number>>
+    articleID?: number,
+    updater?: React.Dispatch<React.SetStateAction<number>>,
+    interactive: boolean
 }
 
-const Comment = ({comment, articleID, updater}: CommentProps) => {
+const Comment = ({comment, articleID, updater, interactive}: CommentProps) => {
     const {isAuthenticated, authenticatedUser} = useIsAuthenticated();
 
     function handleSubmit(e: FormEvent) {
@@ -32,7 +33,9 @@ const Comment = ({comment, articleID, updater}: CommentProps) => {
                       },
                 });
                 await res.json();
-                updater(prev => prev + 1);
+                if (updater) {
+                    updater(prev => prev + 1);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -44,12 +47,12 @@ const Comment = ({comment, articleID, updater}: CommentProps) => {
     return(
         <div className={styles.comment}>
             <div className={styles.comment__info}><i className="fa-solid fa-user"></i><span className={styles.comment__author}>{comment.author}</span><span>{formatDate(comment.updated_at)}</span>
-            {isAuthenticated && (
+            {(isAuthenticated && interactive) && (
                 <form className={styles.comment__form} onSubmit={handleSubmit}>
                     <button type='submit'><span><i className="fa-solid fa-thumbs-up"></i>{comment.likes}</span></button>
                 </form>
             )}
-            {!isAuthenticated && (
+            {(!isAuthenticated || !interactive )&& (
                 <span><i className="fa-solid fa-thumbs-up"></i>{comment.likes}</span>
             )}
             </div>

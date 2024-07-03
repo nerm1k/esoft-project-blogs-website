@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/consts";
 import ArticleCard from "../ArticleCard/ArticleCard";
+import styles from './UserArticles.module.scss';
 
 interface UserArticlesProps {
     username?: string
@@ -45,6 +46,9 @@ const UserArticles = ({ username }: UserArticlesProps) => {
 
     return (
         <div>
+            {articles.length < 1 && (
+                <p className={styles['no-articles']}>У пользователя отсутствуют публикации</p>
+            )}
             {articles.map(article => (
                 <ArticleCard key={article.article_id} article={article}/>
             ))}

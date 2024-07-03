@@ -14,7 +14,7 @@ const DropDownMenu = ({username, setIsDropDownMenuActive}: DropDownMenuProps) =>
                         Профиль
                 </div>
             </Link>
-            <Link to='/users/username/articles'>
+            <Link to={`/users/${username}/articles`}>
                 <div className={styles['dropdown-menu__item']}>
                         Публикации
                 </div>

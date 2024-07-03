@@ -2,7 +2,9 @@
 @import '../../mixins.scss';
 
 .comment {
-    margin-bottom: 20px;
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
 
     &__info {
         margin-bottom: 4px;

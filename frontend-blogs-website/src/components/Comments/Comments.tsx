@@ -91,7 +91,7 @@ const Comments = ({articleID}: CommentsProps) => {
             <h3 className={styles.comments__title}>Комментарии <span>{comments.length}</span></h3>
             <div className={styles.comments__container}>
                 {comments.map((comment, i) => 
-                    <Comment key={i} comment={comment} articleID={articleID} updater={setUpdate}/>
+                    <Comment key={i} comment={comment} articleID={articleID} updater={setUpdate} interactive={true}/>
                 )}
             </div>
             {isAuthenticated && (

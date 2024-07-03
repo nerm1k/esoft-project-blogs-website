@@ -59,4 +59,13 @@ export default class CommentModel {
             return comment;
         }
     }
+
+    async getCommentsByUsername(username: string) {
+        const comments: Comment[] = await pool('comments')
+                                    .select('comment_id', 'username as author', 'content', 'likes', 'comments.updated_at')
+                                    .join('users', 'comments.user_id', 'users.user_id')
+                                    .where('username', '=', username)
+                                    .orderBy('comments.created_at', 'desc');
+        return comments;
+    }
 }

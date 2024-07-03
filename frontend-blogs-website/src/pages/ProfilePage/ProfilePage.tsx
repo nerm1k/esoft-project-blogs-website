@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/consts";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import UserArticles from "../../components/UserArticles/UserArticles";
+import UserComments from "../../components/UserComments/UserComments";
 
 export interface User {
     userID: number,
@@ -68,7 +69,7 @@ const ProfilePage = () => {
         };
 
         fetchUser();
-    }, []);
+    }, [username]);
 
     if (isLoading) {
         return <div>Загрузка...</div>
@@ -87,6 +88,9 @@ const ProfilePage = () => {
                 )} 
                 {currentPath == 'articles' && (
                     <UserArticles username={username}/>
+                )}
+                {currentPath == 'comments' && (
+                    <UserComments username={username} />
                 )}
             </div>
             <SidebarProfilePage />

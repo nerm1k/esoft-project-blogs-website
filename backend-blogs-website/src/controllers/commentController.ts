@@ -40,4 +40,14 @@ export default class CommentController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
         }
     }
+
+    getCommentsByUsername = async (req: Request, res: Response) => {
+        try {
+            const username = req.params.username;
+            const comments = await this.commentService.getCommentsByUsername(username);
+            res.status(HttpStatusCode.OK).json(comments);
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
+        }
+    }
 }
