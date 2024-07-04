@@ -70,11 +70,20 @@ export async function up(knex: Knex): Promise<void> {
         table.foreign('comment_id').references('comment_id').inTable('comments');
         table.foreign('user_id').references('user_id').inTable('users');
     })
+    .createTable('articles_likes', (table) => {
+        table.integer('article_id').notNullable();
+        table.integer('user_id').notNullable();
+        table.timestamps(true, true);
+
+        table.foreign('article_id').references('article_id').inTable('articles');
+        table.foreign('user_id').references('user_id').inTable('users');
+    })
 }
 
 
 export async function down(knex: Knex): Promise<void> {
     await knex.schema
+        .dropTableIfExists('articles_likes')
         .dropTableIfExists('comments_likes')
         .dropTableIfExists('comments')
         .dropTableIfExists('articles_tags')

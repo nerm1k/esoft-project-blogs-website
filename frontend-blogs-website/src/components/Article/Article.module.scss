@@ -86,4 +86,26 @@
     &__image {
         margin-bottom: 30px;
     }
+
+    &__form {
+        display: inline-block;
+        margin-right: 16px;
+
+        button {
+            padding: 5px;
+            font-family: $fontFamilyMain;
+            font-size: 16px;
+            background-color: transparent;
+            border: none;
+            @include border-radius(3px);
+
+            &:hover {
+                background-color: $colorCommentLikeHover;
+            }
+
+            span {
+                margin-right: 0;
+            }
+        }
+    }
 }

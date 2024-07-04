@@ -39,7 +39,7 @@ const ArticleCard = ({article}: ArticleCardProps) => {
                     {article.title}
                 </h3>
                 <p className={styles['article-card__additional-info']}>
-                    <Link to={`/users/${article.author}`}>
+                    <Link to={`/users/${article.author.toLocaleLowerCase()}`}>
                         <span><i className="fa-solid fa-user"></i>{article.author}</span>
                     </Link>
                     <span><i className="fa-solid fa-layer-group"></i>{article.category}</span>

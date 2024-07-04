@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/functions';
 import styles from './Article.module.scss';
+import useIsAuthenticated from '../../hooks/useIsAuthenticated';
+import { FormEvent, useEffect, useState } from 'react';
+import { BASE_URL } from '../../utils/consts';
 
 interface ArticleProps {
     article: {
@@ -15,10 +18,37 @@ interface ArticleProps {
         image: string,
         created_at: Date,
         updated_at: Date
-    }
+    },
+    updater?: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Article = ({article} : ArticleProps) => {
+const Article = ({article, updater} : ArticleProps) => {
+    const {isAuthenticated, authenticatedUser} = useIsAuthenticated();
+
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault();
+        async function likeArticle() {
+            try {
+                const res = await fetch(`${BASE_URL}/articles/${article.article_id}/likes`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`,
+                      },
+                });
+                await res.json();
+                if (updater) {
+                    updater(prev => prev + 1);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        
+        likeArticle();
+    }
+
     return(
         <>
             <div className={styles['article-card']}>
@@ -27,11 +57,18 @@ const Article = ({article} : ArticleProps) => {
                         {article.title}
                     </h3>
                     <p className={styles['article-card__additional-info']}>
-                        <Link to={`/users/${article.author}`}>
+                        <Link to={`/users/${article.author.toLowerCase()}`}>
                             <span><i className="fa-solid fa-user"></i>{article.author}</span>
                         </Link>
                         <span><i className="fa-solid fa-eye"></i>{article.views}</span>
-                        <span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span>
+                        {isAuthenticated && (
+                            <form onSubmit={handleSubmit} className={styles['article-card__form']}>
+                                <button type='submit'><span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span></button>
+                            </form>
+                        )}
+                        {!isAuthenticated && (
+                            <span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span>
+                        )}
                         <span><i className="fa-regular fa-calendar-days"></i>{formatDate(article.created_at)}</span>
                         <span><i className="fa-solid fa-pen"></i>{formatDate(article.updated_at)}</span>
                     </p>
