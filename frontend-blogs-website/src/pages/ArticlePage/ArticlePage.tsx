@@ -24,6 +24,7 @@ const ArticlePage = () => {
     const [article, setArticle] = useState<Article>();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
+    const [updater, setUpdater] = useState(0);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -45,7 +46,7 @@ const ArticlePage = () => {
         }
 
         fetchArticles();
-    }, []);
+    }, [updater]);
 
     if (isLoading) {
         return <div>Загрузка...</div>
@@ -59,7 +60,7 @@ const ArticlePage = () => {
         <>
             {article && (
                 <div className={styles['container__article']}>
-                    <Article article={article} />
+                    <Article article={article} updater={setUpdater}/>
                     <div className={styles.container_comments}>
                         <Comments articleID={article.article_id}/>
                     </div>

@@ -10,7 +10,7 @@
         background-color: $colorForeBackground;
     }
     
-    & > div:not(.advertisement){
+    & > div:not(:nth-child(1), :nth-child(2)){
         padding: 15px;
     }
 

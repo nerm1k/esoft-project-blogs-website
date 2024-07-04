@@ -5,13 +5,14 @@ interface TextareaProps {
     name: string,
     id: string,
     onChange: (e: SyntheticEvent) => void,
-    value: string
+    value: string,
+    big?: boolean
 }
 
-const Textarea = ({name, id, onChange, value} : TextareaProps) => {
+const Textarea = ({name, id, onChange, value, big} : TextareaProps) => {
     return(
         <>
-            <textarea className={styles.textarea} name={name} id={id} onChange={onChange} value={value}></textarea>
+            <textarea className={`${styles.textarea} ${big ? styles.big : ''}`} name={name} id={id} onChange={onChange} value={value}></textarea>
         </>
     )
 };

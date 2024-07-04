@@ -5,6 +5,7 @@ import ButtonLogin from '../../components/ButtonLogin/ButtonLogin';
 import { FormEvent, SyntheticEvent, useState } from 'react';
 import { BASE_URL } from '../../utils/consts';
 import { isValidLoginForm } from '../../utils/validations';
+import { jwtDecode } from 'jwt-decode';
 // import { jwtDecode } from 'jwt-decode';
 
 interface LoginForm {
@@ -59,8 +60,8 @@ const LoginPage = () => {
                         setIsError(true);
                     } else {
                         localStorage.setItem('jwt_token', data.jwtToken);
-                        // const decodedJwtToken = jwtDecode(data.jwtToken);
-                        // localStorage.setItem('decoded_jwt_token', JSON.stringify(decodedJwtToken))
+                        const decodedJwtToken = jwtDecode(data.jwtToken);
+                        localStorage.setItem('decoded_jwt_token', JSON.stringify(decodedJwtToken))
                         navigate('/articles');
                     }
                 } catch (error) {

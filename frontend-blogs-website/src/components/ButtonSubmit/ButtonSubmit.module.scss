@@ -2,7 +2,8 @@
 @import '../../mixins.scss';
 
 .button {
-    width: 100px;
+    width: fit-content;
+    padding: 0px 20px;
     height: 36px;
     font-family: $fontFamilyMain;
     color: $white;

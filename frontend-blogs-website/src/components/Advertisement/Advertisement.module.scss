@@ -1,3 +1,8 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
 .advertisement {
+    margin-bottom: 15px;
     color:rgb(0, 153, 255);
+    background-color: $colorForeBackground;
 }

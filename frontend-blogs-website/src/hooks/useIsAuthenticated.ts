@@ -20,12 +20,12 @@ const useIsAuthenticated = () => {
     });
 
     useEffect(() => {
-        // const decodedJwtToken: TokenPayload = JSON.parse(localStorage.getItem('decoded_jwt_token') || '{}');
-        const jwtToken = localStorage.getItem('jwt_token');
+        const decodedJwtToken: TokenPayload = JSON.parse(localStorage.getItem('decoded_jwt_token') || '{}');
+        // const jwtToken = localStorage.getItem('jwt_token');
 
-        if (jwtToken) {
+        if (Object.keys(decodedJwtToken).length != 0) {
             try {
-                const decodedJwtToken: TokenPayload = jwtDecode(jwtToken);
+                // const decodedJwtToken: TokenPayload = jwtDecode(jwtToken);
                 const isJwtTokenExpired = decodedJwtToken.exp * 1000 < Date.now();
 
                 if (!isJwtTokenExpired) {

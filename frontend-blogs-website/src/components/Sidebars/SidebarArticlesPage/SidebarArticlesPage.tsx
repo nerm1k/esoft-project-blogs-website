@@ -45,12 +45,8 @@ const SidebarArticlesPage = () => {
 
     return(
         <div className={styles.sidebar}>
-            <div className={styles.advertisement}>
-                <Advertisement />
-            </div>
-            <div className={styles.advertisement}>
-                <Advertisement />
-            </div>
+            <Advertisement />
+            <Advertisement />
             <div className={styles['sidebar__top-articles']}>
                 <div className={styles['top-articles__title']}>Топ статей</div>
                 <ul className={styles['top-articles__list']}>

@@ -17,3 +17,8 @@
         border: 1px solid $colorBorderFeedbackFocus;
     }
 }
+
+.big {
+    min-height: 400px;
+    resize: vertical;
+}

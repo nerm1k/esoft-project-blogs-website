@@ -10,7 +10,7 @@ const Logout = () => {
             try {
                 await fetch(`${BASE_URL}/logout`);
                 localStorage.removeItem('jwt_token');
-                // localStorage.removeItem('decoded_jwt_token');
+                localStorage.removeItem('decoded_jwt_token');
                 navigate('/articles');
             } catch (error) {
                 console.log(error);

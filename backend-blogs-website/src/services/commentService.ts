@@ -23,7 +23,7 @@ export default class CommentService {
     }
 
     async getCommentsByUsername(username: string) {
-        const comments = await this.commentModel.getCommentsByUsername(username);
+        const comments = await this.commentModel.getCommentsByUsername(username.toLocaleLowerCase());
         return comments;
     }
 }
