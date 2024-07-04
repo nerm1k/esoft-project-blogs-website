@@ -51,4 +51,26 @@ export default class ArticleController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
         }
     }
+
+    createArticle = async (req: Request, res: Response) => {
+        try {
+            const { userID, title, category, content, tags } = req.body;
+            const imageName = req.file?.filename;
+            const article = await this.articleService.createArticle(userID, title, category, content, tags, imageName);
+            res.status(HttpStatusCode.CREATED).json(article);
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
+        }
+    }
+
+    likeArticle = async (req: Request, res: Response) => {
+        try {
+            const articleID = req.params.articleID;
+            const user = req.body.user;
+            const article = await this.articleService.likeArticle(+articleID, user.user_id);
+            res.status(HttpStatusCode.CREATED).json({ message: 'Article has been liked', article: article });
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
+        }
+    }
 }

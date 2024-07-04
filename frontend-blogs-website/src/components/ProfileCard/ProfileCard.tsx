@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { User } from '../../pages/ProfilePage/ProfilePage';
 import { formatDate } from '../../utils/functions';
 import styles from './ProfileCard.module.scss';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useIsAuthenticated from '../../hooks/useIsAuthenticated';
 
 interface ProfileCardProps {
     user : User,
@@ -10,6 +11,7 @@ interface ProfileCardProps {
 }
 
 const ProfileCard = ({user, currentPath} : ProfileCardProps) => {
+    const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
     const [isShowMore, setIsShowMore] = useState(false);
 
     function showMore() {
@@ -73,6 +75,13 @@ const ProfileCard = ({user, currentPath} : ProfileCardProps) => {
                          Комментарии
                     </div>
                 </Link>
+                {authenticatedUser.username == user.username && (
+                    <Link to='/articles/new'>
+                        <div className={styles.dropdown__item}>
+                            Написать новый пост
+                        </div>
+                    </Link>
+                )} 
             </div>
         </div>
     )

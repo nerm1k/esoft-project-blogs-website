@@ -15,6 +15,13 @@ import UserController from "./controllers/userController";
 import CommentModel from "./models/commentModel";
 import CommentService from "./services/commentService";
 import CommentController from "./controllers/commentController";
+import CategoryModel from "./models/categoryModel";
+import CategoryService from "./services/categoryService";
+import CategoryController from "./controllers/categoryController";
+import bodyParser from "body-parser";
+
+// const multer = require('multer');
+// export const upload = multer({ dest: '../frontend-blogs-website/public/images/'});
 
 const app: Express = express();
 
@@ -34,6 +41,10 @@ const commentModel: CommentModel = new CommentModel();
 const commentService: CommentService = new CommentService(commentModel);
 const commentController: CommentController = new CommentController(commentService);
 
+const categoryModel: CategoryModel = new CategoryModel();
+const categoryService: CategoryService = new CategoryService(categoryModel);
+const categoryController: CategoryController = new CategoryController(categoryService);
+
 
 const corsOptions = {
   origin: "*",
@@ -41,7 +52,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(routes(articleController, feedbackController, userController, commentController));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(routes(articleController, feedbackController, userController, commentController, categoryController));
+// app.use(multer({dest: 'public/images/'}).single('image'));
 
 
 const port = process.env.PORT || 3000;

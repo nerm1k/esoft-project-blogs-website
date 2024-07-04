@@ -18,7 +18,7 @@ export default class ArticleService {
     }
 
     async getArticlesByPage(page: number) {
-        const offset = page * 10 - 9;
+        const offset = page * 10 - 10;
         const articles = await this.articleModel.getArticlesByPage(offset);
         return articles;
     }
@@ -29,7 +29,25 @@ export default class ArticleService {
     }
 
     async getArticlesByUsername(username: string) {
-        const articles = await this.articleModel.getArticlesByUsername(username);
+        const articles = await this.articleModel.getArticlesByUsername(username.toLocaleLowerCase());
         return articles;
+    }
+
+    async createArticle(userID: number, title: string, category: number, content: string, tags?: string, imageName?: string) {
+        if (imageName) {
+            imageName = '/images/' + imageName;
+        }
+        
+        if (tags) {
+            tags = JSON.parse(tags);
+        }
+
+        const article = await this.articleModel.createArticle(userID, title, category, content, tags, imageName);
+        return article;
+    }
+
+    async likeArticle(articleID: number, userID: number) {
+        const comment = await this.articleModel.updateLikesByArticleID(articleID, userID);
+        return comment;
     }
 }

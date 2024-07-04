@@ -10,7 +10,7 @@ export function isValidFeedbackForm(topic: string, email: string, description: s
     }
 
     return true;
-}
+};
 
 export function isValidSignUpForm(username: string, email: string, password: string) {
     if (!username || !email || !password) {
@@ -34,7 +34,7 @@ export function isValidSignUpForm(username: string, email: string, password: str
     }
     
     return true;
-}
+};
 
 export function isValidLoginForm(username: string, password: string) {
     if (!username || !password) {
@@ -49,5 +49,33 @@ export function isValidLoginForm(username: string, password: string) {
         return false
     }
     
+    return true;
+};
+
+export function isNewPostFormValid(userID: number, title: string, category: number, content: string, image?: File) {
+    if (userID < 1) {
+        return false;
+    };
+
+    if (title.length < 1){
+        return false;
+    };
+
+    if (category < 1) {
+        return false;
+    };
+
+    if (content.length < 1) {
+        return false;
+    }
+
+    if (image) {
+        const extension = image.name.split('.').pop()?.toLocaleLowerCase();
+
+        if (extension != 'png' && extension != 'jpg' && extension != 'jpeg') {
+            return false;
+        }
+    }
+
     return true;
 }

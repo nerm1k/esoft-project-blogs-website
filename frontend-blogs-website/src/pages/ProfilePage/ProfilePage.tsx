@@ -1,5 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom";
-import useIsAuthenticated from "../../hooks/useIsAuthenticated";
+import { useLocation, useParams } from "react-router-dom";
 import styles from './ProfilePage.module.scss';
 import SidebarProfilePage from "../../components/Sidebars/SidebarProfilePage/SidebarProfilePage";
 import { useEffect, useState } from "react";
@@ -24,7 +23,6 @@ export interface User {
 }
 
 const ProfilePage = () => {
-    const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
     const { username } = useParams();
     const [user, setUser] = useState<User>({
         userID: 0,
@@ -83,9 +81,6 @@ const ProfilePage = () => {
         <>
             <div className={styles.container}>
                 <ProfileCard user={user} currentPath={currentPath}/>
-                {authenticatedUser.username == username && (
-                    <p>your profle {user?.userID} create edit here</p> 
-                )} 
                 {currentPath == 'articles' && (
                     <UserArticles username={username}/>
                 )}
