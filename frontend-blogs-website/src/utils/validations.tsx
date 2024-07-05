@@ -67,15 +67,15 @@ export function isNewPostFormValid(userID: number, title: string, category: numb
 
     if (content.length < 1) {
         return false;
-    }
+    };
 
     if (image) {
         const extension = image.name.split('.').pop()?.toLocaleLowerCase();
 
         if (extension != 'png' && extension != 'jpg' && extension != 'jpeg') {
             return false;
-        }
-    }
+        };
+    };
 
     return true;
 }
@@ -84,6 +84,34 @@ export function isImageExtensionValid(image: File) {
     const extension = image.name.split('.').pop()?.toLocaleLowerCase();
 
     if (extension != 'png' && extension != 'jpg' && extension != 'jpeg') {
+        return false;
+    };
+
+    return true;
+}
+
+export function isUsernameValid(username: string) {
+    if (username.length < 6 || username.length > 32) {
+        return false
+    };
+
+    return true;
+}
+
+export function isEmailValid(email: string) {
+    if (!emailRegex.test(email)) {
+        return false;
+    };
+
+    if (email.length < 6 || email.length > 64) {
+        return false
+    };
+
+    return true;
+}
+
+export function isPasswordValid(password: string) {
+    if (password.length < 6 || password.length > 32) {
         return false;
     }
 

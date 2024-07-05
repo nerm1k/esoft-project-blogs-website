@@ -15,6 +15,9 @@ export const routes = (articleController: ArticleController, feedbackController:
     router.get('/api/v1/logout', userController.logout);
     router.get('/api/v1/users/:username', userController.getUserByUsername);
     router.put('/api/v1/users/:userID', authenticateJWT, uploadImage, userController.updateUserByUserID);
+    router.put('/api/v1/users/:userID/username', authenticateJWT, userController.updateUsernameByUserID);
+    router.put('/api/v1/users/:userID/email', authenticateJWT, userController.updateEmailByUserID);
+    router.put('/api/v1/users/:userID/password', authenticateJWT, userController.updatePasswordByUserID);
 
     router.get('/api/v1/articles', articleController.getAllArticles);
     router.get('/api/v1/articles/:id', articleController.getArticleByID);

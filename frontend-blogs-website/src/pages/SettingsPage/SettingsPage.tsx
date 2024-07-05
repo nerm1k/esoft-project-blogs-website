@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './SettingsPage.module.scss';
 import EditSettingsProfile from '../../components/EditSettingsProfile/EditSettingsProfile';
 import useIsAuthenticated from '../../hooks/useIsAuthenticated';
+import EditSettingsAccount from '../../components/EditSettingsAccount/EditSettingsAccount';
 
 const SettingsPage = () => {
     const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
@@ -26,9 +27,9 @@ const SettingsPage = () => {
             {currentPath == 'profile' && (
                 <EditSettingsProfile username={authenticatedUser.username} userID={authenticatedUser.user_id}/>
             )}
-            {/* {currentPath == 'settings' && (
-                <UserComments username={username} />
-            )} */}
+            {currentPath == 'account' && (
+                <EditSettingsAccount username={authenticatedUser.username} userID={authenticatedUser.user_id} />
+            )}
         </div>
     )
 };

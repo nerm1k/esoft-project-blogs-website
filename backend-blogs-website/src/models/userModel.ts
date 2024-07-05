@@ -46,26 +46,6 @@ export default class UserModel {
     }
 
     async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarName?: string) {
-        // const updateData = {
-        //     first_name: '',
-        //     last_name: '',
-        //     surname: '',
-        //     description: '',
-        //     date_of_birth: new Date(),
-        //     avatar: '',
-        // };
-
-        // if (firstName) updateData.first_name = firstName;
-        // if (lastName) updateData.last_name = lastName;
-        // if (surname) updateData.surname = surname;
-        // if (description) updateData.description = description;
-        // if (dateOfBirth) updateData.date_of_birth = dateOfBirth;
-        // if (avatarName) {
-        //     updateData.avatar = avatarName
-        // } else {
-        //     updateData.avatar = ''
-        // };
-        // console.log(updateData);
         await pool('users')
             .where('user_id', '=', userID)
             .update({
@@ -75,6 +55,30 @@ export default class UserModel {
                 description: description,
                 date_of_birth: dateOfBirth,
                 avatar: avatarName
+            });
+    }
+
+    async updateUsernameByUserID(userID: number, username: string) {
+        await pool('users')
+            .where('user_id', '=', userID)
+            .update({
+                username: username,
+            });
+    }
+
+    async updateEmailByUserID(userID: number, email: string) {
+        await pool('users')
+            .where('user_id', '=', userID)
+            .update({
+                email: email,
+            });
+    }
+
+    async updatePasswordByUserID(userID: number, password: string) {
+        await pool('users')
+            .where('user_id', '=', userID)
+            .update({
+                password: password,
             });
     }
 }

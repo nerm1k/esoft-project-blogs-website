@@ -62,12 +62,57 @@ export default class UserController {
 
     updateUserByUserID = async (req: Request, res: Response) => {
         try {
-            const userID= req.params.userID;
+            const userID = req.params.userID;
             const { firstName, lastName, surname, description, dateOfBirth } = req.body;
             const avatarName = req.file?.filename;
             console.log(req.file);
             await this.userService.updateUserByUserID(+userID, firstName, lastName, surname, description, dateOfBirth, avatarName);
             res.sendStatus(HttpStatusCode.NO_CONTENT);
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error '});
+        }
+    }
+
+    updateUsernameByUserID = async (req: Request, res: Response) => {
+        try {
+            const userID = req.params.userID;
+            const { username } = req.body;
+            const isUpdated= await this.userService.updateUsernameByUserID(+userID, username);
+            if (!isUpdated) {
+                res.status(400).json({ message: 'Canceled' });
+            } else {
+                res.sendStatus(HttpStatusCode.NO_CONTENT);
+            }
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error '});
+        }
+    }
+
+    updateEmailByUserID = async (req: Request, res: Response) => {
+        try {
+            const userID = req.params.userID;
+            const { email } = req.body;
+            const isUpdated = await this.userService.updateEmailByUserID(+userID, email);
+            if (!isUpdated) {
+                res.status(400).json({ message: 'Canceled' });
+            } else {
+                res.sendStatus(HttpStatusCode.NO_CONTENT);
+            }
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error '});
+        }
+    }
+
+    updatePasswordByUserID = async (req: Request, res: Response) => {
+        try {
+            const userID = req.params.userID;
+            const { password } = req.body;
+            const isUpdated = await this.userService.updatePasswordByUserID(+userID, password);
+            if (!isUpdated) {
+                res.status(400).json({ message: 'Canceled' });
+            } else {
+                res.sendStatus(HttpStatusCode.NO_CONTENT);
+            }
         } catch (error: any) {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error '});
         }

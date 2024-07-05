@@ -11,7 +11,7 @@ const Logout = () => {
                 await fetch(`${BASE_URL}/logout`);
                 localStorage.removeItem('jwt_token');
                 localStorage.removeItem('decoded_jwt_token');
-                navigate('/articles');
+                navigate('/login');
             } catch (error) {
                 console.log(error);
             }

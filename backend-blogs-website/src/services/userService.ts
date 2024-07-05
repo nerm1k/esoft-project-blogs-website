@@ -48,4 +48,32 @@ export default class UserService {
     async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarName?: string) {
         await this.userModel.updateUserByUserID(userID, firstName?.trim(), lastName?.trim(), surname?.trim(), description?.trim(), dateOfBirth, avatarName);
     }
+
+    async updateUsernameByUserID(userID: number, username: string) {
+        const isUsernameExists = await this.userModel.findUserByAttribute('username', username);
+
+        if (isUsernameExists) {
+            return false;
+        }
+
+        await this.userModel.updateUsernameByUserID(userID, username);
+        return true;
+    }
+
+    async updateEmailByUserID(userID: number, email: string) {
+        const isEmailExists = await this.userModel.findUserByAttribute('email', email);
+
+        if (isEmailExists) {
+            return false;
+        }
+        
+        await this.userModel.updateEmailByUserID(userID, email);
+        return true;
+    }
+
+    async updatePasswordByUserID(userID: number, password: string) {
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+        await this.userModel.updatePasswordByUserID(userID, hashedPassword);
+        return true;
+    }
 }
