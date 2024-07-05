@@ -1,0 +1,32 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.profile-edit {
+
+    &__dropdown {
+        display: flex;
+        gap: 20px;
+        position: relative;
+        padding-top: 10px;
+        background-color: $colorForeBackground;
+        box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+        border-top: 1px solid rgba($colorSidebarTitleFeedback, 0.3);
+    
+        .dropdown__item {
+            height: 40px;
+            padding: 5px 10px 10px 10px;
+            font-weight: 500;
+            color: $colorProfileDropdown;
+            @include transition(color, 0.2s);
+    
+            &:hover {
+                color: $colorProfileMoreHover;
+            }
+        }
+
+        .active-link {
+            color: $colorProfileDropdownActive;
+            border-bottom: 2px solid $colorProfileDropdownActive;
+        }
+    }
+}

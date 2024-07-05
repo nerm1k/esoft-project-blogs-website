@@ -44,4 +44,37 @@ export default class UserModel {
                                                                 .first();
         return user;
     }
+
+    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarName?: string) {
+        // const updateData = {
+        //     first_name: '',
+        //     last_name: '',
+        //     surname: '',
+        //     description: '',
+        //     date_of_birth: new Date(),
+        //     avatar: '',
+        // };
+
+        // if (firstName) updateData.first_name = firstName;
+        // if (lastName) updateData.last_name = lastName;
+        // if (surname) updateData.surname = surname;
+        // if (description) updateData.description = description;
+        // if (dateOfBirth) updateData.date_of_birth = dateOfBirth;
+        // if (avatarName) {
+        //     updateData.avatar = avatarName
+        // } else {
+        //     updateData.avatar = ''
+        // };
+        // console.log(updateData);
+        await pool('users')
+            .where('user_id', '=', userID)
+            .update({
+                first_name: firstName,
+                last_name: lastName,
+                surname: surname,
+                description: description,
+                date_of_birth: dateOfBirth,
+                avatar: avatarName
+            });
+    }
 }

@@ -6,7 +6,7 @@ interface TextareaProps {
     id: string,
     onChange: (e: SyntheticEvent) => void,
     value: string,
-    big?: boolean
+    big?: boolean,
 }
 
 const Textarea = ({name, id, onChange, value, big} : TextareaProps) => {

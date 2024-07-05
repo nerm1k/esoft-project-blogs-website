@@ -10,6 +10,7 @@ import ArticlePage from "./pages/ArticlePage/ArticlePage";
 import Logout from "./components/Logout/Logout";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateArticlePage from "./pages/CreateArticlePage/CreateArticlePage";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
             <Route path="/users/:username" element={<ProfilePage />} />
             <Route path="/users/:username/articles" element={<ProfilePage />} />
             <Route path="/users/:username/comments" element={<ProfilePage />} />
+            <Route path="/settings/profile" element={<SettingsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
             <Route path="/articles/new" element={<CreateArticlePage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />

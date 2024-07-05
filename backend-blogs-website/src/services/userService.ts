@@ -44,4 +44,8 @@ export default class UserService {
         const user = await this.userModel.getUserByUsername(username);
         return user;
     }
+
+    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarName?: string) {
+        await this.userModel.updateUserByUserID(userID, firstName?.trim(), lastName?.trim(), surname?.trim(), description?.trim(), dateOfBirth, avatarName);
+    }
 }

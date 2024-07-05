@@ -79,3 +79,13 @@ export function isNewPostFormValid(userID: number, title: string, category: numb
 
     return true;
 }
+
+export function isImageExtensionValid(image: File) {
+    const extension = image.name.split('.').pop()?.toLocaleLowerCase();
+
+    if (extension != 'png' && extension != 'jpg' && extension != 'jpeg') {
+        return false;
+    }
+
+    return true;
+}

@@ -22,7 +22,7 @@ const ProfileCard = ({user, currentPath} : ProfileCardProps) => {
         <div className={styles['profile-card']}>
             <div className={styles['profile-card__main']}>
                 <div className={styles['profile-card__img']}>
-                    <img src={user.avatar} alt="" />
+                    <img src={`/images/${user.avatar}`} alt="" />
                 </div>
                 <div className={styles['profile-card__info']}>
                     <p className={styles['profile-card__username']}>

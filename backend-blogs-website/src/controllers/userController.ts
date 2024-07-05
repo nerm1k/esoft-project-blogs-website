@@ -59,4 +59,17 @@ export default class UserController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
         }
     }
+
+    updateUserByUserID = async (req: Request, res: Response) => {
+        try {
+            const userID= req.params.userID;
+            const { firstName, lastName, surname, description, dateOfBirth } = req.body;
+            const avatarName = req.file?.filename;
+            console.log(req.file);
+            await this.userService.updateUserByUserID(+userID, firstName, lastName, surname, description, dateOfBirth, avatarName);
+            res.sendStatus(HttpStatusCode.NO_CONTENT);
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error '});
+        }
+    }
 }
