@@ -20,44 +20,4 @@
         text-align: center;
         border-bottom: 1px solid rgba($colorSidebarTitleFeedback, 0.3);
     }
-
-    span {
-        margin-right: 4px;
-        color: $red;
-    }
-
-    label {
-        font-size: 14px;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-
-    &__topic {
-        width: 240px;
-        height: 36px;
-        padding: 0px 12px;
-        margin-bottom: 32px;
-        font-size: 16px;
-        border: 1px solid $colorBorderFeedback;
-        @include border-radius(3px);
-        @include transition(border, 0.2s);
-        outline: none;
-
-        &:focus, &:focus-visible {
-            border: 1px solid $colorBorderFeedbackFocus;
-        }
-    }
-
-    &__email {
-        @extend .feedback__topic;
-    }
-
-    textarea {
-        @extend .feedback__topic;
-        width: 100%;
-        min-height: 140px;
-        padding: 12px 12px;
-        font-family: $fontFamilyMain;
-        resize: none;
-    }
 }

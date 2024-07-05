@@ -1,13 +1,18 @@
 @import '../../variables.scss';
 @import '../../mixins.scss';
 
-.textarea {
-    min-height: 70px;
-    margin-bottom: 16px;
-    padding: 12px 12px;
-    font-family: $fontFamilyMain;
+.input-label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.input-text {
+    width: 240px;
+    height: 36px;
+    padding: 0px 12px;
+    margin-bottom: 32px;
     font-size: 16px;
-    resize: none;
     border: 1px solid $colorBorderFeedback;
     @include border-radius(3px);
     @include transition(border, 0.2s);
@@ -18,18 +23,7 @@
     }
 }
 
-.big {
-    min-height: 400px;
-    resize: vertical;
-}
-
-.textarea-span {
+.input-span {
     margin-right: 4px;
     color: $red;
-}
-
-.textarea-label {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 10px;
 }

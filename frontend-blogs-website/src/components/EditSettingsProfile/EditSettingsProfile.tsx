@@ -5,6 +5,7 @@ import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
 import { BASE_URL } from '../../utils/consts';
 import { useNavigate } from 'react-router-dom';
 import { isImageExtensionValid } from '../../utils/validations';
+import Input from '../Input/Input';
 
 interface EditSettingsProfileProps {
     username: string
@@ -128,16 +129,12 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
             {!isValid && (
                 <p className={styles['form-edit__error']}>Заполните поля корректно</p>
             )}
-            <label htmlFor="firstName">Имя</label>
-            <input type="text" name="firstName" id="firstName" value={userSettingsProfile.firstName} onChange={handleChange}/>
-            <label htmlFor="lastName">Фамилия</label>
-            <input type="text" name="lastName" id="lastName" value={userSettingsProfile.lastName} onChange={handleChange}/>
-            <label htmlFor="surname">Отчество</label>
-            <input type="text" name="surname" id="surname" value={userSettingsProfile.surname} onChange={handleChange}/>
+            <Input type='text' name="firstName" id="firstName" value={userSettingsProfile.firstName} onChange={handleChange} label='Имя'/>
+            <Input type="text" name="lastName" id="lastName" value={userSettingsProfile.lastName} onChange={handleChange} label='Фамилия'/>
+            <Input type="text" name="surname" id="surname" value={userSettingsProfile.surname} onChange={handleChange} label='Отчество'/>
             <label className={styles['form-edit__description-label']} htmlFor="description">Описание <span>{userSettingsProfile.description ? 200 - userSettingsProfile.description.length : '200'}</span></label>
             <Textarea name='description' id='description' onChange={handleChange} value={userSettingsProfile.description}/>
-            <label htmlFor="dateOfBirth">Дата рождения</label>
-            <input type="date" name="dateOfBirth" id="dateOfBirth" value={userSettingsProfile.dateOfBirth} onChange={handleChange}/>
+            <Input type="date" name="dateOfBirth" id="dateOfBirth" value={userSettingsProfile.dateOfBirth} onChange={handleChange} label='Дата рождения'/>
             <label htmlFor="avatar">Изображение:</label>
             <input type="file" name="avatar" id="avatar" onChange={handleChangeImage} accept='image/jpeg, image/png' />
             <ButtonSubmit>Сохранить</ButtonSubmit>

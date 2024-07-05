@@ -6,6 +6,7 @@ import useIsAuthenticated from '../../hooks/useIsAuthenticated';
 import { isNewPostFormValid } from '../../utils/validations';
 import { useNavigate } from 'react-router-dom';
 import ButtonSubmit from '../../components/ButtonSubmit/ButtonSubmit';
+import Input from '../../components/Input/Input';
 
 interface NewArticle {
     userID: number
@@ -165,11 +166,10 @@ const CreateArticlePage = () => {
             {!isValid && (
                 <p className={styles['create-article__error']}>Заполните поля корректно</p>
             )}
-            <label htmlFor="title">Заголовок:</label>
-            <input type="text" name="title" id="title" onChange={handleChange} className={styles['create-article__title']}/>
+            <Input type='text' name="title" id="title" value={newArticle.title} onChange={handleChange} label='Заголовок' width='100%' required={true}/>
             <label htmlFor="image">Изображение:</label>
             <input type="file" name="image" id="image" onChange={handleChangeImage} accept='image/jpeg, image/png' className={styles['create-article__image']} />
-            <label htmlFor="category">Категория</label>
+            <label htmlFor="category"><span className={styles['category-span']}>*</span>Категория</label>
             <select name="category" id="category" defaultValue={0} onChange={handleChange} className={styles['create-article__category']}>
                 <option value="0" disabled></option>
                 {categories.map((category, i) => 
@@ -184,8 +184,7 @@ const CreateArticlePage = () => {
                 <input type="text" name="tag" id="tag" onChange={handleChangeTag} value={tag} className={styles['create-article__add-tag']}/>
                 <button type='button' onClick={handleAddTag} className={styles['create-article__add-tag-btn']}>+</button>
             </div>
-            <label htmlFor="content">Текст вашего поста:</label>
-            <Textarea name='content' id='content' onChange={handleChange} value={newArticle.content} big={true}/>
+            <Textarea name='content' id='content' onChange={handleChange} value={newArticle.content} big={true} label='Текст вашего поста' required={true}/>
             <ButtonSubmit>Добавить пост</ButtonSubmit>
         </form>
     )

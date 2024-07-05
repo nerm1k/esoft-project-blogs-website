@@ -19,22 +19,6 @@
         margin-bottom: 10px;
     }
 
-    input:not(:last-of-type) {
-        width: 300px;
-        height: 36px;
-        padding: 0px 12px;
-        margin-bottom: 24px;
-        font-size: 16px;
-        border: 1px solid $colorBorderFeedback;
-        @include border-radius(3px);
-        @include transition(border, 0.2s);
-        outline: none;
-
-        &:focus, &:focus-visible {
-            border: 1px solid $colorBorderFeedbackFocus;
-        }
-    }
-
     input:last-of-type {
         margin-bottom: 24px;
     }

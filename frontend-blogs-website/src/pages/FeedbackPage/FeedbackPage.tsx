@@ -5,6 +5,7 @@ import { BASE_URL } from '../../utils/consts';
 import ButtonSubmit from '../../components/ButtonSubmit/ButtonSubmit';
 import Textarea from '../../components/Textarea/Textarea';
 import SidebarFeedbackPage from '../../components/Sidebars/SidebarFeedbackPage/SidebarFeedbackPage';
+import Input from '../../components/Input/Input';
 
 interface FeedbackInfo {
     topic: string,
@@ -69,12 +70,9 @@ const FeedbackPage = () => {
                      {!isValid && (
                         <p className={styles.feedback__error}>Заполните поля корректно</p>
                     )}
-                    <label htmlFor="topic"><span>*</span>Укажите тему обращения:</label>
-                    <input type="text" name='topic' id='topic' className={styles.feedback__topic} onChange={handleInputs} value={feedbackInfo.topic}/>
-                    <label htmlFor="email"><span>*</span>Ваш адрес электронной почты:</label>
-                    <input type="email" name="email" id="email" className={styles.feedback__email} onChange={handleInputs} value={feedbackInfo.email}/>
-                    <label htmlFor="description"><span>*</span>Текст вашего сообщения:</label>
-                    <Textarea name='description' id='description' onChange={handleInputs} value={feedbackInfo.description}/>
+                    <Input type='text' name="topic" id="topic" value={feedbackInfo.topic} onChange={handleInputs} label='Укажите тему обращения' required={true}/>
+                    <Input type='email' name="email" id="email" value={feedbackInfo.email} onChange={handleInputs} label='Ваш адрес электронной почты' required={true}/>
+                    <Textarea name='description' id='description' onChange={handleInputs} value={feedbackInfo.description} label='Текст вашего сообщения' required={true}/>
                     <ButtonSubmit>Отправить</ButtonSubmit>
                     </>
                 )}
