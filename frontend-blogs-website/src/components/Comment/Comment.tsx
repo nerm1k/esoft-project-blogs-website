@@ -14,10 +14,11 @@ interface CommentProps {
     }
     articleID?: number,
     updater?: React.Dispatch<React.SetStateAction<number>>,
-    interactive: boolean
+    interactive: boolean,
+    handleDeleteArticle?: (commentID: number, e: FormEvent) => void
 }
 
-const Comment = ({comment, articleID, updater, interactive}: CommentProps) => {
+const Comment = ({comment, articleID, updater, interactive, handleDeleteArticle}: CommentProps) => {
     const {isAuthenticated, authenticatedUser} = useIsAuthenticated();
 
     function handleSubmit(e: FormEvent) {
@@ -46,15 +47,25 @@ const Comment = ({comment, articleID, updater, interactive}: CommentProps) => {
 
     return(
         <div className={styles.comment}>
-            <div className={styles.comment__info}><i className="fa-solid fa-user"></i><span className={styles.comment__author}>{comment.author}</span><span>{formatDate(comment.updated_at)}</span>
-            {(isAuthenticated && interactive) && (
-                <form className={styles.comment__form} onSubmit={handleSubmit}>
-                    <button type='submit'><span><i className="fa-solid fa-thumbs-up"></i>{comment.likes}</span></button>
-                </form>
-            )}
-            {(!isAuthenticated || !interactive )&& (
-                <span><i className="fa-solid fa-thumbs-up"></i>{comment.likes}</span>
-            )}
+            <div className={styles.comment__info}>
+                <div>
+                    <i className="fa-solid fa-user"></i><span className={styles.comment__author}>{comment.author}</span><span>{formatDate(comment.updated_at)}</span>
+                    {(isAuthenticated && interactive) && (
+                        <form className={styles.comment__form} onSubmit={handleSubmit}>
+                            <button type='submit'><span><i className="fa-solid fa-thumbs-up"></i>{comment.likes}</span></button>
+                        </form>
+                    )}
+                    {(!isAuthenticated || !interactive )&& (
+                        <span><i className="fa-solid fa-thumbs-up"></i>{comment.likes}</span>
+                    )}
+                </div>
+                <div className={styles.delete}>
+                    {handleDeleteArticle && (
+                        <form onSubmit={(e) => handleDeleteArticle(comment.comment_id, e)}>
+                            <button className={styles.delete__button} type='submit'><i className="fa-solid fa-xmark"></i></button>
+                        </form>
+                    )}
+                </div>
             </div>
             <p className={styles.comment__content}>{comment.content}</p>
         </div>

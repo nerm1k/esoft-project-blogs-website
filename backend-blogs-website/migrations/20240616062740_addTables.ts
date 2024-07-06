@@ -35,14 +35,14 @@ export async function up(knex: Knex): Promise<void> {
         table.string('image', 255);
         table.timestamps(true, true);
         
-        table.foreign('user_id').references('user_id').inTable('users');
+        table.foreign('user_id').references('user_id').inTable('users').onDelete('CASCADE');
         table.foreign('category_id').references('category_id').inTable('categories');
     })
     .createTable('articles_tags', (table) => {
         table.integer('article_id').notNullable();
         table.string('tag_name', 32).notNullable();
 
-        table.foreign('article_id').references('article_id').inTable('articles');
+        table.foreign('article_id').references('article_id').inTable('articles').onDelete('CASCADE');
     })
     .createTable('comments', (table) => {
         table.increments('comment_id').primary();
@@ -52,8 +52,8 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('likes').defaultTo(0);
         table.timestamps(true, true);
 
-        table.foreign('user_id').references('user_id').inTable('users');
-        table.foreign('article_id').references('article_id').inTable('articles');
+        table.foreign('user_id').references('user_id').inTable('users').onDelete('CASCADE');
+        table.foreign('article_id').references('article_id').inTable('articles').onDelete('CASCADE');
     })
     .createTable('feedbacks', (table) => {
         table.increments('feedback_id').primary();
@@ -67,16 +67,16 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('user_id').notNullable();
         table.timestamps(true, true);
 
-        table.foreign('comment_id').references('comment_id').inTable('comments');
-        table.foreign('user_id').references('user_id').inTable('users');
+        table.foreign('comment_id').references('comment_id').inTable('comments').onDelete('CASCADE');
+        table.foreign('user_id').references('user_id').inTable('users').onDelete('CASCADE');
     })
     .createTable('articles_likes', (table) => {
         table.integer('article_id').notNullable();
         table.integer('user_id').notNullable();
         table.timestamps(true, true);
 
-        table.foreign('article_id').references('article_id').inTable('articles');
-        table.foreign('user_id').references('user_id').inTable('users');
+        table.foreign('article_id').references('article_id').inTable('articles').onDelete('CASCADE');
+        table.foreign('user_id').references('user_id').inTable('users').onDelete('CASCADE');
     })
 }
 

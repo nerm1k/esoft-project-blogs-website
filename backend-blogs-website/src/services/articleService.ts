@@ -50,4 +50,8 @@ export default class ArticleService {
         const comment = await this.articleModel.updateLikesByArticleID(articleID, userID);
         return comment;
     }
+
+    async deleteArticleByArticleID(articleID: number) {
+        await this.articleModel.deleteArticleByArticleID(articleID);
+    }
 }

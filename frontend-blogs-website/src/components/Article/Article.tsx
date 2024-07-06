@@ -56,7 +56,7 @@ const Article = ({article, updater} : ArticleProps) => {
                     <h3 className={styles['article-card__title']}>
                         {article.title}
                     </h3>
-                    <p className={styles['article-card__additional-info']}>
+                    <div className={styles['article-card__additional-info']}>
                         <Link to={`/users/${article.author.toLowerCase()}`}>
                             <span><i className="fa-solid fa-user"></i>{article.author}</span>
                         </Link>
@@ -71,7 +71,7 @@ const Article = ({article, updater} : ArticleProps) => {
                         )}
                         <span><i className="fa-regular fa-calendar-days"></i>{formatDate(article.created_at)}</span>
                         <span><i className="fa-solid fa-pen"></i>{formatDate(article.updated_at)}</span>
-                    </p>
+                    </div>
                     {article.tags.length > 1 && (
                         <p className={styles['article-card__tags']}>
                             {article.tags.map(tag => 

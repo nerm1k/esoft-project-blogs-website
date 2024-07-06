@@ -68,4 +68,10 @@ export default class CommentModel {
                                     .orderBy('comments.created_at', 'desc');
         return comments;
     }
+
+    async deleteCommentByCommentID(commentID: number) {
+        await pool('comments')
+                .where('comment_id', '=', commentID)
+                .delete();
+    }
 }

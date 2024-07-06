@@ -58,6 +58,7 @@ const CreateArticlePage = () => {
         const target = e.target as HTMLInputElement;
         setNewArticle({
             ...newArticle,
+            userID: authenticatedUser.user_id,
             [target.name]: target.value
         });
     };
@@ -101,15 +102,12 @@ const CreateArticlePage = () => {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        setNewArticle({
-            ...newArticle,
-            userID: authenticatedUser.user_id,
-        });
         console.log(newArticle.image);
         const isValid = isNewPostFormValid(newArticle.userID, newArticle.title, newArticle.category, newArticle.content, newArticle.image);
+        console.log(isValid);
         setIsValid(isValid);
         if (!isValid) {
-            return
+            return;
         } else {
             const formData = new FormData();
             formData.append('userID', newArticle.userID.toString());

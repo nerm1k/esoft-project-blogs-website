@@ -98,7 +98,6 @@ export default class ArticleModel {
                                     .where('user_id', '=', userID)
                                     .first();
         if (isLikeExists) {
-            console.log('+');
             await pool('articles_likes')
                     .where('article_id', '=', articleID)
                     .where('user_id', '=', userID)
@@ -112,7 +111,6 @@ export default class ArticleModel {
             return article;
             
         } else {
-            console.log('-');
             await pool('articles_likes')
                     .insert({article_id: articleID, user_id: userID});
 
@@ -123,5 +121,11 @@ export default class ArticleModel {
             
             return article;
         }
+    }
+
+    async deleteArticleByArticleID(articleID: number) {
+        await pool('articles')
+                .where('article_id', '=', articleID)
+                .delete();
     }
 }

@@ -7,6 +7,8 @@
     }
 
     &__info {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 4px;
         i {
             margin-right: 4px;
@@ -14,6 +16,23 @@
         span:not(:first-of-type) {
             margin-left: 16px;
             font-size: 14px;
+        }
+
+        .delete__button {
+            padding: 4px 8px;
+            font-size: 20px;
+            border: none;
+            background-color: transparent;
+            @include border-radius(5px);
+            @include transition(background-color, 0.2s);
+
+            i {
+                margin: 0;
+            }
+
+            &:hover {
+                background-color: darken($colorCommentLikeHover, 2%);
+            }
         }
     }
 

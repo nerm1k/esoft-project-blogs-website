@@ -26,4 +26,8 @@ export default class CommentService {
         const comments = await this.commentModel.getCommentsByUsername(username.toLocaleLowerCase());
         return comments;
     }
+
+    async deleteCommentByCommentID(commentID: number) {
+        await this.commentModel.deleteCommentByCommentID(commentID);
+    }
 }

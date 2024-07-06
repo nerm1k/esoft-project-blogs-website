@@ -73,4 +73,14 @@ export default class ArticleController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
         }
     }
+
+    deleteArticleByArticleID = async (req: Request, res: Response) => {
+        try {
+            const articleID = req.params.articleID;
+            await this.articleService.deleteArticleByArticleID(+articleID);
+            res.sendStatus(HttpStatusCode.NO_CONTENT);
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error ' });
+        }
+    }
 }

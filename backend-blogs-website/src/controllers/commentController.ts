@@ -50,4 +50,14 @@ export default class CommentController {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
         }
     }
+
+    deleteCommentByCommentID = async (req: Request, res: Response) => {
+        try {
+            const commentID = req.params.commentID;
+            await this.commentService.deleteCommentByCommentID(+commentID);
+            res.sendStatus(HttpStatusCode.NO_CONTENT);
+        } catch (error: any) {
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error ' });
+        }
+    }
 }

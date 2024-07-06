@@ -24,11 +24,13 @@ export const routes = (articleController: ArticleController, feedbackController:
     router.get('/api/v1/users/:username/articles', articleController.getArticlesByUsername);
     router.post('/api/v1/articles', authenticateJWT, uploadImage, articleController.createArticle);
     router.post('/api/v1/articles/:articleID/likes', authenticateJWT, articleController.likeArticle);
+    router.delete('/api/v1/articles/:articleID', authenticateJWT, articleController.deleteArticleByArticleID);
 
     router.get('/api/v1/articles/:id/comments', commentController.getCommentsByArticleID);
     router.post('/api/v1/articles/:id/comments', authenticateJWT, commentController.addComment);
     router.post('/api/v1/articles/:articleID/comments/:commentID/likes', authenticateJWT, commentController.likeComment);
     router.get('/api/v1/users/:username/comments', commentController.getCommentsByUsername);
+    router.delete('/api/v1/comments/:commentID', commentController.deleteCommentByCommentID);
 
     router.post('/api/v1/feedbacks', feedbackController.createFeedback);
 

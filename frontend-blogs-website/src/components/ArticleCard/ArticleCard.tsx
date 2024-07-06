@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/functions';
 import styles from './ArticleCard.module.scss';
+import { FormEvent } from 'react';
 
 interface ArticleCardProps {
     article : {
@@ -14,10 +15,11 @@ interface ArticleCardProps {
         likes: number,
         image?: string,
         created_at: Date,
-    }
+    },
+    handleDeleteArticle?: (articleID: number, e: FormEvent) => void,
 }
 
-const ArticleCard = ({article}: ArticleCardProps) => {
+const ArticleCard = ({article, handleDeleteArticle}: ArticleCardProps) => {
     if (article.content.length > 250) {
         article.content = article.content.slice(0, 250) + '...';
     }
@@ -37,6 +39,11 @@ const ArticleCard = ({article}: ArticleCardProps) => {
             <div className={styles['article-card__info']}>
                 <h3 className={styles['article-card__title']}>
                     {article.title}
+                    {handleDeleteArticle && (
+                        <form onSubmit={(e) => handleDeleteArticle(article.article_id, e)}>
+                            <button type='submit'><i className="fa-solid fa-xmark"></i></button>
+                        </form>
+                    )}
                 </h3>
                 <p className={styles['article-card__additional-info']}>
                     <Link to={`/users/${article.author.toLocaleLowerCase()}`}>

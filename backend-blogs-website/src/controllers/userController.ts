@@ -65,7 +65,6 @@ export default class UserController {
             const userID = req.params.userID;
             const { firstName, lastName, surname, description, dateOfBirth } = req.body;
             const avatarName = req.file?.filename;
-            console.log(req.file);
             await this.userService.updateUserByUserID(+userID, firstName, lastName, surname, description, dateOfBirth, avatarName);
             res.sendStatus(HttpStatusCode.NO_CONTENT);
         } catch (error: any) {
