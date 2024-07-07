@@ -45,7 +45,7 @@ export default class UserModel {
         return user;
     }
 
-    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarName?: string) {
+    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarID?: string) {
         await pool('users')
             .where('user_id', '=', userID)
             .update({
@@ -54,7 +54,7 @@ export default class UserModel {
                 surname: surname,
                 description: description,
                 date_of_birth: dateOfBirth,
-                avatar: avatarName
+                avatar: avatarID
             });
     }
 

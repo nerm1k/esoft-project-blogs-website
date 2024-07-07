@@ -21,6 +21,14 @@ interface UserEditSettingsProfile {
     avatar?: File | string
 }
 
+interface ImgurResponse {
+    status: number,
+    success: boolean,
+    data: {
+        id: string
+    }
+}
+
 const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => {
     const navigate = useNavigate();
     const [userSettingsProfile, setUserSettingsProfile] = useState<UserEditSettingsProfile>({
@@ -32,6 +40,7 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
         avatar: undefined
     });
     const [isValid, setIsValid] = useState(true);
+    const [imageID, setImageID] = useState('');
 
     useEffect(() => {
         async function getUserData() {
@@ -84,31 +93,80 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
 
     function handleSubmit(e: FormEvent) { 
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('firstName', userSettingsProfile.firstName);
-        formData.append('lastName', userSettingsProfile.lastName);
-        formData.append('surname', userSettingsProfile.surname);
-        formData.append('description', userSettingsProfile.description);
-        formData.append('dateOfBirth', userSettingsProfile.dateOfBirth);
-        if (userSettingsProfile.avatar && userSettingsProfile.avatar instanceof File) {
-            const isImageValid = isImageExtensionValid(userSettingsProfile.avatar as File);
+        async function uploadImage() {
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", "Client-ID e60b3e698cdfe1a");
 
-            if (!isImageValid) {
-                setIsValid(false);
-                return;
+            var formdata = new FormData();
+            if (userSettingsProfile.avatar && userSettingsProfile.avatar instanceof File) {
+                const isImageValid = isImageExtensionValid(userSettingsProfile.avatar as File);
+
+                if (!isImageValid) {
+                    setIsValid(false);
+                    return;
+                };
+
+                formdata.append('image', userSettingsProfile.avatar, userSettingsProfile.avatar.name);
+            }
+            formdata.append("type", "image");
+
+            const requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: formdata,
             };
 
-            formData.append('image', userSettingsProfile.avatar);
-        }
-        
-        async function updateUser() {
             try {
+                const res = await fetch("https://api.imgur.com/3/image", requestOptions);
+                const data: ImgurResponse = await res.json();
+                if (data.status === 200) {  
+                    return data.data.id;
+                }
+                return undefined;
+            } catch (error) {
+                console.log(error);
+                return undefined;
+            }
+        };
+
+        // uploadImage();
+
+        // const formData = new FormData();
+        // formData.append('firstName', userSettingsProfile.firstName);
+        // formData.append('lastName', userSettingsProfile.lastName);
+        // formData.append('surname', userSettingsProfile.surname);
+        // formData.append('description', userSettingsProfile.description);
+        // formData.append('dateOfBirth', userSettingsProfile.dateOfBirth);
+        // if (userSettingsProfile.avatar && userSettingsProfile.avatar instanceof File) {
+        //     const isImageValid = isImageExtensionValid(userSettingsProfile.avatar as File);
+
+        //     if (!isImageValid) {
+        //         setIsValid(false);
+        //         return;
+        //     };
+
+        //     formData.append('image', userSettingsProfile.avatar);
+        // }
+        
+        async function updateUser(avatarID: string | undefined) {
+            const updatedUser = {
+                firstName: userSettingsProfile.firstName,
+                lastName: userSettingsProfile.lastName,
+                surname: userSettingsProfile.surname,
+                description: userSettingsProfile.description,
+                dateOfBirth: userSettingsProfile.dateOfBirth,
+                avatar: avatarID
+            };
+            try {
+                console.log(updatedUser);
                 const res = await fetch(`${BASE_URL}/users/${userID}`, {
                     method: 'PUT',
                     headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
                             'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
                     },
-                    body: formData
+                    body: JSON.stringify(updatedUser)
                 });
                 if (res.status === 204) {
                     navigate(`/users/${username}`)
@@ -121,7 +179,13 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
             }
         };
     
-        updateUser();
+        // updateUser();
+
+        uploadImage().then(avatarID => {
+            updateUser(avatarID);
+        }).catch(error => {
+            console.log(error);
+        });
     };
 
     return(

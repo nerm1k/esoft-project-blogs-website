@@ -22,6 +22,14 @@ export interface User {
     createdAt: Date
 }
 
+interface ImgurResponse {
+    status: number,
+    success: boolean,
+    data: {
+        link: string
+    }
+}
+
 const ProfilePage = () => {
     const { username } = useParams();
     const [user, setUser] = useState<User>({
@@ -46,6 +54,32 @@ const ProfilePage = () => {
     const currentPath = pathname.split('/').pop();
 
     useEffect(() => {
+        async function getImage(dataUser: User | undefined) {
+            if (dataUser) {
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Client-ID e60b3e698cdfe1a");
+                
+                var requestOptions = {
+                  method: 'GET',
+                  headers: myHeaders,
+                };
+                
+                try {
+                    const res = await fetch(`https://api.imgur.com/3/image/${dataUser.avatar}`, requestOptions);
+                    const data: ImgurResponse = await res.json();
+                    if (data.status === 200) {
+                        setUser({ ...dataUser, avatar: data.data.link });
+                    }
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+        };
+
+
+
         async function fetchUser() {
             setIsLoading(true);
 
@@ -58,6 +92,7 @@ const ProfilePage = () => {
                     const data = await res.json() as User;
                     setUser(data);
                     console.log(data);
+                    return data;
                 }
             } catch (error) {
                 setIsError(true);
@@ -66,9 +101,16 @@ const ProfilePage = () => {
             }
         };
 
-        fetchUser();
-    }, [username]);
+        fetchUser().then(data => {
+            getImage(data);
+        })
+        .catch(error => {
+            console.log(error);
+        });;
 
+
+    }, [username]);
+    console.log(user);
     if (isLoading) {
         return <div>Загрузка...</div>
     }

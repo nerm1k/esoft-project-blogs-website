@@ -45,8 +45,8 @@ export default class UserService {
         return user;
     }
 
-    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarName?: string) {
-        await this.userModel.updateUserByUserID(userID, firstName?.trim(), lastName?.trim(), surname?.trim(), description?.trim(), dateOfBirth, avatarName);
+    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarID?: string) {
+        await this.userModel.updateUserByUserID(userID, firstName?.trim(), lastName?.trim(), surname?.trim(), description?.trim(), dateOfBirth, avatarID);
     }
 
     async updateUsernameByUserID(userID: number, username: string) {

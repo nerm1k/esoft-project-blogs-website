@@ -81,7 +81,7 @@ const Article = ({article, updater} : ArticleProps) => {
                     )}
                     {article.image && (
                         <div className={styles['article-card__image']}>
-                            <img src={article.image} alt="" />
+                            <img src={article.image} alt="article image" />
                         </div>
                     )}
                     <p className={styles['article-card__content']}>

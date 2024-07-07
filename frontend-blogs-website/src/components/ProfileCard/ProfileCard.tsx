@@ -17,12 +17,12 @@ const ProfileCard = ({user, currentPath} : ProfileCardProps) => {
     function showMore() {
         setIsShowMore(!isShowMore);
     }
-
+    console.log(user);
     return (
         <div className={styles['profile-card']}>
             <div className={styles['profile-card__main']}>
                 <div className={styles['profile-card__img']}>
-                    <img src={`/images/${user.avatar}`} alt="" />
+                    <img src={user.avatar} alt="avatar" referrerPolicy="no-referrer"/>
                 </div>
                 <div className={styles['profile-card__info']}>
                     <p className={styles['profile-card__username']}>
@@ -43,7 +43,7 @@ const ProfileCard = ({user, currentPath} : ProfileCardProps) => {
                 <div className={styles['profile-card__additional']}>
                     {(user.firstName || user.lastName || user.surname) && (
                         <p className={styles['profile-card__name']}>
-                            {user.lastName} {user.firstName} {user.surname}
+                            {user.lastName != 'null' ? user.lastName : ''} {user.firstName != 'null' ? user.firstName : ''} {user.surname != 'null' ? user.surname : ''}
                         </p>
                     )}
                     {user.dateOfBirth && (
@@ -51,9 +51,6 @@ const ProfileCard = ({user, currentPath} : ProfileCardProps) => {
                             Дата рождения: {formatDate(user.dateOfBirth).slice(0, -6)}
                         </p>
                     )}
-                    {/* <p className={styles['profile-card__email']}>
-                        {user.email}
-                    </p> */}
                     {user.description && (
                         <p className={styles['profile-card__description']}>
                             {user.description}
