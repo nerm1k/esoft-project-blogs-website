@@ -4,6 +4,7 @@ import { BASE_URL } from '../../utils/consts';
 import { useParams } from 'react-router-dom';
 import Article from '../../components/Article/Article';
 import Comments from '../../components/Comments/Comments';
+import SidebarArticlesPage from '../../components/Sidebars/SidebarArticlesPage/SidebarArticlesPage';
 
 interface Article {
     article_id: number,
@@ -59,12 +60,15 @@ const ArticlePage = () => {
     return(
         <>
             {article && (
-                <div className={styles['container__article']}>
-                    <Article article={article} updater={setUpdater}/>
-                    <div className={styles.container_comments}>
-                        <Comments articleID={article.article_id}/>
+                <>
+                    <div className={styles['container__article']}>
+                        <Article article={article} updater={setUpdater}/>
+                        <div className={styles.container_comments}>
+                            <Comments articleID={article.article_id}/>
+                        </div>
                     </div>
-                </div>
+                    <SidebarArticlesPage />
+                </>
             )}
             {!article && (
                 <p>not found</p>
