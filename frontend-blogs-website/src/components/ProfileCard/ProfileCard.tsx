@@ -22,7 +22,9 @@ const ProfileCard = ({user, currentPath} : ProfileCardProps) => {
         <div className={styles['profile-card']}>
             <div className={styles['profile-card__main']}>
                 <div className={styles['profile-card__img']}>
-                    <img src={user.avatar} alt="avatar" referrerPolicy="no-referrer"/>
+                    {user.avatar && (
+                        <img src={user.avatar} alt="avatar" referrerPolicy="no-referrer"/>
+                    )}
                 </div>
                 <div className={styles['profile-card__info']}>
                     <p className={styles['profile-card__username']}>

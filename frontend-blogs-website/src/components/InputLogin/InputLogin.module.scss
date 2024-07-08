@@ -7,13 +7,13 @@
     height: 60px;
     padding: 0px 30px 0px 65px;
     font-size: 18px;
-    color: $colorInput;
-    background-color: $greyLight;
+    color: var(--colorInput);
+    background-color: var(--greyLight);
     border: none;
     @include border-radius(3px);
 
     &::placeholder {
-        color: $colorPlaceholder;
+        color: var(--colorPlaceholder);
     }
 
     &:focus-visible, &:focus {
@@ -26,7 +26,7 @@
         & + .i--login {
             @include transition(all, 0.4s);
             left: 6.5%;
-            color: $colorLoginMain;
+            color: var(--colorLoginMain);
         }
     }
 }
@@ -35,6 +35,6 @@
     position: absolute;
     left: 8%;
     font-size: 18px;
-    color: $colorInputIcon;
+    color: var(--colorInputIcon);
     @include transition(all, 0.4s);
 }

@@ -5,16 +5,18 @@
     min-height: 70px;
     margin-bottom: 16px;
     padding: 12px 12px;
-    font-family: $fontFamilyMain;
+    font-family: var(--fontFamilyMain);
+    color: var(--colorTextarea);
     font-size: 16px;
     resize: none;
-    border: 1px solid $colorBorderFeedback;
+    background-color: var(--backgroundColorTextarea);
+    border: 1px solid var(--colorBorderTextarea);
     @include border-radius(3px);
     @include transition(border, 0.2s);
     outline: none;
 
     &:focus, &:focus-visible {
-        border: 1px solid $colorBorderFeedbackFocus;
+        border: 1px solid var(--colorBorderTextareaFocus);
     }
 }
 
@@ -25,7 +27,7 @@
 
 .textarea-span {
     margin-right: 4px;
-    color: $red;
+    color: var(--red);
 }
 
 .textarea-label {

@@ -70,7 +70,6 @@ const Article = ({article, updater} : ArticleProps) => {
                             <span><i className="fa-solid fa-thumbs-up"></i>{article.likes}</span>
                         )}
                         <span><i className="fa-regular fa-calendar-days"></i>{formatDate(article.created_at)}</span>
-                        <span><i className="fa-solid fa-pen"></i>{formatDate(article.updated_at)}</span>
                     </div>
                     {article.tags.length > 1 && (
                         <p className={styles['article-card__tags']}>

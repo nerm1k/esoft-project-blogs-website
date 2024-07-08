@@ -47,7 +47,7 @@ const ArticlePage = () => {
         }
 
         fetchArticles();
-    }, [updater]);
+    }, [updater, articleId]);
 
     if (isLoading) {
         return <div>Загрузка...</div>

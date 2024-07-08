@@ -5,11 +5,11 @@
     display: flex;
     flex-direction: column;
     padding: 30px;
-    background-color: $colorForeBackground;
-    box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+    background-color: var(--colorForeBackground);
+    box-shadow: 0px 0px 1px 0px var(--box-shadow10);
 
     &__error {
-        color: $red;
+        color: var(--red);
         margin-bottom: 10px;
     }
 
@@ -18,7 +18,7 @@
         margin-bottom: 30px;
         font-size: 22px;
         text-align: center;
-        border-bottom: 1px solid rgba($colorSidebarTitleFeedback, 0.3);
+        border-bottom: 1px solid var(--colorSidebarTitleFeedback30);
     }
 
     label {
@@ -30,11 +30,13 @@
     &__category {
         width: 150px;
         margin-bottom: 24px;
+        color: var(--colorTextarea);
+        background-color: var(--backgroundColorTextarea);
     }
 
     .category-span {
         margin-right: 4px;
-        color: $red;
+        color: var(--red);
     }
     
     &__image {
@@ -50,21 +52,24 @@
 
     &__delete, &__add-tag-btn {
         padding: 4px 8px;
+        color: var(--colorTextarea);
         background-color: transparent;
-        border: 1px solid $colorNewArticleTagsBorder;
+        border: 1px solid var(--colorBorderTextarea);
         @include border-radius(15px);
         @include transition(all, 0.2s);
 
         &:hover {
-            background-color: $colorNewArticleTagsBackground;
-            border-color: $colorNewArticleTagsBorderFocus;
+            color: var(--black);
+            background-color: var(--colorNewArticleTagsBackground);
+            border-color: var(--colorNewArticleTagsBorderFocus);
         }
     }
 
     &__add-tag {
         padding: 4px 8px;
+        color: var(--colorTextarea);
         background-color: transparent;
-        border: 1px solid $colorNewArticleTagsBorder;
+        border: 1px solid var(--colorBorderTextarea);
         @include border-radius(15px);
     }
 }

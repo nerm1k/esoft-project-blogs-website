@@ -17,9 +17,10 @@ interface ArticleCardProps {
         created_at: Date,
     },
     handleDeleteArticle?: (articleID: number, e: FormEvent) => void,
+    deletable?: boolean
 }
 
-const ArticleCard = ({article, handleDeleteArticle}: ArticleCardProps) => {
+const ArticleCard = ({article, handleDeleteArticle, deletable}: ArticleCardProps) => {
     if (article.content.length > 250) {
         article.content = article.content.slice(0, 250) + '...';
     }
@@ -39,7 +40,7 @@ const ArticleCard = ({article, handleDeleteArticle}: ArticleCardProps) => {
             <div className={styles['article-card__info']}>
                 <h3 className={styles['article-card__title']}>
                     {article.title}
-                    {handleDeleteArticle && (
+                    {(handleDeleteArticle && deletable) && (
                         <form onSubmit={(e) => handleDeleteArticle(article.article_id, e)}>
                             <button type='submit'><i className="fa-solid fa-xmark"></i></button>
                         </form>

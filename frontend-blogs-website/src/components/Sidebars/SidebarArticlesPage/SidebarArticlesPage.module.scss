@@ -7,7 +7,7 @@
     gap: 15px;
 
     & > div {
-        background-color: $colorForeBackground;
+        background-color: var(--colorForeBackground);
     }
     
     & > div:not(:nth-child(1), :nth-child(2)){
@@ -22,10 +22,10 @@
                 padding-bottom: 12px;
                 margin-bottom: 20px;
                 font-size: 13px;
-                color: $colorSidebarTitleTopArticles;
+                color: var(--colorSidebarTitleTopArticles);
                 font-weight: 600;
                 text-transform: uppercase;
-                border-bottom: 1px solid rgba($colorSidebarTitleTopArticles, 0.3);
+                border-bottom: 1px solid var(--colorSidebarTitleTopArticles30);
             }
 
             &__list {
@@ -36,12 +36,12 @@
                         &:not(:last-child) {
                             padding-bottom: 12px;
                             margin-bottom: 12px;
-                            border-bottom: 1px solid rgba($colorSidebarTitleTopArticles, 0.3);
+                            border-bottom: 1px solid var(--colorSidebarTitleTopArticles30);
                         }
 
                         &:hover {
                             .item__title {
-                                color: $colorSidebarLinkHover;
+                                color: var(--colorSidebarLinkHover);
                             }
                         }
 
@@ -49,7 +49,7 @@
 
                             &__title {
                                 margin-bottom: 6px;
-                                color: $colorSidebarTopArticles;
+                                color: var(--colorSidebarTopArticles);
                                 font-size: 14px;
                                 font-weight: 700;
                                 line-height: 1.5;
@@ -59,11 +59,11 @@
                             &__info {
                                 padding-left: 4px;
                                 font-weight: 600;
-                                color: $colorSidebarSpanText;
+                                color: var(--colorSidebarSpanText);
                                 
                                 i {
                                     margin-right: 6px;
-                                    color: $colorSidebarSpan;
+                                    color: var(--colorSidebarSpan);
                                 }
                             }
                         }

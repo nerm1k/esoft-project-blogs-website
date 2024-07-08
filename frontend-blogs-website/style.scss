@@ -9,8 +9,9 @@
 }
 
 body {
-    font-family: $fontFamilyMain;
-    background-color: $backgroundColor;
+    font-family: var(--fontFamilyMain);
+    background-color: var(--backgroudColor);
+    color: var(--color);
 }
 
 img {

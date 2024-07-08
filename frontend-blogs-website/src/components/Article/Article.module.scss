@@ -4,28 +4,28 @@
 .article-card {
     padding: 30px;
     margin-bottom: 15px;
-    background-color: $colorForeBackground;
-    box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+    background-color: var(--colorForeBackground);
+    box-shadow: 0px 0px 1px 0px var(--box-shadow10);
 
     &__info {
         position: relative;
-        background-color: $colorForeBackground;
+        background-color: var(--colorForeBackground);
 
         .btn {
             display: inline-block;
             height: 50px;
             padding-right: 20px;
-            color: $black;
+            color: var(--black);
             font-weight: 700;
             line-height: 50px;
-            background-color: $white;
-            box-shadow: 1px 1px 3px 0 rgba($black, 0.2);
+            background-color: var(--white);
+            box-shadow: 1px 1px 3px 0 var(--box-shadow20);
             @include transition(background-color, 0.2s);
             @include transition(color, 0.2s);
 
             &:hover {
-                background-color: $colorSecondaryArticleCard;
-                color: $white;
+                background-color: var(--colorSecondaryArticleCard);
+                color: var(--white);
             }
 
             i {
@@ -33,8 +33,8 @@
                 margin-right: 10px;
                 height: 50px;
                 line-height: 50px;
-                color: $white;
-                background-color: $colorSecondaryArticleCard;
+                color: var(--white);
+                background-color: var(--colorSecondaryArticleCard);
                 clip-path: polygon(0 0, 70% 0, 100% 100%, 0% 100%);
             }
         }
@@ -56,7 +56,7 @@
             margin-right: 16px;
 
             i {
-                color: $colorSecondaryArticleCard;
+                color: var(--colorSecondaryArticleCard);
                 margin-right: 6px;
             }
         }
@@ -71,8 +71,8 @@
             margin-right: 10px;
             font-size: 13px;
             font-weight: 600;
-            color: $white;
-            background-color: $colorSecondaryArticleCard;
+            color: var(--white);
+            background-color: var(--colorSecondaryArticleCard);
 
             @include border-radius(3px);
         }
@@ -93,14 +93,15 @@
 
         button {
             padding: 5px;
-            font-family: $fontFamilyMain;
+            font-family: var(--fontFamilyMain);
+            color: var(--color);
             font-size: 16px;
             background-color: transparent;
             border: none;
             @include border-radius(3px);
 
             &:hover {
-                background-color: $colorCommentLikeHover;
+                background-color: var(--colorCommentLikeHover);
             }
 
             span {

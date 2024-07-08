@@ -5,15 +5,15 @@
     &__edit {
         padding: 10px;
         margin-bottom: 15px;
-        background-color: $colorProfileMore;
-        color: $white;
+        background-color: var(--colorProfileMore);
+        color: var(--white);
         font-weight: 500;
         letter-spacing: 0.08em;
         text-align: center;
         @include transition(background-color, 0.1s);
 
         &:hover {
-            background-color: $colorProfileMoreHover;
+            background-color: var(--colorProfileMoreHover);
         }
     }
 }

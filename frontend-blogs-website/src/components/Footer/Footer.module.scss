@@ -3,8 +3,8 @@
 
 .footer {
     font-size: 14px;
-    color: $colorFooter;
-    background-color: $backgroundColorFooter;
+    color: var(--colorFooter);
+    background-color: var(--colorForeBackground);
 
     .container {
         max-width: 1140px;
@@ -25,7 +25,7 @@
         align-items: center;
 
         a {
-            color: $colorLinkFooter;
+            color: var(--colorLinkFooter);
             font-weight: 700;
             @include transition(color, 0.2s);
 

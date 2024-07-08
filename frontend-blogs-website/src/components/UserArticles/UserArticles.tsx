@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/consts";
 import ArticleCard from "../ArticleCard/ArticleCard";
 import styles from './UserArticles.module.scss';
+import useIsAuthenticated from "../../hooks/useIsAuthenticated";
 
 interface UserArticlesProps {
     username?: string
@@ -21,6 +22,7 @@ interface ArticleCard {
 }
 
 const UserArticles = ({ username }: UserArticlesProps) => {
+    const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
     const [articles, setArticles] = useState<ArticleCard[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
@@ -75,7 +77,7 @@ const UserArticles = ({ username }: UserArticlesProps) => {
                 <p className={styles['no-articles']}>У пользователя отсутствуют публикации</p>
             )}
             {articles.map(article => (
-                <ArticleCard key={article.article_id} article={article} handleDeleteArticle={handleDeleteArticle}/>
+                <ArticleCard key={article.article_id} article={article} handleDeleteArticle={handleDeleteArticle} deletable={authenticatedUser.username == username}/>
             ))}
         </div>
     )

@@ -5,6 +5,6 @@
     position: relative;
     padding: 30px;
     margin-bottom: 15px;
-    background-color: $colorForeBackground;
-    box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+    background-color: var(--colorForeBackground);
+    box-shadow: 0px 0px 1px 0px var(--box-shadow10);
 }

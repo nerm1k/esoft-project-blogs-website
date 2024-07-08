@@ -1,10 +1,11 @@
 @import '../../variables.scss';
 @import '../../mixins.scss';
 
+
 .advertisement {
     margin-bottom: 15px;
     color:rgb(0, 153, 255);
-    background-color: $colorForeBackground;
+    background-color: var(--colorForeBackground);
 
     &__image {
         position: relative;
@@ -16,10 +17,10 @@
             display: inline-block;
             padding: 2px;
             font-size: 7px;
-            color: darken($grey, 30%);
+            color: var(--colorAdverisement);
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            background-color: lighten($grey, 10%);
+            background-color: var(--backgroundColorAdvertisement);
             @include border-radius(6px);
         }
     }

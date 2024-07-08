@@ -11,9 +11,21 @@ import Logout from "./components/Logout/Logout";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateArticlePage from "./pages/CreateArticlePage/CreateArticlePage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
+import { useEffect } from "react";
 
 
 function App() {
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+
+    if (theme === 'dark') {
+      document.body.dataset.theme = 'dark';
+    } else {
+      document.body.dataset.theme = 'light';
+    }
+
+  }, []);
+
   return (
     <>
       <Provider store={store}>

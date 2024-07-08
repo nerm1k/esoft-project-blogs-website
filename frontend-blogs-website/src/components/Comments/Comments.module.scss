@@ -6,11 +6,11 @@
     &__title {
         padding-bottom: 12px;
         margin-bottom: 20px;
-        border-bottom: 1px solid $colorCommentsTitleBorder;
+        border-bottom: 1px solid var(--colorCommentsTitleBorder);
 
         span {
             margin-left: 10px;
-            color: $colorCommentTitleSpan;
+            color: var(--colorCommentTitleSpan);
             font-size: 22px;
         }
     }
@@ -21,7 +21,7 @@
         padding-top: 30px;
         margin-top: 20px;
 
-        border-top: 1px solid $colorCommentsTitleBorder;
+        border-top: 1px solid var(--colorCommentsTitleBorder);
 
         label {
             font-size: 14px;

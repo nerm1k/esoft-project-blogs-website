@@ -7,8 +7,8 @@
     align-items: center;
     padding: 15px;
     margin-bottom: 15px;
-    background-color: $colorForeBackground;
-    box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+    background-color: var(--colorForeBackground);
+    box-shadow: 0px 0px 1px 0px var(--box-shadow10);
 
     &__item {
 
@@ -33,9 +33,9 @@
                 font-size: 17px;
 
                 &--active {
-                    color: $colorPaginationActive;
+                    color: var(--colorPaginationActive);
                     font-weight: 500;
-                    border: 1px solid $colorPaginationBorder;
+                    border: 1px solid var(--colorPaginationBorder);
                     @include border-radius(3px);
                 }
             }

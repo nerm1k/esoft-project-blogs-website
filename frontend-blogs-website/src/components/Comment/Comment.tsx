@@ -15,12 +15,12 @@ interface CommentProps {
     articleID?: number,
     updater?: React.Dispatch<React.SetStateAction<number>>,
     interactive: boolean,
-    handleDeleteArticle?: (commentID: number, e: FormEvent) => void
+    handleDeleteArticle?: (commentID: number, e: FormEvent) => void,
+    deletable?: boolean,
+    isAuthenticated?: boolean
 }
 
-const Comment = ({comment, articleID, updater, interactive, handleDeleteArticle}: CommentProps) => {
-    const {isAuthenticated, authenticatedUser} = useIsAuthenticated();
-
+const Comment = ({comment, articleID, updater, interactive, handleDeleteArticle, deletable, isAuthenticated}: CommentProps) => {
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         async function likeComment() {
@@ -60,7 +60,7 @@ const Comment = ({comment, articleID, updater, interactive, handleDeleteArticle}
                     )}
                 </div>
                 <div className={styles.delete}>
-                    {handleDeleteArticle && (
+                    {(handleDeleteArticle && deletable) && (
                         <form onSubmit={(e) => handleDeleteArticle(comment.comment_id, e)}>
                             <button className={styles.delete__button} type='submit'><i className="fa-solid fa-xmark"></i></button>
                         </form>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './DropDownMenu.module.scss';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 interface DropDownMenuProps {
     username: string,
@@ -24,6 +25,9 @@ const DropDownMenu = ({username, setIsDropDownMenuActive}: DropDownMenuProps) =>
                         Настройки
                 </div>
             </Link>
+                <div className={styles['dropdown-menu__item']}>   
+                        <ThemeToggle />
+                </div>
             <Link to='/logout'>
                 <div className={styles['dropdown-menu__item']}>   
                         Выйти   

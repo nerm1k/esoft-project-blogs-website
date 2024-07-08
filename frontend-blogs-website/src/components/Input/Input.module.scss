@@ -13,17 +13,19 @@
     padding: 0px 12px;
     margin-bottom: 32px;
     font-size: 16px;
-    border: 1px solid $colorBorderFeedback;
+    color: var(--colorTextarea);
+    background-color: var(--backgroundColorTextarea);
+    border: 1px solid var(--colorBorderTextarea);
     @include border-radius(3px);
     @include transition(border, 0.2s);
     outline: none;
 
     &:focus, &:focus-visible {
-        border: 1px solid $colorBorderFeedbackFocus;
+        border: 1px solid var(--colorBorderTextareaFocus);
     }
 }
 
 .input-span {
     margin-right: 4px;
-    color: $red;
+    color: var(--red);
 }

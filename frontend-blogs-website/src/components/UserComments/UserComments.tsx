@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import styles from './UserComments.module.scss';
 import { BASE_URL } from '../../utils/consts';
 import Comment from '../Comment/Comment';
+import useIsAuthenticated from '../../hooks/useIsAuthenticated';
 
 interface UserArticlesProps {
     username?: string
@@ -16,6 +17,7 @@ interface Comment {
 }
 
 const UserComments = ({username}: UserArticlesProps) => {
+    const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
     const [comments, setComments] = useState<Comment[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
@@ -78,7 +80,7 @@ const UserComments = ({username}: UserArticlesProps) => {
                 <p className={styles['no-articles']}>У пользователя отсутствуют комментарии</p>
             )}
             {comments.map(comment => (
-                <Comment key={comment.comment_id} comment={comment} interactive={false} handleDeleteArticle={handleDeleteArticle}/>
+                <Comment key={comment.comment_id} comment={comment} interactive={false} handleDeleteArticle={handleDeleteArticle} deletable={authenticatedUser.username == username} isAuthenticated={isAuthenticated}/>
             ))}
         </div>
     )

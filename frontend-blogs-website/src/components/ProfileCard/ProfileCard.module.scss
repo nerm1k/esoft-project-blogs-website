@@ -5,8 +5,8 @@
     position: relative;
     padding: 30px 30px 0 30px;
     margin-bottom: 15px;
-    background-color: $colorForeBackground;
-    box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
+    background-color: var(--colorForeBackground);
+    box-shadow: 0px 0px 1px 0px var(--box-shadow10);
 
     &__main {
     display: grid;
@@ -34,7 +34,7 @@
                     &__id {
                         font-size: 18px;
                         font-weight: 600;
-                        color: $colorProfileID;
+                        color: var(--colorProfileID);
                     }
 
                     &__rating {
@@ -47,7 +47,7 @@
 
     &__show-more {
         display: inline-block;
-        color: $colorProfileMore;
+        color: var(--colorProfileMore);
         font-weight: 500;
         user-select: none;
         @include transition(all, 0.2s);
@@ -58,7 +58,7 @@
         }
 
         &:hover {
-            color: $colorProfileMoreHover;
+            color: var(--colorProfileMoreHover);
         }
     }
 
@@ -75,25 +75,24 @@
         position: relative;
         padding-top: 10px;
         margin-top: 20px;
-        background-color: $colorForeBackground;
-        box-shadow: 0px 0px 1px 0px rgba($black, 0.1);
-        border-top: 1px solid rgba($colorSidebarTitleFeedback, 0.3);
+        background-color: var(--colorForeBackground);
+        border-top: 1px solid var(--colorSidebarTitleFeedback30);
     
         .dropdown__item {
             height: 40px;
             padding: 5px 10px 10px 10px;
             font-weight: 500;
-            color: $colorProfileDropdown;
+            color: var(--colorProfileDropdown);
             @include transition(color, 0.2s);
     
             &:hover {
-                color: $colorProfileMoreHover;
+                color: var(--colorProfileMoreHover);
             }
         }
 
         .active-link {
-            color: $colorProfileDropdownActive;
-            border-bottom: 2px solid $colorProfileDropdownActive;
+            color: var(--colorProfileDropdownActive);
+            border-bottom: 2px solid var(--colorProfileDropdownActive);
         }
     }
 }

@@ -1,55 +1,165 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-$fontFamilyMain: 'Raleway', sans-serif;
-$backgroundColor: #f0f0f0;
-$white: #fff;
-$greyLight: #e6e6e6;
-$grey: #b3b3b3;
-$greyDark: #585858;
-$black: #000;
-$red: #ff0000;
+:root {
+    --backgroudColor: #f0f0f0;
+    --fontFamilyMain: 'Raleway', sans-serif;
 
-$colorPlaceholder: #acacac;
-$colorInput: #686868;
-$colorInputIcon: #999;
-$colorLoginTitle: #333;
-$colorLoginMain: #d33f8d;
+    --color: #333;
 
-$colorDropDownMenuLink: #ebf8ff;
-$colorForeBackground: #fff;
-$colorSecondaryArticleCard: #ffb535;
+    --white: #fff;
+    --greyLight: #e6e6e6;
+    --grey: #b3b3b3;
+    --greyDark: #585858;
+    --black: #000;
+    --black40: #00000066;
+    --red: #ff0000;
+    --box-shadow20: #00000033;
+    --box-shadow10: #0000001a;
 
-$backgroundColorFooter: #1f2225;
-$colorFooter: #bbcdd6;
-$colorLinkFooter: #49addf;
+    --backgroundColorTextarea: #fff;
+    --colorTextarea: #000;
+    --colorBorderTextarea: #BBCDD6;
+    --colorBorderTextareaFocus: #558ca5;
 
-$colorSidebarTopArticles: #2b2b2b;
-$colorSidebarTitleTopArticles: #6F7577;
-$colorSidebarSpan: #BBCDD6;
-$colorSidebarSpanText: #929CA5;
-$colorSidebarLinkHover: #768791;
+    --colorPlaceholder: #acacac;
+    --colorInput: #686868;
+    --colorInputIcon: #999;
+    --colorLoginTitle: #333;
+    --colorLoginMain: #d33f8d;
 
-$colorBorderFeedback: #BBCDD6;
-$colorBorderFeedbackFocus: #558ca5;
-$colorButtonFeedback: #ffb535;
-$colorButtonFeedbackHover: #d3962c;
-$colorSidebarTitleFeedback: #6F7577;
+    --colorHeaderBorderBottom: #b3b3b380;
+    --colorHeaderNavHover: #e6e6e6;
 
-$colorPaginationBorder: #ffb535;
-$colorPaginationActive: #bb7f17;
+    --backgroundColorDropDownMenu: var(--colorForeBackground);
+    --colorDropDownMenuBorder: var(--greyLight);
+    --colorDropDownMenuLink: #ebf8ff;
+    --colorDropDownMenuLinkHover: var(--color);
 
-$colorCommentsTitleBorder: #6F7577;
-$colorCommentTitleSpan: #ffb535;
-$colorCommentBackground: #f0f0f0;
-$colorCommentLikeHover: #f0f0f0;
+    --colorForeBackground: #fff;
+    --colorSecondaryArticleCard: #ffb535;
+    --backgroundColorArticleCardButton: var(--white);
 
-$colorProfileID: #929292;
-$colorProfileMore: #3b95c2;
-$colorProfileMoreHover: #296888;
-$colorProfileDropdown: #525252;
-$colorProfileDropdownActive: #307ea5;
+    --backgroundColorFooter: #1f2225;
+    --colorFooter: #bbcdd6;
+    --colorLinkFooter: #49addf;
 
-$colorNewArticleTagsBackground: #f0f0f0;
-$colorNewArticleTagsBorder: #BBCDD6;
-$colorNewArticleTagsBorderFocus: #558ca5;
+    --colorSidebarTopArticles: #2b2b2b;
+    --colorSidebarTitleTopArticles: #6F7577;
+    --colorSidebarTitleTopArticles30: #6f75774d;
+    --colorSidebarSpan: #BBCDD6;
+    --colorSidebarSpanText: #929CA5;
+    --colorSidebarLinkHover: #768791;
+
+    --colorBorderFeedback: #BBCDD6;
+    --colorBorderFeedbackFocus: #558ca5;
+    --colorButtonFeedback: #ffb535;
+    --colorButtonFeedbackHover: #d3962c;
+    --colorSidebarTitleFeedback: #6F7577;
+    --colorSidebarTitleFeedback30: #6f75774d;
+
+    --colorPaginationBorder: #ffb535;
+    --colorPaginationActive: #bb7f17;
+
+    --colorCommentsTitleBorder: #6F7577;
+    --colorCommentTitleSpan: #ffb535;
+    --colorCommentBackground: #f0f0f0;
+    --colorCommentLikeHover: #f0f0f0;
+    --colorCommentDeleteButtonHover: #ebebeb;
+
+    --colorProfileID: #929292;
+    --colorProfileMore: #46a7d8;
+    --colorProfileMoreHover: #277fac;
+    --colorProfileDropdown: #525252;
+    --colorProfileDropdownActive: #307ea5;
+
+    --colorNewArticleTagsBackground: #f0f0f0;
+    --colorNewArticleTagsBorder: #BBCDD6;
+    --colorNewArticleTagsBorderFocus: #558ca5;
+
+    --colorAdverisement: #7d7d7d;
+    --backgroundColorAdvertisement: #bbbbbb;
+}
+
+
+[data-theme="dark"] {
+    --backgroudColor: #0a0a0a;
+    --fontFamilyMain: 'Raleway', sans-serif;
+
+    --color: #ddd;
+
+    --white: #fff;
+    --greyLight: #e6e6e6;
+    --grey: #b3b3b3;
+    --greyDark: #585858;
+    --black: #000;
+    --black40: #00000066;
+    --red: #ff0000;
+    --box-shadow20: #ffffff33;
+    --box-shadow10: #ffffff1a;
+
+    --backgroundColorTextarea: #111111;
+    --colorTextarea: #ffffff;
+    --colorBorderTextarea: #575f63;
+    --colorBorderTextareaFocus: #558ca5;
+
+    // ----------------------------------------
+    --colorPlaceholder: #acacac;
+    --colorInput: #686868;
+    --colorInputIcon: #999;
+    --colorLoginTitle: #333;
+    --colorLoginMain: #d33f8d;
+    // ----------------------------------------
+
+    --colorHeaderBorderBottom: #5e5e5e80;
+    --colorHeaderNavHover: #494949;
+    
+    --backgroundColorDropDownMenu: var(--colorForeBackground);
+    --colorDropDownMenuBorder: #1d1d1d;
+    --colorDropDownMenuLink: #2b3a42;
+    --colorDropDownMenuLinkHover: #49addf;
+
+    --colorForeBackground: #171717;
+    --colorSecondaryArticleCard: #cea560;
+    --backgroundColorArticleCardButton: var(--color);
+
+    --backgroundColorFooter: #1f2225;
+    --colorFooter: #bbcdd6;
+    --colorLinkFooter: #49addf;
+
+    --colorSidebarTopArticles: #dbdbdb;
+    --colorSidebarTitleTopArticles: #99a1a3;
+    --colorSidebarTitleTopArticles30: #99a1a34d;
+    --colorSidebarSpan: #60676d;
+    --colorSidebarSpanText: #60676d;
+    --colorSidebarLinkHover: #7bb1d3;
+
+    --colorBorderFeedback: #BBCDD6;
+    --colorBorderFeedbackFocus: #558ca5;
+    --colorButtonFeedback: #cea560;
+    --colorButtonFeedbackHover: #d3962c;
+    --colorSidebarTitleFeedback: #6F7577;
+    --colorSidebarTitleFeedback30: #6f75774d;
+
+    --colorPaginationBorder: #cea560;
+    --colorPaginationActive: #bb7f17;
+
+    --colorCommentsTitleBorder: #6F7577;
+    --colorCommentTitleSpan: #cea560;
+    --colorCommentBackground: #f0f0f0;
+    --colorCommentLikeHover: #494949;
+    --colorCommentDeleteButtonHover: #636363;
+
+    --colorProfileID: #929292;
+    --colorProfileMore: #4ca4cf;
+    --colorProfileMoreHover: #217caa;
+    --colorProfileDropdown: #525252;
+    --colorProfileDropdownActive: #307ea5;
+
+    --colorNewArticleTagsBackground: #f0f0f0;
+    --colorNewArticleTagsBorder: #BBCDD6;
+    --colorNewArticleTagsBorderFocus: #558ca5;
+
+    --colorAdverisement: #7d7d7d;
+    --backgroundColorAdvertisement: #bbbbbb;
+}
 
