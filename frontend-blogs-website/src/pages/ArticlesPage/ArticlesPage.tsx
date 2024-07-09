@@ -6,8 +6,10 @@ import Pagination, { maxPage, minPage } from '../../components/Pagination/Pagina
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { setCurrentPage } from '../../store/currentPageSlice';
 import { setPagesAround } from '../../store/pagesAroundSlice';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SidebarArticlesPage from '../../components/Sidebars/SidebarArticlesPage/SidebarArticlesPage';
+import FilterCategories from '../../components/FilterCategories/FilterCategories';
+import { setCurrentCategory } from '../../store/currentCategorySlice';
 
 export interface ArticleCard {
     article_id: number,
@@ -30,7 +32,11 @@ const ArticlesPage = () => {
     const dispatch = useAppDispatch();
     const currentPage = useAppSelector((state) => state.currentPage);
     const pagesAround = useAppSelector((state) => state.pagesAround);
+    const currentCategory = useAppSelector((state) => state.currentCategory);
 
+    // const [currentCategory, setCurrentCategory] = useState<string>('');
+
+    const navigate = useNavigate();
     // const [searchParams, setSearchParams] = useSearchParams();
     // const pageSearchParam = Number(searchParams.get('page'));
 
@@ -45,7 +51,7 @@ const ArticlesPage = () => {
             setIsLoading(true);
 
             try {
-                const res = await fetch(`${BASE_URL}/articles?page=${currentPage}`);
+                const res = await fetch(`${BASE_URL}/articles?page=${currentPage}&category=${currentCategory}`);
                 const data = (await res.json()) as ArticleCard[];
                 setArticles(data);
             } catch (error: any) {
@@ -56,7 +62,7 @@ const ArticlesPage = () => {
         }
 
         fetchArticles();
-    }, [currentPage]);
+    }, [currentPage, currentCategory]);
 
     function handlePagination(type: 'next' | 'previous' | number): void {
         if (type == 'next') {
@@ -114,6 +120,11 @@ const ArticlesPage = () => {
         }
     }
 
+    function handleClickCategory(category: string): void{
+        dispatch(setCurrentCategory(category));
+        navigate(`/articles?page=${currentPage}&category=${category}`);
+    }
+
     if (isLoading) {
         return <div>Загрузка...</div>
     }
@@ -131,10 +142,11 @@ const ArticlesPage = () => {
                         {currentPage < minPage || currentPage > maxPage && (
                             <div>Не найдено или устарело</div>
                         )}
+                        <FilterCategories onClick={handleClickCategory} selectedCategory={currentCategory}/>
                         {articles.map(article => (
                             <ArticleCard key={article.article_id} article={article}/>
                         ))}
-                        <Pagination onClick={handlePagination} pagesAround={pagesAround} page={currentPage}/>
+                        <Pagination onClick={handlePagination} pagesAround={pagesAround} page={currentPage} currentCategory={currentCategory}/>
                     </div>
                     <SidebarArticlesPage />
                 </>

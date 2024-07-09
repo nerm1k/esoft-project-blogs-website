@@ -15,6 +15,11 @@ export default class ArticleController {
                 const limit = req.query.limit;
                 const articles = await this.articleService.getTopArticles(+limit);
                 res.status(HttpStatusCode.OK).json(articles);
+            } else if (req.query.page && req.query.category != ''){
+                const page = req.query.page;
+                const category = req.query.category as string;
+                const articles = await this.articleService.getArticlesByPageAndCategory(+page, category);
+                res.status(HttpStatusCode.OK).json(articles);
             } else if (req.query.page) {
                 const page = req.query.page;
                 const articles = await this.articleService.getArticlesByPage(+page);

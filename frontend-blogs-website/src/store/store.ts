@@ -3,11 +3,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import currentPageSlice from "./currentPageSlice";
 import pagesAroundSlice from "./pagesAroundSlice";
+import currentCategorySlice from "./currentCategorySlice";
 
 export const store = configureStore({
     reducer: {
         currentPage: currentPageSlice,
-        pagesAround: pagesAroundSlice
+        pagesAround: pagesAroundSlice,
+        currentCategory: currentCategorySlice
     }
 });
 

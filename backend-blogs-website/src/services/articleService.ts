@@ -23,6 +23,12 @@ export default class ArticleService {
         return articles;
     }
 
+    async getArticlesByPageAndCategory(page: number, category: string) {
+        const offset = page * 10 - 10;
+        const articles = await this.articleModel.getArticlesByPageAndCategory(offset, category);
+        return articles;
+    }
+
     async getArticleByID(articleID: number) {
         const article = await this.articleModel.getArticleByID(articleID);
         return article;

@@ -1,0 +1,26 @@
+@import '../../mixins.scss';
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    
+    select {
+        font-size: 14px;
+        background-color: var(--backgroundColorArticleCardButton);
+    }
+
+    button {
+        padding: 3px 10px;
+        font-family: var(--fontFamilyMain);
+        color: var(--white);
+        background-color: var(--colorSecondaryArticleCard);
+        border: none;
+        @include border-radius(3px);
+
+        &:hover {
+            background-color: var(--colorButtonFeedbackHover);
+        }
+    }
+}
