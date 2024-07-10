@@ -1,25 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import useIsAuthenticated from "../../hooks/useIsAuthenticated";
 import CreateArticlePage from "../../pages/CreateArticlePage/CreateArticlePage";
 import { useEffect } from "react";
 
-const RequiredAuth = () => {
-    const {isAuthenticated, authenticatedUser} = useIsAuthenticated();
+interface RequiredAuthProps {
+    children: React.ReactNode,
+    isAuthenticated: boolean
+}
+
+const RequiredAuth = ({children, isAuthenticated}: RequiredAuthProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!isAuthenticated) {
-            navigate ('/login');
-        }
+            navigate('/login');
+        };
     }, [])
-    
-    if (isAuthenticated) {
-        return (
-            <CreateArticlePage />
-        )
-    } else {
-        return null;
-    }
+
+    return children;
 };
 
 export default RequiredAuth;
