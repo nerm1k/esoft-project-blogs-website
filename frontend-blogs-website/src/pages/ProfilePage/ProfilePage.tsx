@@ -102,7 +102,9 @@ const ProfilePage = () => {
         };
 
         fetchUser().then(data => {
-            getImage(data);
+            if (data?.avatar) {
+                getImage(data);
+            };
         })
         .catch(error => {
             console.log(error);

@@ -13,7 +13,7 @@
         i {
             margin-right: 4px;
         }
-        span:not(:first-of-type) {
+        span:not(:first-child) {
             margin-left: 16px;
             font-size: 14px;
         }

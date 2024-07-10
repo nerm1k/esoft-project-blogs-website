@@ -44,7 +44,40 @@ export const uploadImage = async (req: Request, res: Response, next: NextFunctio
               //   }
               // });
             } catch (err) {
-              // Handle potential errors during processing
+              console.error("Error processing image:", err);
+              return next(err);
+            }
+        }
+        next();
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  export const uploadAvatar = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await upload(req, res, async (err) => {
+        if (err) {
+          return next(err);
+        }
+
+        if (req.file) {
+            const originalFilePath = req.file.path;
+            const tempFilePath = path.join(__dirname, '..', '..', 'frontend-blogs-website', 'public', 'images', 'temp-' + req.file.filename);
+            const finalFilePath = req.file.path; 
+    
+            try {
+              const imageBuffer = fs.readFileSync(originalFilePath);
+    
+              await sharp(imageBuffer)
+                .resize(100)
+                .toFormat('jpeg')
+                .jpeg({ quality: 80 })
+                .toFile(tempFilePath);
+    
+              fs.renameSync(tempFilePath, finalFilePath);
+            } catch (err) {
               console.error("Error processing image:", err);
               return next(err);
             }

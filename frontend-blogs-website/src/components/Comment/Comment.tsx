@@ -3,6 +3,7 @@ import { formatDate } from '../../utils/functions';
 import styles from './Comment.module.scss';
 import useIsAuthenticated from '../../hooks/useIsAuthenticated';
 import { BASE_URL } from '../../utils/consts';
+import { Link } from 'react-router-dom';
 
 interface CommentProps {
     comment: {
@@ -49,7 +50,11 @@ const Comment = ({comment, articleID, updater, interactive, handleDeleteArticle,
         <div className={styles.comment}>
             <div className={styles.comment__info}>
                 <div>
-                    <i className="fa-solid fa-user"></i><span className={styles.comment__author}>{comment.author}</span><span>{formatDate(comment.updated_at)}</span>
+                    <i className="fa-solid fa-user"></i>
+                    <Link to={`/users/${comment.author.toLowerCase()}`}>
+                        <span className={styles.comment__author}>{comment.author}</span>
+                    </Link>
+                    <span>{formatDate(comment.updated_at)}</span>
                     {(isAuthenticated && interactive) && (
                         <form className={styles.comment__form} onSubmit={handleSubmit}>
                             <button type='submit'><span><i className="fa-solid fa-thumbs-up"></i>{comment.likes}</span></button>

@@ -117,3 +117,31 @@ export function isPasswordValid(password: string) {
 
     return true;
 }
+
+export function isEditProfileValid(firstName: string, lastName: string, surname: string, dateOfBirth: string) {
+    if (firstName) {
+        if (firstName.length < 1 || firstName.length > 32) {
+            return false;
+        };
+    };
+
+    if (lastName) {
+        if (lastName.length < 1 || lastName.length > 32) {
+            return false;
+        };
+    };
+
+    if (surname) {
+        if (surname.length < 1 || surname.length > 32) {
+            return false;
+        };
+    };
+
+    if (dateOfBirth) {
+        if (Date.parse(dateOfBirth) > Date.now()) {
+            return false;
+        };
+    };
+
+    return true;
+}

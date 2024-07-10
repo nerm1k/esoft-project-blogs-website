@@ -20,10 +20,12 @@ const SignUpPage = () => {
         password: ''
     });
     const [isValid, setIsValid] = useState(true);
+    const [error, setError] = useState('');
 
     function handleChange(e: SyntheticEvent): void {
         const target = e.target as HTMLInputElement;
         setIsValid(true);
+        setError('');
         setSignUpInfo({
             ...signUpInfo,
             [target.name]: target.value
@@ -49,6 +51,8 @@ const SignUpPage = () => {
                 });
                 if (res.status === 201) {
                     navigate('/login');
+                } else if (res.status === 409) {
+                    setError('Такой пользователь уже существует');
                 }
             }
     
@@ -62,6 +66,9 @@ const SignUpPage = () => {
         <div className={styles.container}>
             <form className={styles.login} onSubmit={handleSubmit}>
                 <p className={styles.login__title}>Регистрация</p>
+                {error != '' && (
+                        <p className={styles.login__error}>{error}</p>
+                )}
                 {!isValid && (
                         <p className={styles.login__error}>Заполните поля корректно</p>
                 )}

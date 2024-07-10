@@ -4,7 +4,7 @@ import Textarea from '../Textarea/Textarea';
 import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
 import { BASE_URL } from '../../utils/consts';
 import { useNavigate } from 'react-router-dom';
-import { isImageExtensionValid } from '../../utils/validations';
+import { isEditProfileValid, isImageExtensionValid } from '../../utils/validations';
 import Input from '../Input/Input';
 
 interface EditSettingsProfileProps {
@@ -48,11 +48,13 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
                 const res = await fetch(`${BASE_URL}/users/${username}`);
                 if (res.status === 200) {
                     const data = await res.json() as UserEditSettingsProfile;
-                    const date = new Date(data.dateOfBirth);
-                    const formattedDate = date.getFullYear() + '-' + 
-                                         ('0' + (date.getMonth() + 1)).slice(-2) + '-' + 
-                                         ('0' + date.getDate()).slice(-2);
-                    data.dateOfBirth = formattedDate;
+                    if (data.dateOfBirth) {
+                        const date = new Date(data.dateOfBirth);
+                        const formattedDate = date.getFullYear() + '-' + 
+                                             ('0' + (date.getMonth() + 1)).slice(-2) + '-' + 
+                                             ('0' + date.getDate()).slice(-2);
+                        data.dateOfBirth = formattedDate;
+                    };
                     setUserSettingsProfile(data);
                 }
             } catch (error) {
@@ -93,11 +95,8 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
 
     function handleSubmit(e: FormEvent) { 
         e.preventDefault();
-        async function uploadImage() {
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", "Client-ID e60b3e698cdfe1a");
 
-            var formdata = new FormData();
+        async function uploadImage() {
             if (userSettingsProfile.avatar && userSettingsProfile.avatar instanceof File) {
                 const isImageValid = isImageExtensionValid(userSettingsProfile.avatar as File);
 
@@ -105,27 +104,31 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
                     setIsValid(false);
                     return;
                 };
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Client-ID e60b3e698cdfe1a");
 
+                var formdata = new FormData();
+                
                 formdata.append('image', userSettingsProfile.avatar, userSettingsProfile.avatar.name);
-            }
-            formdata.append("type", "image");
+                formdata.append("type", "image");
 
-            const requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: formdata,
-            };
+                const requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: formdata,
+                };
 
-            try {
-                const res = await fetch("https://api.imgur.com/3/image", requestOptions);
-                const data: ImgurResponse = await res.json();
-                if (data.status === 200) {  
-                    return data.data.id;
+                try {
+                    const res = await fetch("https://api.imgur.com/3/image", requestOptions);
+                    const data: ImgurResponse = await res.json();
+                    if (data.status === 200) {  
+                        return data.data.id;
+                    }
+                    return undefined;
+                } catch (error) {
+                    console.log(error);
+                    return undefined;
                 }
-                return undefined;
-            } catch (error) {
-                console.log(error);
-                return undefined;
             }
         };
 
@@ -157,25 +160,31 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
                 dateOfBirth: userSettingsProfile.dateOfBirth,
                 avatar: avatarID
             };
-            try {
-                console.log(updatedUser);
-                const res = await fetch(`${BASE_URL}/users/${userID}`, {
-                    method: 'PUT',
-                    headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
-                    },
-                    body: JSON.stringify(updatedUser)
-                });
-                if (res.status === 204) {
-                    navigate(`/users/${username}`)
-                } else {
-                    console.log('-');
-                }
+            const isValid = isEditProfileValid(updatedUser.firstName, updatedUser.lastName, updatedUser.surname, updatedUser.dateOfBirth);
+            setIsValid(isValid);
+            if (!isValid) {
+                return;
+            } else {
+                try {
+                    console.log(updatedUser);
+                    const res = await fetch(`${BASE_URL}/users/${userID}`, {
+                        method: 'PUT',
+                        headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
+                        },
+                        body: JSON.stringify(updatedUser)
+                    });
+                    if (res.status === 204) {
+                        navigate(`/users/${username}`)
+                    } else {
+                        console.log('-');
+                    }
 
-            } catch (error) {
-                console.log(error);
+                } catch (error) {
+                    console.log(error);
+                }
             }
         };
     
