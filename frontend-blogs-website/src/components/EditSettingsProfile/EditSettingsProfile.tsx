@@ -202,11 +202,11 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
             {!isValid && (
                 <p className={styles['form-edit__error']}>Заполните поля корректно</p>
             )}
-            <Input type='text' name="firstName" id="firstName" value={userSettingsProfile.firstName} onChange={handleChange} label='Имя'/>
-            <Input type="text" name="lastName" id="lastName" value={userSettingsProfile.lastName} onChange={handleChange} label='Фамилия'/>
-            <Input type="text" name="surname" id="surname" value={userSettingsProfile.surname} onChange={handleChange} label='Отчество'/>
+            <Input type='text' name="firstName" id="firstName" value={userSettingsProfile.firstName || ''} onChange={handleChange} label='Имя'/>
+            <Input type="text" name="lastName" id="lastName" value={userSettingsProfile.lastName || ''} onChange={handleChange} label='Фамилия'/>
+            <Input type="text" name="surname" id="surname" value={userSettingsProfile.surname || ''} onChange={handleChange} label='Отчество'/>
             <label className={styles['form-edit__description-label']} htmlFor="description">Описание <span>{userSettingsProfile.description ? 200 - userSettingsProfile.description.length : '200'}</span></label>
-            <Textarea name='description' id='description' onChange={handleChange} value={userSettingsProfile.description}/>
+            <Textarea name='description' id='description' onChange={handleChange} value={userSettingsProfile.description || ''}/>
             <Input type="date" name="dateOfBirth" id="dateOfBirth" value={userSettingsProfile.dateOfBirth} onChange={handleChange} label='Дата рождения'/>
             <label htmlFor="avatar">Изображение:</label>
             <input type="file" name="avatar" id="avatar" onChange={handleChangeImage} accept='image/jpeg, image/png' />

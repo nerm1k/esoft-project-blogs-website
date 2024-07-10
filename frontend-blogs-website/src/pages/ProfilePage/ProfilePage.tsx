@@ -54,6 +54,8 @@ const ProfilePage = () => {
     const currentPath = pathname.split('/').pop();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        
         async function getImage(dataUser: User | undefined) {
             if (dataUser) {
                 var myHeaders = new Headers();
