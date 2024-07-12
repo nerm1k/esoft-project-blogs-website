@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { setCurrentPage } from '../../store/currentPageSlice';
 import { setPagesAround } from '../../store/pagesAroundSlice';
 import useIsAuthenticated from '../../hooks/useIsAuthenticated';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const Header = () => {
     const { isAuthenticated, authenticatedUser } = useIsAuthenticated();
@@ -49,6 +50,9 @@ const Header = () => {
                 <nav className={styles.header__nav}>
                     {!isAuthenticated && (
                         <ul>
+                            <li> 
+                                <ThemeToggle /> 
+                            </li>
                             <li>
                                 <Link to='/login'>
                                     Войти
@@ -64,9 +68,12 @@ const Header = () => {
                     {isAuthenticated && (
                         <>
                             <ul>
+                                <li> 
+                                    <ThemeToggle /> 
+                                </li>
                                 <li className={styles.nav__profile} onClick={toggleDropdownMenu}>
                                     {authenticatedUser.username}
-                                </li>
+                                </li>         
                             </ul>
                             {isDropDownMenuActive && (
                                 <div ref={dropDownMenuRef}>

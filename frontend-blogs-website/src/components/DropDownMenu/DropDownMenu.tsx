@@ -25,9 +25,9 @@ const DropDownMenu = ({username, setIsDropDownMenuActive}: DropDownMenuProps) =>
                         Настройки
                 </div>
             </Link>
-                <div className={styles['dropdown-menu__item']}>   
+                {/* <div className={styles['dropdown-menu__item']}>   
                         <ThemeToggle />
-                </div>
+                </div> */}
             <Link to='/logout'>
                 <div className={styles['dropdown-menu__item']}>   
                         Выйти   
