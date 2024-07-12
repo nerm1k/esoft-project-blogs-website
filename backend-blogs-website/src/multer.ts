@@ -6,7 +6,7 @@ import fs from 'fs';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '..', '..', 'front-blog-website', 'public', 'images'));
+    cb(null, path.join(__dirname, '..', '..', 'frontend-blog-website', 'public', 'images'));
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + file.originalname);
@@ -24,7 +24,7 @@ export const uploadImage = async (req: Request, res: Response, next: NextFunctio
 
         if (req.file) {
             const originalFilePath = req.file.path;
-            const tempFilePath = path.join(__dirname, '..', '..', 'front-blog-website', 'public', 'images', 'temp-' + req.file.filename);
+            const tempFilePath = path.join(__dirname, '..', '..', 'frontend-blog-website', 'public', 'images', 'temp-' + req.file.filename);
             const finalFilePath = req.file.path; 
     
             try {
