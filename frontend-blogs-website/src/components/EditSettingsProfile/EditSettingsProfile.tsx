@@ -45,7 +45,7 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
     useEffect(() => {
         async function getUserData() {
             try {
-                const res = await fetch(`${BASE_URL}/users/${username}`);
+                const res = await fetch(`${BASE_URL}/users/${username.toLowerCase()}`);
                 if (res.status === 200) {
                     const data = await res.json() as UserEditSettingsProfile;
                     if (data.dateOfBirth) {
