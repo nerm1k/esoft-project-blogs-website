@@ -106,7 +106,7 @@ const EditSettingsAccount = ({ username, userID }: EditSettingsAccountProps) => 
                     body: JSON.stringify(userSettingsAccount)
                 });
                 if (res.status === 204) {
-                    navigate(`/users/${username}`)
+                    navigate(`/users/${username.toLowerCase()}`)
                 } else {
                     alert('Такая почта уже занята');
                 }

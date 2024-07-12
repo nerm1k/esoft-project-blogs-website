@@ -139,7 +139,7 @@ const CreateArticlePage = () => {
                         body: formData
                     });
                     if (res.status === 201) {
-                        navigate(`/users/${authenticatedUser.username}`);
+                        navigate(`/users/${authenticatedUser.username.toLowerCase()}`);
                         const data = await res.json();
                         console.log(data);
                     } else {

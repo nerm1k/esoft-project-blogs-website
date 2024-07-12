@@ -177,7 +177,7 @@ const EditSettingsProfile = ({ username, userID }: EditSettingsProfileProps) => 
                         body: JSON.stringify(updatedUser)
                     });
                     if (res.status === 204) {
-                        navigate(`/users/${username}`)
+                        navigate(`/users/${username.toLowerCase()}`)
                     } else {
                         console.log('-');
                     }
