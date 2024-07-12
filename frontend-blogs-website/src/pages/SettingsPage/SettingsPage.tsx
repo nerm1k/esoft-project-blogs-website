@@ -27,10 +27,10 @@ const SettingsPage = () => {
                     </Link>
                 </div>
                 {currentPath == 'profile' && (
-                    <EditSettingsProfile username={authenticatedUser.username} userID={authenticatedUser.user_id}/>
+                    <EditSettingsProfile username={authenticatedUser.username.toLowerCase()} userID={authenticatedUser.user_id}/>
                 )}
                 {currentPath == 'account' && (
-                    <EditSettingsAccount username={authenticatedUser.username} userID={authenticatedUser.user_id} />
+                    <EditSettingsAccount username={authenticatedUser.username.toLowerCase()} userID={authenticatedUser.user_id} />
                 )}
             </div>
             <SidebarSettingsPage />
