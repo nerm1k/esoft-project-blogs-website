@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./build && npx tsc",
-    "dev": "npx nodemon",
-    "start": "npm run build && node build/index",
+    "dev": "npx tsx src/index.ts",
+    "start": "npx nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

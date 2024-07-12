@@ -58,8 +58,8 @@ app.use(routes(articleController, feedbackController, userController, commentCon
 // app.use(multer({dest: 'public/images/'}).single('image'));
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4200;
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+  console.log(`[server]: Server is running at http://46.148.229.218:${port}`);
 });

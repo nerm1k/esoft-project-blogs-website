@@ -13,12 +13,9 @@ import CreateArticlePage from "./pages/CreateArticlePage/CreateArticlePage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import { useEffect } from "react";
 import RequiredAuth from "./components/RequiredAuth/RequiredAuth";
-import useIsAuthenticated from "./hooks/useIsAuthenticated";
 
 
 function App() {
-  const { isAuthenticated } = useIsAuthenticated();
-
   useEffect(() => {
     const theme = localStorage.getItem('theme');
 
@@ -41,16 +38,16 @@ function App() {
             <Route path="/users/:username" element={<ProfilePage />} />
             <Route path="/users/:username/articles" element={<ProfilePage />} />
             <Route path="/users/:username/comments" element={<ProfilePage />} />
-            <Route path="/settings" element={<RequiredAuth isAuthenticated={isAuthenticated}>
+            <Route path="/settings" element={<RequiredAuth>
                                                 <SettingsPage />
                                               </RequiredAuth>} />
-            <Route path="/settings/profile" element={<RequiredAuth isAuthenticated={isAuthenticated}>
+            <Route path="/settings/profile" element={<RequiredAuth>
                                                         <SettingsPage />
                                                       </RequiredAuth>} />
-            <Route path="/settings/account" element={<RequiredAuth isAuthenticated={isAuthenticated}>
+            <Route path="/settings/account" element={<RequiredAuth>
                                                         <SettingsPage />
                                                       </RequiredAuth>} />
-            <Route path="/articles/new" element={<RequiredAuth isAuthenticated={isAuthenticated}>
+            <Route path="/articles/new" element={<RequiredAuth>
                                                     <CreateArticlePage />
                                                   </RequiredAuth>} />
           </Route>

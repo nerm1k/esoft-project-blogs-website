@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 interface User {
     user_id: number
     username: string,
-    is_admin: boolean
 }
 
 interface TokenPayload extends User {
@@ -16,7 +15,6 @@ const useIsAuthenticated = () => {
     const [authenticatedUser, setAuthenticatedUser] = useState<User>({
         user_id: 0,
         username: '',
-        is_admin: false
     });
 
     useEffect(() => {
@@ -30,7 +28,7 @@ const useIsAuthenticated = () => {
 
                 if (!isJwtTokenExpired) {
                     setIsAuthenticated(true);
-                    setAuthenticatedUser({user_id: decodedJwtToken.user_id, username: decodedJwtToken.username, is_admin: decodedJwtToken.is_admin});
+                    setAuthenticatedUser({user_id: decodedJwtToken.user_id, username: decodedJwtToken.username});
                 } else {
                     setIsAuthenticated(false);
                 } 

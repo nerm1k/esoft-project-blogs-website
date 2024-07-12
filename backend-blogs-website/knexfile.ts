@@ -26,7 +26,7 @@ import type { Knex } from "knex";
 const config = {
     client: 'pg',
     connection: {
-      connectionString: 'postgresql://postgres:admin@127.0.0.1:5432/blogwebsite?application_name=app',
+      connectionString: 'postgresql://admin:admin@localhost:5432/blogwebsite?application_name=app',
       pool: {
         min: 2,
         max: 50,

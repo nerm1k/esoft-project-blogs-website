@@ -1,21 +1,20 @@
-import { Navigate, useNavigate } from "react-router-dom";
-import useIsAuthenticated from "../../hooks/useIsAuthenticated";
-import CreateArticlePage from "../../pages/CreateArticlePage/CreateArticlePage";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 interface RequiredAuthProps {
     children: React.ReactNode,
-    isAuthenticated: boolean
 }
 
-const RequiredAuth = ({children, isAuthenticated}: RequiredAuthProps) => {
+const RequiredAuth = ({children}: RequiredAuthProps) => {
+    const [isAllowed, setIsAllowed] = useState(localStorage.getItem('decoded_jwt_token'));
+    // const {isAuthenticated} = useIsAuthenticated();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!isAllowed) {
             navigate('/login');
         };
-    }, [])
+    }, []);
 
     return children;
 };

@@ -36,7 +36,7 @@ export default class UserService {
             return 401;
         }
 
-        const jwtToken = jwt.sign({user_id: user.user_id, username: user.username, is_admin: user.is_admin}, SECRET_KEY, {expiresIn: SESSION_DURATION});
+        const jwtToken = jwt.sign({user_id: user.user_id, username: user.username}, SECRET_KEY, {expiresIn: SESSION_DURATION});
         return {user, jwtToken};
     }
 
