@@ -10,12 +10,12 @@ interface DropDownMenuProps {
 const DropDownMenu = ({username, setIsDropDownMenuActive}: DropDownMenuProps) => {
     return(
         <div className={styles['dropdown-menu']} onClick={() => setIsDropDownMenuActive(false)}>
-            <Link to={`/users/${username}`}>
+            <Link to={`/users/${username.toLowerCase()}`}>
                 <div className={styles['dropdown-menu__item']}>
                         Профиль
                 </div>
             </Link>
-            <Link to={`/users/${username}/articles`}>
+            <Link to={`/users/${username.toLowerCase()}/articles`}>
                 <div className={styles['dropdown-menu__item']}>
                         Публикации
                 </div>
