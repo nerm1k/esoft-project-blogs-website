@@ -13,7 +13,12 @@ export default class FeedbackController {
         try {
             const {topic, description, email} = req.body;
             const feedback = await this.feedbackService.createFeedback(topic, email, description);
-            res.status(HttpStatusCode.CREATED).json(feedback);
+            if (feedback) {
+                res.status(HttpStatusCode.CREATED).json(feedback);
+            } else {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ message: 'Bad Request'});
+            }
+            
         } catch (error: any) {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error.message});
         }

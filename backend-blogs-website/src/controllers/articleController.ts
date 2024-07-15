@@ -62,7 +62,12 @@ export default class ArticleController {
             const { userID, title, category, content, tags } = req.body;
             const imageName = req.file?.filename;
             const article = await this.articleService.createArticle(userID, title, category, content, tags, imageName);
-            res.status(HttpStatusCode.CREATED).json(article);
+            if (article) {
+                res.status(HttpStatusCode.CREATED).json(article);
+            } else {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ message: 'Bad Request'});
+            }
+            
         } catch (error: any) {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({error: error});
         }

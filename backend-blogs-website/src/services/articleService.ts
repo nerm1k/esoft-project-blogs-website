@@ -1,4 +1,5 @@
 import ArticleModel from "../models/articleModel";
+import { isNewPostValid } from "../utils/validations";
 
 export default class ArticleService {
     articleModel: ArticleModel;
@@ -40,6 +41,10 @@ export default class ArticleService {
     }
 
     async createArticle(userID: number, title: string, category: number, content: string, tags?: string, imageName?: string) {
+        if (!isNewPostValid(userID, title, category, content, imageName)) {
+            return;
+        }
+        
         if (imageName) {
             imageName = '/images/' + imageName;
         }

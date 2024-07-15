@@ -1,6 +1,7 @@
 import UserModel from "../models/userModel";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { isEditProfileValid, isEmailValid, isPasswordValid, isUsernameValid, isValidLogin, isValidNewUser } from "../utils/validations";
 
 export const SECRET_KEY = 'testsecretkey32testsecretkey323232'
 const SESSION_DURATION = '1h'
@@ -14,6 +15,10 @@ export default class UserService {
     }
 
     async registerUser(username: string, email: string, password: string) {
+        if (!isValidNewUser(username, email, password)) {
+            return null;
+        }
+
         const isUsernameExists = await this.userModel.findUserByAttribute('username', username);
         const isEmailExists = await this.userModel.findUserByAttribute('email', email);
         if (isUsernameExists || isEmailExists) {
@@ -26,6 +31,10 @@ export default class UserService {
     }
 
     async loginUser(username: string, password: string) {
+        if (!isValidLogin(username, password)) {
+            return;
+        }
+        
         const user = await this.userModel.findUserByAttribute('username', username);
         if (!user) {
             return;
@@ -45,11 +54,20 @@ export default class UserService {
         return user;
     }
 
-    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: Date, avatarID?: string) {
+    async updateUserByUserID(userID: number, firstName?: string, lastName?: string, surname?: string, description?: string, dateOfBirth?: string, avatarID?: string) {
+        if (!isEditProfileValid(firstName, lastName, surname, dateOfBirth)) {
+            return false;
+        }
+
         await this.userModel.updateUserByUserID(userID, firstName?.trim(), lastName?.trim(), surname?.trim(), description?.trim(), dateOfBirth, avatarID);
+        return true;
     }
 
     async updateUsernameByUserID(userID: number, username: string) {
+        if (!isUsernameValid(username)) {
+            return false;
+        }
+
         const isUsernameExists = await this.userModel.findUserByAttribute('username', username);
 
         if (isUsernameExists) {
@@ -61,6 +79,10 @@ export default class UserService {
     }
 
     async updateEmailByUserID(userID: number, email: string) {
+        if (!isEmailValid(email)) {
+            return false;
+        }
+
         const isEmailExists = await this.userModel.findUserByAttribute('email', email);
 
         if (isEmailExists) {
@@ -72,6 +94,10 @@ export default class UserService {
     }
 
     async updatePasswordByUserID(userID: number, password: string) {
+        if (!isPasswordValid(password)) {
+            return false;
+        }
+
         const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
         await this.userModel.updatePasswordByUserID(userID, hashedPassword);
         return true;

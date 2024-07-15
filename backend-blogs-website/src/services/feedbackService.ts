@@ -1,4 +1,5 @@
 import FeedbackModel from "../models/feedbackModel";
+import { isValidFeedback } from "../utils/validations";
 
 export default class FeedbackService {
     feedbackModel: FeedbackModel;
@@ -8,6 +9,10 @@ export default class FeedbackService {
     }
 
     async createFeedback(topic: string, email: string, description: string) {
+        if (!isValidFeedback(topic, email, description)) {
+            return;
+        }
+
         const feedback = await this.feedbackModel.createFeedback(topic, email, description);
         return feedback;
     }

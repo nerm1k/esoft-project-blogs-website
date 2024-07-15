@@ -17,7 +17,7 @@ export default class UserController {
             if (user) {
                 res.status(HttpStatusCode.CREATED).json({ message: 'User registered', user: user});
             } else {
-                res.status(HttpStatusCode.CONFLICT).json({ message: 'User has already been registered' });
+                res.status(HttpStatusCode.CONFLICT).json({ message: 'Error' });
             }
         } catch (error: any) {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
@@ -66,8 +66,12 @@ export default class UserController {
             const { firstName, lastName, surname, description, dateOfBirth, avatar } = req.body;
             // const avatarName = req.file?.filename;
             console.log(req.body, req.params);
-            await this.userService.updateUserByUserID(+userID, firstName, lastName, surname, description, dateOfBirth, avatar);
-            res.sendStatus(HttpStatusCode.NO_CONTENT);
+            const isUserUpdated = await this.userService.updateUserByUserID(+userID, firstName, lastName, surname, description, dateOfBirth, avatar);
+            if (isUserUpdated) {
+                res.sendStatus(HttpStatusCode.NO_CONTENT);
+            } else {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ message: 'Bad Request'});
+            }
         } catch (error: any) {
             res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error '});
         }
@@ -79,7 +83,7 @@ export default class UserController {
             const { username } = req.body;
             const isUpdated= await this.userService.updateUsernameByUserID(+userID, username);
             if (!isUpdated) {
-                res.status(400).json({ message: 'Canceled' });
+                res.status(HttpStatusCode.BAD_REQUEST).json({ message: 'Canceled' });
             } else {
                 res.sendStatus(HttpStatusCode.NO_CONTENT);
             }
